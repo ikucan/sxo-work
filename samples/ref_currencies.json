@@ -1,0 +1,510 @@
+{
+  "Data": [
+    {
+      "CurrencyCode": "USD",
+      "Decimals": 2,
+      "Name": "US Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "GBP",
+      "Decimals": 2,
+      "Name": "British Pound",
+      "Symbol": "\u00a3"
+    },
+    {
+      "CurrencyCode": "EUR",
+      "Decimals": 2,
+      "Name": "Euro",
+      "Symbol": "\u20ac"
+    },
+    {
+      "CurrencyCode": "CHF",
+      "Decimals": 2,
+      "Name": "Swiss Franc",
+      "Symbol": "CHF"
+    },
+    {
+      "CurrencyCode": "AUD",
+      "Decimals": 2,
+      "Name": "Australian Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "CAD",
+      "Decimals": 2,
+      "Name": "Canadian Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "NZD",
+      "Decimals": 2,
+      "Name": "New Zealand Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "JPY",
+      "Decimals": 0,
+      "Name": "Japanese Yen",
+      "Symbol": "\u00a5"
+    },
+    {
+      "CurrencyCode": "DKK",
+      "Decimals": 2,
+      "Name": "Danish Krone",
+      "Symbol": "kr."
+    },
+    {
+      "CurrencyCode": "SEK",
+      "Decimals": 2,
+      "Name": "Swedish Krona",
+      "Symbol": "kr"
+    },
+    {
+      "CurrencyCode": "NOK",
+      "Decimals": 2,
+      "Name": "Norwegian Krone",
+      "Symbol": "kr"
+    },
+    {
+      "CurrencyCode": "ATS",
+      "Decimals": 2,
+      "Name": "Austrian Schilling"
+    },
+    {
+      "CurrencyCode": "BEF",
+      "Decimals": 2,
+      "Name": "Belgian Franc"
+    },
+    {
+      "CurrencyCode": "DEM",
+      "Decimals": 2,
+      "Name": "German Mark"
+    },
+    {
+      "CurrencyCode": "ESP",
+      "Decimals": 2,
+      "Name": "Spanish Peseta"
+    },
+    {
+      "CurrencyCode": "FIM",
+      "Decimals": 2,
+      "Name": "Finnish Mark"
+    },
+    {
+      "CurrencyCode": "FRF",
+      "Decimals": 2,
+      "Name": "French Franc"
+    },
+    {
+      "CurrencyCode": "GRD",
+      "Decimals": 2,
+      "Name": "Greek Drachma"
+    },
+    {
+      "CurrencyCode": "IEP",
+      "Decimals": 2,
+      "Name": "Irish Punt"
+    },
+    {
+      "CurrencyCode": "ITL",
+      "Decimals": 2,
+      "Name": "Italian Lira"
+    },
+    {
+      "CurrencyCode": "LUF",
+      "Decimals": 2,
+      "Name": "Luxembourg Franc"
+    },
+    {
+      "CurrencyCode": "NLG",
+      "Decimals": 2,
+      "Name": "Dutch Guilder"
+    },
+    {
+      "CurrencyCode": "PTE",
+      "Decimals": 2,
+      "Name": "Portugese Escudo"
+    },
+    {
+      "CurrencyCode": "CZK",
+      "Decimals": 2,
+      "Name": "Czech Koruna",
+      "Symbol": "K\u010d"
+    },
+    {
+      "CurrencyCode": "ISK",
+      "Decimals": 2,
+      "Name": "Iceland Krona",
+      "Symbol": "kr"
+    },
+    {
+      "CurrencyCode": "PLN",
+      "Decimals": 2,
+      "Name": "Polish Zloty",
+      "Symbol": "z\u0142"
+    },
+    {
+      "CurrencyCode": "SGD",
+      "Decimals": 2,
+      "Name": "Singapore Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "LTL",
+      "Decimals": 2,
+      "Name": "Lithuanian Litas"
+    },
+    {
+      "CurrencyCode": "EEK",
+      "Decimals": 2,
+      "Name": "Estonian Kroon"
+    },
+    {
+      "CurrencyCode": "HRK",
+      "Decimals": 2,
+      "Name": "Croatian Kuna",
+      "Symbol": "kn"
+    },
+    {
+      "CurrencyCode": "LVL",
+      "Decimals": 2,
+      "Name": "Latvian Lats"
+    },
+    {
+      "CurrencyCode": "SIT",
+      "Decimals": 2,
+      "Name": "Slovenian Tolar"
+    },
+    {
+      "CurrencyCode": "SKK",
+      "Decimals": 2,
+      "Name": "Slovak Koruna"
+    },
+    {
+      "CurrencyCode": "AED",
+      "Decimals": 2,
+      "Name": "UAE Dirham",
+      "Symbol": "\u062f.\u0625.\u200f"
+    },
+    {
+      "CurrencyCode": "BHD",
+      "Decimals": 2,
+      "Name": "Bahrain Dinar",
+      "Symbol": "\u062f.\u0628.\u200f"
+    },
+    {
+      "CurrencyCode": "BRL",
+      "Decimals": 2,
+      "Name": "Brazilian Real",
+      "Symbol": "R$"
+    },
+    {
+      "CurrencyCode": "CNH",
+      "Decimals": 2,
+      "Name": "Offshore Chinese Renminbi"
+    },
+    {
+      "CurrencyCode": "CNY",
+      "Decimals": 2,
+      "Name": "Chinese Yuan Renminbi",
+      "Symbol": "\u00a5"
+    },
+    {
+      "CurrencyCode": "EGP",
+      "Decimals": 2,
+      "Name": "Egypt Pound",
+      "Symbol": "\u062c.\u0645.\u200f"
+    },
+    {
+      "CurrencyCode": "HKD",
+      "Decimals": 2,
+      "Name": "Hong Kong Dollar",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "RUB",
+      "Decimals": 2,
+      "Name": "Russian Ruble",
+      "Symbol": "\u20bd"
+    },
+    {
+      "CurrencyCode": "HUF",
+      "Decimals": 2,
+      "Name": "Hungarian Forint",
+      "Symbol": "Ft"
+    },
+    {
+      "CurrencyCode": "IDR",
+      "Decimals": 2,
+      "Name": "Indonesian Rupiah",
+      "Symbol": "Rp"
+    },
+    {
+      "CurrencyCode": "ILS",
+      "Decimals": 2,
+      "Name": "Israeli Shekel",
+      "Symbol": "\u20aa"
+    },
+    {
+      "CurrencyCode": "INR",
+      "Decimals": 2,
+      "Name": "Indian Rupee",
+      "Symbol": "\u20b9"
+    },
+    {
+      "CurrencyCode": "JOD",
+      "Decimals": 2,
+      "Name": "Jordan Dinar",
+      "Symbol": "\u062f.\u0627.\u200f"
+    },
+    {
+      "CurrencyCode": "KRW",
+      "Decimals": 2,
+      "Name": "Korean Won",
+      "Symbol": "\u20a9"
+    },
+    {
+      "CurrencyCode": "KWD",
+      "Decimals": 2,
+      "Name": "Kuwait Dinar",
+      "Symbol": "\u062f.\u0643.\u200f"
+    },
+    {
+      "CurrencyCode": "MAD",
+      "Decimals": 2,
+      "Name": "Moroccan Dirham",
+      "Symbol": "\u062f.\u0645.\u200f"
+    },
+    {
+      "CurrencyCode": "MXN",
+      "Decimals": 2,
+      "Name": "Mexican Peso",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "MYR",
+      "Decimals": 2,
+      "Name": "Malaysian Ringgit",
+      "Symbol": "RM"
+    },
+    {
+      "CurrencyCode": "OMR",
+      "Decimals": 2,
+      "Name": "Oman Sul Rial",
+      "Symbol": "\u0631.\u0639.\u200f"
+    },
+    {
+      "CurrencyCode": "PHP",
+      "Decimals": 2,
+      "Name": "Philipines Peso",
+      "Symbol": "\u20b1"
+    },
+    {
+      "CurrencyCode": "QAR",
+      "Decimals": 2,
+      "Name": "Qatar Rial",
+      "Symbol": "\u0631.\u0642.\u200f"
+    },
+    {
+      "CurrencyCode": "SAR",
+      "Decimals": 2,
+      "Name": "Saudi Riyal",
+      "Symbol": "\u0631.\u0633.\u200f"
+    },
+    {
+      "CurrencyCode": "THB",
+      "Decimals": 2,
+      "Name": "Thai Baht",
+      "Symbol": "\u0e3f"
+    },
+    {
+      "CurrencyCode": "TRL",
+      "Decimals": 2,
+      "Name": "Turkish Lira"
+    },
+    {
+      "CurrencyCode": "TRY",
+      "Decimals": 2,
+      "Name": "Turkish Lira",
+      "Symbol": "\u20ba"
+    },
+    {
+      "CurrencyCode": "TWD",
+      "Decimals": 2,
+      "Name": "Taiwan Dollar",
+      "Symbol": "NT$"
+    },
+    {
+      "CurrencyCode": "VEB",
+      "Decimals": 2,
+      "Name": "Venezuela Bolivar"
+    },
+    {
+      "CurrencyCode": "ZAR",
+      "Decimals": 2,
+      "Name": "South African Rand",
+      "Symbol": "R"
+    },
+    {
+      "CurrencyCode": "DZD",
+      "Decimals": 2,
+      "Name": "Algerian Dinar",
+      "Symbol": "\u062f.\u062c.\u200f"
+    },
+    {
+      "CurrencyCode": "IRR",
+      "Decimals": 2,
+      "Name": "Iranian Riyal",
+      "Symbol": "\u0631\u064a\u0627\u0644"
+    },
+    {
+      "CurrencyCode": "IQD",
+      "Decimals": 2,
+      "Name": "Iraqi Dinar",
+      "Symbol": "\u062f.\u0639.\u200f"
+    },
+    {
+      "CurrencyCode": "LBP",
+      "Decimals": 2,
+      "Name": "Lebanese Pound",
+      "Symbol": "\u0644.\u0644.\u200f"
+    },
+    {
+      "CurrencyCode": "LYD",
+      "Decimals": 2,
+      "Name": "Libya Dinar",
+      "Symbol": "\u062f.\u0644.\u200f"
+    },
+    {
+      "CurrencyCode": "SYP",
+      "Decimals": 2,
+      "Name": "Syrian Pound",
+      "Symbol": "\u0644.\u0633.\u200f"
+    },
+    {
+      "CurrencyCode": "TND",
+      "Decimals": 2,
+      "Name": "Tunisian Dinar",
+      "Symbol": "\u062f.\u062a.\u200f"
+    },
+    {
+      "CurrencyCode": "YER",
+      "Decimals": 2,
+      "Name": "Yemen Riyal",
+      "Symbol": "\u0631.\u064a.\u200f"
+    },
+    {
+      "CurrencyCode": "UAH",
+      "Decimals": 2,
+      "Name": "Ukraine Hryvnia",
+      "Symbol": "\u20b4"
+    },
+    {
+      "CurrencyCode": "XAU",
+      "Decimals": 2,
+      "Name": "Gold"
+    },
+    {
+      "CurrencyCode": "XPD",
+      "Decimals": 2,
+      "Name": "Palladium"
+    },
+    {
+      "CurrencyCode": "XPT",
+      "Decimals": 2,
+      "Name": "Platinum"
+    },
+    {
+      "CurrencyCode": "XAG",
+      "Decimals": 2,
+      "Name": "Silver"
+    },
+    {
+      "CurrencyCode": "USX",
+      "Decimals": 0,
+      "Name": "US Cent"
+    },
+    {
+      "CurrencyCode": "XTI",
+      "Decimals": 2,
+      "Name": "CL Light Sweet Crude Oil (WTI)"
+    },
+    {
+      "CurrencyCode": "ZAX",
+      "Decimals": 0,
+      "Name": "South African Cents"
+    },
+    {
+      "CurrencyCode": "RON",
+      "Decimals": 2,
+      "Name": "Romanian leu",
+      "Symbol": "lei"
+    },
+    {
+      "CurrencyCode": "PEN",
+      "Decimals": 4,
+      "Name": "Peruvian Nuevo",
+      "Symbol": "S/"
+    },
+    {
+      "CurrencyCode": "MTL",
+      "Decimals": 2,
+      "Name": "*Maltese Lira - to be disabled 20080101"
+    },
+    {
+      "CurrencyCode": "MUR",
+      "Decimals": 2,
+      "Name": "Mauritius Rupee"
+    },
+    {
+      "CurrencyCode": "LTC",
+      "Decimals": 2,
+      "Name": "Litecoin"
+    },
+    {
+      "CurrencyCode": "GBX",
+      "Decimals": 0,
+      "Name": "British Pence"
+    },
+    {
+      "CurrencyCode": "ETH",
+      "Decimals": 2,
+      "Name": "Ethereum"
+    },
+    {
+      "CurrencyCode": "COP",
+      "Decimals": 1,
+      "Name": "Colombian Peso",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "CYP",
+      "Decimals": 2,
+      "Name": "*Cypriot Pound - to be disabled 20080101"
+    },
+    {
+      "CurrencyCode": "CLP",
+      "Decimals": 2,
+      "Name": "Chilean Peso",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "BTC",
+      "Decimals": 2,
+      "Name": "Bitcoin"
+    },
+    {
+      "CurrencyCode": "ARS",
+      "Decimals": 2,
+      "Name": "Argentine Peso",
+      "Symbol": "$"
+    },
+    {
+      "CurrencyCode": "BGN",
+      "Decimals": 2,
+      "Name": "*Bulgarian Lev - to be disabled 20070205",
+      "Symbol": "\u043b\u0432."
+    }
+  ]
+}

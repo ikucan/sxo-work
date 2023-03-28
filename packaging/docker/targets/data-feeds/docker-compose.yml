@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image:
+        iztokkucan/sxo-token-grabber:0.0.1
+    environment:
+      SAXO_USER: 17541206
+      SAXO_PASS: h3f046da 
+      TOKEN_PATH: /tokendir
+      TOKEN_FILE: saxo_token
+    volumes:
+      - type: bind
+        source: /workstem/scratch/
+        target: /tokendir/

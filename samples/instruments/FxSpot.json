@@ -1,0 +1,2705 @@
+{
+  "Data": [
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Euro/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37471,
+      "Identifier": 21,
+      "SummaryType": "Instrument",
+      "Symbol": "EURUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Gold/US Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37540,
+      "Identifier": 8176,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "US Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37467,
+      "Identifier": 42,
+      "SummaryType": "Instrument",
+      "Symbol": "USDJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "British Pound/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37468,
+      "Identifier": 31,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Australian Dollar/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37472,
+      "Identifier": 4,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CAD",
+      "Description": "US Dollar/Canadian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37465,
+      "Identifier": 38,
+      "SummaryType": "Instrument",
+      "Symbol": "USDCAD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Euro/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37470,
+      "Identifier": 18,
+      "SummaryType": "Instrument",
+      "Symbol": "EURJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Silver/US Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37541,
+      "Identifier": 8177,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "British Pound/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37443,
+      "Identifier": 26,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "US Dollar/Swiss Franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37460,
+      "Identifier": 39,
+      "SummaryType": "Instrument",
+      "Symbol": "USDCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "Euro/Australian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37457,
+      "Identifier": 12,
+      "SummaryType": "Instrument",
+      "Symbol": "EURAUD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CAD",
+      "Description": "Euro/Canadian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37455,
+      "Identifier": 13,
+      "SummaryType": "Instrument",
+      "Symbol": "EURCAD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Australian Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37445,
+      "Identifier": 2,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "New Zealand Dollar/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37462,
+      "Identifier": 37,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CAD",
+      "Description": "Australian Dollar/Canadian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37433,
+      "Identifier": 1,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDCAD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Swiss Franc/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37454,
+      "Identifier": 8,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "GBP",
+      "Description": "Euro/British Pound",
+      "ExchangeId": "SBFX",
+      "GroupId": 37469,
+      "Identifier": 17,
+      "SummaryType": "Instrument",
+      "Symbol": "EURGBP",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Canadian Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37446,
+      "Identifier": 6,
+      "SummaryType": "Instrument",
+      "Symbol": "CADJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NZD",
+      "Description": "Australian Dollar/New Zealand Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37442,
+      "Identifier": 3,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDNZD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "Euro/Swiss Franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37458,
+      "Identifier": 14,
+      "SummaryType": "Instrument",
+      "Symbol": "EURCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "New Zealand Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37456,
+      "Identifier": 36,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "Canadian Dollar/Swiss franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37436,
+      "Identifier": 5,
+      "SummaryType": "Instrument",
+      "Symbol": "CADCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "British Pound/Australian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37461,
+      "Identifier": 22,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPAUD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CAD",
+      "Description": "British Pound/Canadian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37459,
+      "Identifier": 23,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPCAD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "Australian Dollar/Swiss Franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37526,
+      "Identifier": 5027,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CAD",
+      "Description": "New Zealand Dollar/Canadian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37434,
+      "Identifier": 33,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDCAD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "British Pound/Swiss Franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37463,
+      "Identifier": 24,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "New Zealand Dollar/Swiss Franc",
+      "ExchangeId": "SBFX",
+      "GroupId": 37435,
+      "Identifier": 34,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NZD",
+      "Description": "Euro/New Zealand Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37491,
+      "Identifier": 2072,
+      "SummaryType": "Instrument",
+      "Symbol": "EURNZD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "US Dollar/Mexican Pesos",
+      "ExchangeId": "SBFX",
+      "GroupId": 37487,
+      "Identifier": 1348,
+      "SummaryType": "Instrument",
+      "Symbol": "USDMXN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "Euro/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37498,
+      "Identifier": 2071,
+      "SummaryType": "Instrument",
+      "Symbol": "EURHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Euro/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37466,
+      "Identifier": 20,
+      "SummaryType": "Instrument",
+      "Symbol": "EURSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Euro/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37440,
+      "Identifier": 19,
+      "SummaryType": "Instrument",
+      "Symbol": "EURNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "US Dollar/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37447,
+      "Identifier": 44,
+      "SummaryType": "Instrument",
+      "Symbol": "USDSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "Gold/Euro",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37571,
+      "Identifier": 17190,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "US Dollar/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37473,
+      "Identifier": 1296,
+      "SummaryType": "Instrument",
+      "Symbol": "USDZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "US Dollar/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37448,
+      "Identifier": 43,
+      "SummaryType": "Instrument",
+      "Symbol": "USDNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NZD",
+      "Description": "British Pound/New Zealand Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37431,
+      "Identifier": 28,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPNZD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "US Dollar/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37451,
+      "Identifier": 47,
+      "SummaryType": "Instrument",
+      "Symbol": "USDPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "US Dollar/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37495,
+      "Identifier": 2075,
+      "SummaryType": "Instrument",
+      "Symbol": "USDHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Platinum/US Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37785,
+      "Identifier": 107830,
+      "SummaryType": "Instrument",
+      "Symbol": "XPTUSD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Euro/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37479,
+      "Identifier": 1343,
+      "SummaryType": "Instrument",
+      "Symbol": "EURPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "US Dollar/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37449,
+      "Identifier": 45,
+      "SummaryType": "Instrument",
+      "Symbol": "USDSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "US Dollar/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37774,
+      "Identifier": 52872,
+      "SummaryType": "Instrument",
+      "Symbol": "USDCNH",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "US Dollar/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37444,
+      "Identifier": 41,
+      "SummaryType": "Instrument",
+      "Symbol": "USDDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "Silver/Euro",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37608,
+      "Identifier": 19846,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Norwegian Krone/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37453,
+      "Identifier": 32,
+      "SummaryType": "Instrument",
+      "Symbol": "NOKSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "US Dollar/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37567,
+      "Identifier": 13928,
+      "SummaryType": "Instrument",
+      "Symbol": "USDTRY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Euro/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37493,
+      "Identifier": 2073,
+      "SummaryType": "Instrument",
+      "Symbol": "EURZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Singapore Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37452,
+      "Identifier": 48,
+      "SummaryType": "Instrument",
+      "Symbol": "SGDJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "British Pound/Euro",
+      "ExchangeId": "SBFX",
+      "GroupId": 37513,
+      "Identifier": 3942,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "Euro/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37524,
+      "Identifier": 4800,
+      "SummaryType": "Instrument",
+      "Symbol": "EURSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "Euro/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37464,
+      "Identifier": 15,
+      "SummaryType": "Instrument",
+      "Symbol": "EURCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "British Pound/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37528,
+      "Identifier": 5125,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "Australian Dollar/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37551,
+      "Identifier": 9436,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "South African Rand/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37623,
+      "Identifier": 21281,
+      "SummaryType": "Instrument",
+      "Symbol": "ZARJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Mexican Peso/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37644,
+      "Identifier": 23581,
+      "SummaryType": "Instrument",
+      "Symbol": "MXNJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CHF",
+      "Description": "Gold/Swiss Franc",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37793,
+      "Identifier": 155945,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUCHF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "Australian Dollar/Euro",
+      "ExchangeId": "SBFX",
+      "GroupId": 37527,
+      "Identifier": 5124,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "New Zealand Dollar/Mexican Peso",
+      "ExchangeId": "SBFX",
+      "GroupId": 37653,
+      "Identifier": 30553,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDMXN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "US Dollar/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37441,
+      "Identifier": 40,
+      "SummaryType": "Instrument",
+      "Symbol": "USDCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "US Dollar/Australian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37621,
+      "Identifier": 22413,
+      "SummaryType": "Instrument",
+      "Symbol": "USDAUD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Swiss Franc/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37578,
+      "Identifier": 17746,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ILS",
+      "Description": "US Dollar/Israeli Shekel",
+      "ExchangeId": "SBFX",
+      "GroupId": 37525,
+      "Identifier": 4773,
+      "SummaryType": "Instrument",
+      "Symbol": "USDILS",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Gold/Japanese Yen",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37622,
+      "Identifier": 19719,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUJPY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "Gold/Australian Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37613,
+      "Identifier": 19910,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUAUD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Offshore Chinese Renminbi/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37775,
+      "Identifier": 52873,
+      "SummaryType": "Instrument",
+      "Symbol": "CNHJPY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Canadian Dollar/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37510,
+      "Identifier": 3946,
+      "SummaryType": "Instrument",
+      "Symbol": "CADUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "British Pound/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37432,
+      "Identifier": 30,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "XAG",
+      "Description": "Gold/Silver",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37792,
+      "Identifier": 195179,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUXAG",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Turkish Lira/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37645,
+      "Identifier": 23582,
+      "SummaryType": "Instrument",
+      "Symbol": "TRYJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "British Pound/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37429,
+      "Identifier": 27,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Norwegian Krone/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37450,
+      "Identifier": 46,
+      "SummaryType": "Instrument",
+      "Symbol": "NOKJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "Euro/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37566,
+      "Identifier": 13927,
+      "SummaryType": "Instrument",
+      "Symbol": "EURTRY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "GBP",
+      "Description": "Australian Dollar/British Pound",
+      "ExchangeId": "SBFX",
+      "GroupId": 37500,
+      "Identifier": 3115,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDGBP",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "Canadian Dollar/Euro",
+      "ExchangeId": "SBFX",
+      "GroupId": 37520,
+      "Identifier": 3943,
+      "SummaryType": "Instrument",
+      "Symbol": "CADEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Euro/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37438,
+      "Identifier": 16,
+      "SummaryType": "Instrument",
+      "Symbol": "EURDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "British Pound/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37430,
+      "Identifier": 29,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Euro/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37781,
+      "Identifier": 52830,
+      "SummaryType": "Instrument",
+      "Symbol": "EURCNH",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Norwegian Krone/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37573,
+      "Identifier": 17764,
+      "SummaryType": "Instrument",
+      "Symbol": "NOKUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Danish Krone/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37523,
+      "Identifier": 4727,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "British Pound/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37539,
+      "Identifier": 7609,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "Swiss Franc/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37558,
+      "Identifier": 9439,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Swedish Krone/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37490,
+      "Identifier": 2047,
+      "SummaryType": "Instrument",
+      "Symbol": "SEKDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "New Zealand Dollar/Euro",
+      "ExchangeId": "SBFX",
+      "GroupId": 37437,
+      "Identifier": 35,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Swiss Franc/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37439,
+      "Identifier": 9,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Swiss Franc/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37536,
+      "Identifier": 6561,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Australian Dollar/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37778,
+      "Identifier": 52823,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDCNH",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "Euro/Mexican Pesos",
+      "ExchangeId": "SBFX",
+      "GroupId": 37501,
+      "Identifier": 2871,
+      "SummaryType": "Instrument",
+      "Symbol": "EURMXN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "Silver/Australian Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37614,
+      "Identifier": 20770,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGAUD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Japanese Yen/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37522,
+      "Identifier": 3849,
+      "SummaryType": "Instrument",
+      "Symbol": "JPYUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Japanese Yen/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37502,
+      "Identifier": 3077,
+      "SummaryType": "Instrument",
+      "Symbol": "JPYNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Euro/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37534,
+      "Identifier": 5400,
+      "SummaryType": "Instrument",
+      "Symbol": "EURHKD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "British Pound/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37782,
+      "Identifier": 52832,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Australian Dollar/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37547,
+      "Identifier": 9435,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "British Pound/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37427,
+      "Identifier": 25,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "THB",
+      "Description": "US Dollar/Thai Baht",
+      "ExchangeId": "SBFX",
+      "GroupId": 37485,
+      "Identifier": 1351,
+      "SummaryType": "Instrument",
+      "Symbol": "USDTHB",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "GBP",
+      "Description": "New Zealand Dollar/British Pound",
+      "ExchangeId": "SBFX",
+      "GroupId": 37518,
+      "Identifier": 4014,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDGBP",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Swiss Franc/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37477,
+      "Identifier": 1305,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "US Dollar/Hong Kong dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37475,
+      "Identifier": 1345,
+      "SummaryType": "Instrument",
+      "Symbol": "USDHKD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Silver/Japanese Yen",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37609,
+      "Identifier": 19847,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGJPY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Canadian Dollar/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37647,
+      "Identifier": 23690,
+      "SummaryType": "Instrument",
+      "Symbol": "CADPLN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Swiss Franc/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37474,
+      "Identifier": 1311,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Swiss Franc/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37560,
+      "Identifier": 9440,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "Canadian Dollar/Mexican Peso",
+      "ExchangeId": "SBFX",
+      "GroupId": 37633,
+      "Identifier": 23739,
+      "SummaryType": "Instrument",
+      "Symbol": "CADMXN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Norwegian Krone/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37488,
+      "Identifier": 2046,
+      "SummaryType": "Instrument",
+      "Symbol": "NOKDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "RON",
+      "Description": "Euro/Romanian Leu",
+      "ExchangeId": "SBFX",
+      "GroupId": 37641,
+      "Identifier": 24443,
+      "SummaryType": "Instrument",
+      "Symbol": "EURRON",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Singapore Dollar/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37826,
+      "Identifier": 9095522,
+      "SummaryType": "Instrument",
+      "Symbol": "SGDCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Canadian Dollar/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37670,
+      "Identifier": 36897,
+      "SummaryType": "Instrument",
+      "Symbol": "CADSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "British Pound/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37542,
+      "Identifier": 8712,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Canadian Dollar/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37535,
+      "Identifier": 6158,
+      "SummaryType": "Instrument",
+      "Symbol": "CADNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "Swiss Franc/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37632,
+      "Identifier": 23521,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "New Zealand Dollar/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37562,
+      "Identifier": 9451,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "Swiss Franc/Mexican Peso",
+      "ExchangeId": "SBFX",
+      "GroupId": 37656,
+      "Identifier": 30631,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFMXN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "Canadian Dollar/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37801,
+      "Identifier": 682710,
+      "SummaryType": "Instrument",
+      "Symbol": "CADSGD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "Australian Dollar/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37546,
+      "Identifier": 9434,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Canadian Dollar/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37779,
+      "Identifier": 52824,
+      "SummaryType": "Instrument",
+      "Symbol": "CADCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "British Pound/Mexican Peso",
+      "ExchangeId": "SBFX",
+      "GroupId": 37569,
+      "Identifier": 14009,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPMXN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Swedish Krone/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37489,
+      "Identifier": 2048,
+      "SummaryType": "Instrument",
+      "Symbol": "SEKNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "New Zealand Dollar/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37545,
+      "Identifier": 8183,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDSGD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "Polish Zloty/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37672,
+      "Identifier": 36770,
+      "SummaryType": "Instrument",
+      "Symbol": "PLNHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "New Zealand Dollar/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37564,
+      "Identifier": 9452,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Gold/Hong Kong Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37630,
+      "Identifier": 22563,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Australian Dollar/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37625,
+      "Identifier": 23610,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDZAR",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "Australian Dollar/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37655,
+      "Identifier": 30630,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "Gold/Turkish Lira",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37783,
+      "Identifier": 57359,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUTRY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "New Zealand Dollar/Australian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37514,
+      "Identifier": 3939,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDAUD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AUD",
+      "Description": "Swiss Franc/Australian Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37428,
+      "Identifier": 7,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFAUD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Australian Dollar/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37639,
+      "Identifier": 24392,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDSEK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Gold/Offshore Chinese Renminbi",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37802,
+      "Identifier": 719823,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Japanese Yen/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37748,
+      "Identifier": 40321,
+      "SummaryType": "Instrument",
+      "Symbol": "JPYHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "New Zealand Dollar/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37772,
+      "Identifier": 52870,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "RON",
+      "Description": "US Dollar/Romanian Leu",
+      "ExchangeId": "SBFX",
+      "GroupId": 37642,
+      "Identifier": 24407,
+      "SummaryType": "Instrument",
+      "Symbol": "USDRON",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Hungarian Forint/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37673,
+      "Identifier": 37129,
+      "SummaryType": "Instrument",
+      "Symbol": "HUFJPY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "Australian Dollar/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37563,
+      "Identifier": 9433,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "Swiss Franc/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37554,
+      "Identifier": 9438,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "British Pound/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37634,
+      "Identifier": 23522,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPTRY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Polish Zloty/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37511,
+      "Identifier": 3934,
+      "SummaryType": "Instrument",
+      "Symbol": "PLNDKK",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "British Pound/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37555,
+      "Identifier": 9447,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Australian Dollar/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37509,
+      "Identifier": 3863,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "MXN",
+      "Description": "Australian Dollar/Mexican Peso",
+      "ExchangeId": "SBFX",
+      "GroupId": 37657,
+      "Identifier": 30651,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDMXN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Platinum/South African Rand",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37800,
+      "Identifier": 458692,
+      "SummaryType": "Instrument",
+      "Symbol": "XPTZAR",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Swiss Franc/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37679,
+      "Identifier": 39771,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Danish Krone/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37616,
+      "Identifier": 21294,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKPLN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "NOK",
+      "Description": "New Zealand Dollar/Norwegian Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37530,
+      "Identifier": 5396,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDNOK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Swedish Krone/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37499,
+      "Identifier": 2870,
+      "SummaryType": "Instrument",
+      "Symbol": "SEKJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "Swiss Franc/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37631,
+      "Identifier": 23520,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFTRY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Hong Kong Dollar/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37543,
+      "Identifier": 8943,
+      "SummaryType": "Instrument",
+      "Symbol": "HKDJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Silver/Offshore Chinese Renminbi",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37831,
+      "Identifier": 11701065,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "British Pound/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37531,
+      "Identifier": 5395,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ILS",
+      "Description": "Euro/Israeli Shekel",
+      "ExchangeId": "SBFX",
+      "GroupId": 37674,
+      "Identifier": 39057,
+      "SummaryType": "Instrument",
+      "Symbol": "EURILS",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Australian Dollar/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37529,
+      "Identifier": 5394,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "EUR",
+      "Description": "Japanese Yen/Euro",
+      "ExchangeId": "SBFX",
+      "GroupId": 37519,
+      "Identifier": 3940,
+      "SummaryType": "Instrument",
+      "Symbol": "JPYEUR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "AED",
+      "Description": "US Dollar/UAE Dirham",
+      "ExchangeId": "SBFX",
+      "GroupId": 37483,
+      "Identifier": 1363,
+      "SummaryType": "Instrument",
+      "Symbol": "USDAED",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Silver/Hong Kong Dollar",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37628,
+      "Identifier": 22562,
+      "SummaryType": "Instrument",
+      "Symbol": "XAGHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CNH",
+      "Description": "Swiss Franc/Offshore Chinese Renminbi",
+      "ExchangeId": "SBFX",
+      "GroupId": 37780,
+      "Identifier": 52828,
+      "SummaryType": "Instrument",
+      "Symbol": "CHFCNH",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Japanese Yen/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37494,
+      "Identifier": 2115,
+      "SummaryType": "Instrument",
+      "Symbol": "JPYDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "JPY",
+      "Description": "Polish Zloty/Japanese Yen",
+      "ExchangeId": "SBFX",
+      "GroupId": 37506,
+      "Identifier": 3901,
+      "SummaryType": "Instrument",
+      "Symbol": "PLNJPY",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Czech Koruna/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37671,
+      "Identifier": 36629,
+      "SummaryType": "Instrument",
+      "Symbol": "CZKPLN",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "Australian Dollar/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37626,
+      "Identifier": 23509,
+      "SummaryType": "Instrument",
+      "Symbol": "AUDTRY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "New Zealand Dollar/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37559,
+      "Identifier": 9449,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Turkish Lira/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37675,
+      "Identifier": 37130,
+      "SummaryType": "Instrument",
+      "Symbol": "TRYZAR",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Canadian Dollar/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37825,
+      "Identifier": 2906229,
+      "SummaryType": "Instrument",
+      "Symbol": "CADZAR",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "THB",
+      "Description": "Gold/Thai Baht",
+      "DisplayHint": "PreciousMetal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37777,
+      "Identifier": 53684,
+      "SummaryType": "Instrument",
+      "Symbol": "XAUTHB",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ILS",
+      "Description": "British Pound/Israeli Shekel",
+      "ExchangeId": "SBFX",
+      "GroupId": 37646,
+      "Identifier": 26766,
+      "SummaryType": "Instrument",
+      "Symbol": "GBPILS",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Singapore Dollar/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37635,
+      "Identifier": 23742,
+      "SummaryType": "Instrument",
+      "Symbol": "SGDHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SGD",
+      "Description": "Danish Krone/Singapore Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37549,
+      "Identifier": 9443,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKSGD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "Danish Krone/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37552,
+      "Identifier": 9441,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKCZK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "New Zealand Dollar/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37561,
+      "Identifier": 9450,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "New Zealand Dollar/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37515,
+      "Identifier": 3864,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDDKK",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Canadian Dollar/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37803,
+      "Identifier": 994174,
+      "SummaryType": "Instrument",
+      "Symbol": "CADHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "Offshore Chinese Renminbi/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37796,
+      "Identifier": 300875,
+      "SummaryType": "Instrument",
+      "Symbol": "CNHHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "THB",
+      "Description": "Euro/Thai Baht",
+      "ExchangeId": "SBFX",
+      "GroupId": 37550,
+      "Identifier": 9446,
+      "SummaryType": "Instrument",
+      "Symbol": "EURTHB",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "Canadian Dollar/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37629,
+      "Identifier": 23519,
+      "SummaryType": "Instrument",
+      "Symbol": "CADTRY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "PLN",
+      "Description": "Swedish Krone/Polish Zloty",
+      "ExchangeId": "SBFX",
+      "GroupId": 37617,
+      "Identifier": 21295,
+      "SummaryType": "Instrument",
+      "Symbol": "SEKPLN",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "DKK",
+      "Description": "Turkish Lira/Danish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37618,
+      "Identifier": 21321,
+      "SummaryType": "Instrument",
+      "Symbol": "TRYDKK",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "New Zealand Dollar/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37638,
+      "Identifier": 23525,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Singapore Dollar/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37753,
+      "Identifier": 40953,
+      "SummaryType": "Instrument",
+      "Symbol": "SGDSEK",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SEK",
+      "Description": "Polish Zloty/Swedish Krone",
+      "ExchangeId": "SBFX",
+      "GroupId": 37612,
+      "Identifier": 20300,
+      "SummaryType": "Instrument",
+      "Symbol": "PLNSEK",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "TRY",
+      "Description": "New Zealand Dollar/Turkish Lira",
+      "ExchangeId": "SBFX",
+      "GroupId": 37637,
+      "Identifier": 23524,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDTRY",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HKD",
+      "Description": "New Zealand Dollar/Hong Kong Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37706,
+      "Identifier": 40334,
+      "SummaryType": "Instrument",
+      "Symbol": "NZDHKD",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "HUF",
+      "Description": "Danish Krone/Hungarian Forint",
+      "ExchangeId": "SBFX",
+      "GroupId": 37556,
+      "Identifier": 9442,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKHUF",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "ZAR",
+      "Description": "Danish Krone/South African Rand",
+      "ExchangeId": "SBFX",
+      "GroupId": 37553,
+      "Identifier": 9445,
+      "SummaryType": "Instrument",
+      "Symbol": "DKKZAR",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "USD",
+      "Description": "Mexican Peso/US Dollar",
+      "ExchangeId": "SBFX",
+      "GroupId": 37607,
+      "Identifier": 17761,
+      "SummaryType": "Instrument",
+      "Symbol": "MXNUSD",
+      "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "CZK",
+      "Description": "Norwegian Krone/Czech Koruna",
+      "ExchangeId": "SBFX",
+      "GroupId": 37758,
+      "Identifier": 41943,
+      "SummaryType": "Instrument",
+      "Symbol": "NOKCZK",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    },
+    {
+      "AssetType": "FxSpot",
+      "CurrencyCode": "SAR",
+      "Description": "US Dollar/Saudi Riyal",
+      "ExchangeId": "SBFX",
+      "GroupId": 37482,
+      "Identifier": 1350,
+      "SummaryType": "Instrument",
+      "Symbol": "USDSAR",
+      "TradableAs": [
+        "FxSpot"
+      ]
+    }
+  ]
+}

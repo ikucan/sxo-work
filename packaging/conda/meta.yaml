@@ -1,0 +1,29 @@
+---
+package:
+    name: ik.sxo
+    version: v0.1.0
+
+source:
+    path: ../../
+
+build:
+    include_recipe: false
+
+    skip: true # [py<39]
+
+    script: python setup.py install --single-version-externally-managed --record record.txt
+
+requirements:
+    build:
+        - python            >=3.10
+        - setuptools_scm    >=1.1.6
+
+    run:
+        - python            >=3.10
+        - aiohttp           >=3.8
+        - numpy             >=1.22
+        - websockets        >=10
+
+about:
+    home: iztokkucan.io
+    licence: MIT

@@ -1,0 +1,326 @@
+{
+  "Data": [
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "USD",
+      "Description": "US 500",
+      "ExchangeId": "",
+      "GroupId": 4,
+      "Identifier": 4913,
+      "SummaryType": "Instrument",
+      "Symbol": "US500.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 23238685
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Germany 40",
+      "ExchangeId": "",
+      "GroupId": 1,
+      "Identifier": 4910,
+      "SummaryType": "Instrument",
+      "Symbol": "GER40.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24668413
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "USD",
+      "Description": "US 30 Wall Street",
+      "ExchangeId": "",
+      "GroupId": 2,
+      "Identifier": 4911,
+      "SummaryType": "Instrument",
+      "Symbol": "US30.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 26167693
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "GBP",
+      "Description": "UK 100",
+      "ExchangeId": "",
+      "GroupId": 5,
+      "Identifier": 4914,
+      "SummaryType": "Instrument",
+      "Symbol": "UK100.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24668466
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Spain 35",
+      "ExchangeId": "",
+      "GroupId": 7,
+      "Identifier": 5769,
+      "SummaryType": "Instrument",
+      "Symbol": "SPAIN35.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 27005649
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "USD",
+      "Description": "US Tech 100 NAS",
+      "ExchangeId": "",
+      "GroupId": 3,
+      "Identifier": 4912,
+      "SummaryType": "Instrument",
+      "Symbol": "USNAS100.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24668610
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "France 40",
+      "ExchangeId": "",
+      "GroupId": 6,
+      "Identifier": 5768,
+      "SummaryType": "Instrument",
+      "Symbol": "FRA40.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 26462197
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Italy 40",
+      "ExchangeId": "",
+      "GroupId": 8,
+      "Identifier": 5770,
+      "SummaryType": "Instrument",
+      "Symbol": "ITALY40.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 27363
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "CHF",
+      "Description": "Switzerland 20",
+      "ExchangeId": "",
+      "GroupId": 11,
+      "Identifier": 9506,
+      "SummaryType": "Instrument",
+      "Symbol": "SWISS20.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 26167497
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "AUD",
+      "Description": "Australia 200",
+      "ExchangeId": "",
+      "GroupId": 10,
+      "Identifier": 8831,
+      "SummaryType": "Instrument",
+      "Symbol": "AUS200.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24668352
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "EU Stocks 50",
+      "ExchangeId": "",
+      "GroupId": 14,
+      "Identifier": 16753,
+      "SummaryType": "Instrument",
+      "Symbol": "EU50.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24668451
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "JPY",
+      "Description": "Japan 225",
+      "ExchangeId": "",
+      "GroupId": 12,
+      "Identifier": 16351,
+      "SummaryType": "Instrument",
+      "Symbol": "JP225.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 27332423
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "SEK",
+      "Description": "Sweden 30",
+      "ExchangeId": "",
+      "GroupId": 9,
+      "Identifier": 25046,
+      "SummaryType": "Instrument",
+      "Symbol": "SWE30.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 27005647
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Netherlands 25",
+      "ExchangeId": "",
+      "GroupId": 15,
+      "Identifier": 26870,
+      "SummaryType": "Instrument",
+      "Symbol": "NETH25.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 27005648
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Germany Mid-Cap 50",
+      "ExchangeId": "",
+      "GroupId": 17,
+      "Identifier": 31582,
+      "SummaryType": "Instrument",
+      "Symbol": "GER50MID.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 3023
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Belgium 20",
+      "ExchangeId": "",
+      "GroupId": 19,
+      "Identifier": 36945,
+      "SummaryType": "Instrument",
+      "Symbol": "BELG20.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 36940
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Germany Tech 30",
+      "ExchangeId": "",
+      "GroupId": 20,
+      "Identifier": 36946,
+      "SummaryType": "Instrument",
+      "Symbol": "GERTECH30.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 36947
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "GBP",
+      "Description": "UK Mid-Cap 250",
+      "ExchangeId": "",
+      "GroupId": 21,
+      "Identifier": 36949,
+      "SummaryType": "Instrument",
+      "Symbol": "UK250MID.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 4101
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "NOK",
+      "Description": "Norway 25",
+      "ExchangeId": "",
+      "GroupId": 18,
+      "Identifier": 36938,
+      "SummaryType": "Instrument",
+      "Symbol": "NOR25.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 36937
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "HKD",
+      "Description": "Hong Kong 50",
+      "ExchangeId": "",
+      "GroupId": 24,
+      "Identifier": 47624,
+      "SummaryType": "Instrument",
+      "Symbol": "HK50.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 24182873
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "EUR",
+      "Description": "Portugal 20",
+      "ExchangeId": "",
+      "GroupId": 28,
+      "Identifier": 665797,
+      "SummaryType": "Instrument",
+      "Symbol": "PORT20.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 7941
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "ZAR",
+      "Description": "South Africa 40",
+      "ExchangeId": "",
+      "GroupId": 30,
+      "Identifier": 1008098,
+      "SummaryType": "Instrument",
+      "Symbol": "ZA40.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 26167339
+    },
+    {
+      "AssetType": "CfdOnIndex",
+      "CurrencyCode": "DKK",
+      "Description": "Denmark 25",
+      "ExchangeId": "",
+      "GroupId": 34,
+      "Identifier": 5889634,
+      "SummaryType": "Instrument",
+      "Symbol": "DEN25.I",
+      "TradableAs": [
+        "CfdOnStock"
+      ],
+      "UnderlyingUic": 5708478
+    }
+  ]
+}

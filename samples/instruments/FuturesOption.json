@@ -1,0 +1,1094 @@
+{
+  "Data": [
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro Stoxx 50 Index Dividend",
+      "ExchangeId": "EUREX",
+      "GroupId": 37264,
+      "Identifier": 112,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OEXD:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Eurodollar ",
+      "ExchangeId": "CME",
+      "GroupId": 37158,
+      "Identifier": 14,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "GE:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Eurodollar 1yr Mid Curve ",
+      "ExchangeId": "CME",
+      "GroupId": 37158,
+      "Identifier": 168,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "GE0:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Eurodollar 2yr Mid Curve",
+      "ExchangeId": "CME",
+      "GroupId": 37158,
+      "Identifier": 169,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "GE2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Eurodollar 3yr Mid Curve",
+      "ExchangeId": "CME",
+      "GroupId": 37158,
+      "Identifier": 170,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "GE3:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "3 m Euribor",
+      "ExchangeId": "ICE_LIF",
+      "GroupId": 37192,
+      "Identifier": 16,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "I:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "3 m Euribor 1yr Mid Curve",
+      "ExchangeId": "ICE_LIF",
+      "GroupId": 37192,
+      "Identifier": 360,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "I0:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "3 m Euribor 2yr Mid Curve",
+      "ExchangeId": "ICE_LIF",
+      "GroupId": 37192,
+      "Identifier": 361,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "I2:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Silver",
+      "ExchangeId": "COMEX",
+      "GroupId": 37160,
+      "Identifier": 25,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "SO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Light Sweet Crude Oil",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37184,
+      "Identifier": 22,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "LO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Light Sweet Crude Oil Weekly (1)",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37184,
+      "Identifier": 1632,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "1LO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Light Sweet Crude Oil Weekly (2",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37184,
+      "Identifier": 1633,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2LO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Light Sweet Crude Oil Weekly (3)",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37184,
+      "Identifier": 1634,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3LO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Light Sweet Crude Oil Weekly (4)",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37184,
+      "Identifier": 1635,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4LO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "RBOB Gasoline",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37237,
+      "Identifier": 61,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OB:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Soybeans",
+      "ExchangeId": "CBOT",
+      "GroupId": 37185,
+      "Identifier": 11,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZS:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Corn ",
+      "ExchangeId": "CBOT",
+      "GroupId": 37196,
+      "Identifier": 10,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZC:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Wheat",
+      "ExchangeId": "CBOT",
+      "GroupId": 37198,
+      "Identifier": 12,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZW:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Gold",
+      "ExchangeId": "COMEX",
+      "GroupId": 37180,
+      "Identifier": 24,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OG:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "30-Days Federal Funds",
+      "ExchangeId": "CBOT",
+      "GroupId": 37201,
+      "Identifier": 18,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZQ:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Coffee C",
+      "ExchangeId": "ICE_NYBOT",
+      "GroupId": 37182,
+      "Identifier": 132,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OKC:icus"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Sugar No. 11",
+      "ExchangeId": "ICE_NYBOT",
+      "GroupId": 37165,
+      "Identifier": 133,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OSB:icus"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Cotton No. 2",
+      "ExchangeId": "ICE_NYBOT",
+      "GroupId": 37188,
+      "Identifier": 136,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OCT:icus"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Cocoa",
+      "ExchangeId": "ICE_NYBOT",
+      "GroupId": 37190,
+      "Identifier": 134,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OCC:icus"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Soybean Meal",
+      "ExchangeId": "CBOT",
+      "GroupId": 37189,
+      "Identifier": 59,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZM:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Live Cattle",
+      "ExchangeId": "CME",
+      "GroupId": 37163,
+      "Identifier": 13,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "LE:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Milling Wheat",
+      "ExchangeId": "EUR_PAR1",
+      "GroupId": 37227,
+      "Identifier": 46,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OBM:xpar"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Corn",
+      "ExchangeId": "EUR_PAR1",
+      "GroupId": 37219,
+      "Identifier": 86,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OMA:xpar"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "EURUSD - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37154,
+      "Identifier": 1279,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "EUU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "EURUSD Weekly (2) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37154,
+      "Identifier": 1281,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2EU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "EURUSD Weekly (3) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37154,
+      "Identifier": 1282,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3EU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "EURUSD Weekly (4) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37154,
+      "Identifier": 1283,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4EU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Rapeseed",
+      "ExchangeId": "EUR_PAR1",
+      "GroupId": 37220,
+      "Identifier": 100,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ECO:xpar"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Cocoa ",
+      "ExchangeId": "ICE_SOFT",
+      "GroupId": 37240,
+      "Identifier": 63,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "C:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Orange Juice",
+      "ExchangeId": "ICE_NYBOT",
+      "GroupId": 37203,
+      "Identifier": 135,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OOJ:icus"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Soybean Oil",
+      "ExchangeId": "CBOT",
+      "GroupId": 37197,
+      "Identifier": 58,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZL:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Henry Hub Natural Gas",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37202,
+      "Identifier": 23,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ON:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Copper",
+      "ExchangeId": "COMEX",
+      "GroupId": 37183,
+      "Identifier": 141,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "HX:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "CADUSD - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37193,
+      "Identifier": 1308,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "CAU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "CADUSD Weekly (2) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37193,
+      "Identifier": 1311,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2CD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "CADUSD Weekly (3) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37193,
+      "Identifier": 1312,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3CD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "CADUSD Weekly (4) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37193,
+      "Identifier": 1313,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4CD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Heating Oil",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37187,
+      "Identifier": 60,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OH:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "GBPUSD -  9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37152,
+      "Identifier": 1296,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "GBU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "GBPUSD Weekly (2) -  9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37152,
+      "Identifier": 1299,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2BP:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "GBPUSD Weekly (3) -  9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37152,
+      "Identifier": 1300,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3BP:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "GBPUSD Weekly (4) -  9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37152,
+      "Identifier": 1301,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4BP:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 ",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 2,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ES:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 Weekly (3) ",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1067,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ESW3:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 End Of Month ",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 98,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ESW:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 Weekly (1)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 87,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ESW1:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 Weekly (2) ",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 92,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ESW2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Monday Weekly (1)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1500,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E1A:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini S&P 500 Weekly (4)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 93,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ESW4:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Monday Weekly (2)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1501,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E2A:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Wed Weekly (2)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1357,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E2C:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Monday Weekly (3)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1502,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E3A:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Wed Weekly (3)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1358,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E3C:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Monday Weekly (4)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1503,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E4A:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini S&P 500 Wed Weekly (4)",
+      "ExchangeId": "CME",
+      "GroupId": 4,
+      "Identifier": 1359,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "E4C:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Platinum",
+      "ExchangeId": "NYMEX",
+      "GroupId": 37205,
+      "Identifier": 593,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "PO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Robusta Coffee (No.501) ",
+      "ExchangeId": "ICE_SOFT",
+      "GroupId": 37244,
+      "Identifier": 66,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "RC:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Brent Crude",
+      "ExchangeId": "ICE",
+      "GroupId": 37200,
+      "Identifier": 131,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OLCO:iepa"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "AUDUSD -  9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37151,
+      "Identifier": 1245,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ADU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "AUDUSD Weekly (2) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37151,
+      "Identifier": 1292,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2AD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "AUDUSD Weekly (3) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37151,
+      "Identifier": 1293,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3AD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "AUDUSD Weekly (4) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37151,
+      "Identifier": 1294,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4AD:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Swiss Franc - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37153,
+      "Identifier": 1322,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "CHU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "JPYUSD - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37178,
+      "Identifier": 1324,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "JPU:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "JPYUSD Weekly (2) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37178,
+      "Identifier": 1327,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "2JY:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "JPYUSD Weekly (3) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37178,
+      "Identifier": 1328,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "3JY:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "JPYUSD Weekly (4) - 9am fix",
+      "ExchangeId": "CME",
+      "GroupId": 37178,
+      "Identifier": 1329,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "4JY:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 ",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 27,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "NQ:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 End-of-Month",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 1459,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "QNE:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 Weekly (3)",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 1457,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "QN3:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 Weekly (1)",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 1455,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "QN1:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 Weekly (2)",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 1456,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "QN2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-Mini NASDAQ-100 Weekly (4)",
+      "ExchangeId": "CME",
+      "GroupId": 3,
+      "Identifier": 1458,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "QN4:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "WTI Light Sweet Crude Oil",
+      "ExchangeId": "ICE",
+      "GroupId": 37234,
+      "Identifier": 130,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OWBS:iepa"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Feed Wheat",
+      "ExchangeId": "ICE_SOFT",
+      "GroupId": 37239,
+      "Identifier": 1051,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OT:xlif"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro/British Pound",
+      "ExchangeId": "CME",
+      "GroupId": 37210,
+      "Identifier": 1777,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "RP:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Lean Hogs ",
+      "ExchangeId": "CME",
+      "GroupId": 37159,
+      "Identifier": 28,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "HE:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-BTP",
+      "ExchangeId": "EUREX",
+      "GroupId": 37258,
+      "Identifier": 1556,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OBTP:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro BOBL",
+      "ExchangeId": "EUREX",
+      "GroupId": 37161,
+      "Identifier": 4,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGBM:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 3,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGBL:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund Weekly (4)",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 525,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGB4:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund Weekly (1)",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 522,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGB1:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund Weekly (2)",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 523,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGB2:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund Weekly (3)",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 524,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGB3:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro-Bund Weekly (5)",
+      "ExchangeId": "EUREX",
+      "GroupId": 37176,
+      "Identifier": 526,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGB5:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Euro Schatz",
+      "ExchangeId": "EUREX",
+      "GroupId": 37168,
+      "Identifier": 5,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OGBS:xeur"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini Dow Jones ($5) ",
+      "ExchangeId": "CBOT",
+      "GroupId": 2,
+      "Identifier": 77,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "YM:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Ultra T-Bond",
+      "ExchangeId": "CBOT",
+      "GroupId": 37262,
+      "Identifier": 423,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OUB:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "U.S. Treasury Bond",
+      "ExchangeId": "CBOT",
+      "GroupId": 37171,
+      "Identifier": 19,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZB:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "30-Year U.S. T-Bond Weekly (1)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37171,
+      "Identifier": 1040,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZB1:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "30-Year U.S. T-Bond Weekly (2)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37171,
+      "Identifier": 1041,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZB2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "30-Year U.S. T-Bond Weekly (4)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37171,
+      "Identifier": 1043,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZB4:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "5-Year U.S. Treasury Note",
+      "ExchangeId": "CBOT",
+      "GroupId": 37174,
+      "Identifier": 20,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZF:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "5-Year U.S. Treasury Note Week 2",
+      "ExchangeId": "CBOT",
+      "GroupId": 37174,
+      "Identifier": 1597,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZF2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "10-Year U.S. Treasury Note",
+      "ExchangeId": "CBOT",
+      "GroupId": 37179,
+      "Identifier": 21,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZN:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "10-Year U.S. T-Note Weekly (1)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37179,
+      "Identifier": 1430,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZN1:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "10-Year U.S. T-Note Weekly (2)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37179,
+      "Identifier": 1431,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZN2:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "10-Year U.S. T-Note Weekly (4)",
+      "ExchangeId": "CBOT",
+      "GroupId": 37179,
+      "Identifier": 1433,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "ZN4:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "2-Year U.S. Treasury Note",
+      "ExchangeId": "CBOT",
+      "GroupId": 37166,
+      "Identifier": 422,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OZT:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "10-year Japanese Government Bond",
+      "ExchangeId": "OSA",
+      "GroupId": 37191,
+      "Identifier": 1577,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "OJGB:xose"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "E-mini Russell 2000",
+      "ExchangeId": "CME",
+      "GroupId": 37332,
+      "Identifier": 1670,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "RTO:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Micro E-mini S&P 500",
+      "ExchangeId": "CME",
+      "GroupId": 37346,
+      "Identifier": 2345,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "MES:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "Micro E-mini Nasdaq-100",
+      "ExchangeId": "CME",
+      "GroupId": 37348,
+      "Identifier": 2346,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "MNQ:xcme"
+    },
+    {
+      "AssetType": "FuturesOption",
+      "CanParticipateInMultiLegOrder": false,
+      "Description": "IBEX 35 Mini",
+      "ExchangeId": "MEFF",
+      "GroupId": 37217,
+      "Identifier": 97,
+      "SummaryType": "ContractOptionRoot",
+      "Symbol": "IBX:xmef"
+    }
+  ]
+}

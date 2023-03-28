@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "console": "integratedTerminal",
+      // "env": {
+      //   "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
+      //   "SETUPTOOLS_SCM_DEBUG": "True",
+      //   "SAXO_USER": "17541206",
+      //   "SAXO_PASS": "h3f046da" , 
+      //   "TOKEN_PATH": "/tmp" , 
+      //   "TOKEN_FILE": "saxo_token" , 
+      // },
+      "env": {
+        "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
+        "SETUPTOOLS_SCM_DEBUG": "True",
+        "TOKEN_FILE": "/tmp/saxo_token" , 
+        "INSTRUMENTS": "GBPUSD,GBPEUR,GBPJPY,EURUSD,EURJPY,JPYUSD,",
+        "DATA_DIR": "/data" , 
+      },
+      "name": "Python: Current file",
+      "program": "${file}",
+      "request": "launch",
+      "type": "python",
+      "justMyCode": false,
+    }
+  ],
+  "version": "0.2.0"
+}
