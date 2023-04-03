@@ -1,4 +1,4 @@
 #!/bin/bash
 echo "running the mainline script"
 
-mamba run -n selenium python /scratch/grab.py
+mamba run -n sxo python /scratch/run.py

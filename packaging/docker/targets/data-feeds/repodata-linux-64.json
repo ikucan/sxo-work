@@ -1,0 +1,28 @@
+{
+  "info": {
+    "subdir": "linux-64"
+  },
+  "packages": {
+    "ik.sxo-v0.1.0-py311_0.tar.bz2": {
+      "build": "py311_0",
+      "build_number": 0,
+      "depends": [
+        "aiohttp >=3.8",
+        "numpy >=1.22",
+        "python >=3.11,<3.12.0a0",
+        "python_abi 3.11.* *_cp311",
+        "websockets >=10"
+      ],
+      "md5": "abe71f35d504485d0e39f23cbd51bee2",
+      "name": "ik.sxo",
+      "sha256": "019ad075e949f6aeffe7c320efe9e0c2d4401d7edbdf4b3b8f8e32d2ced10c52",
+      "size": 686239,
+      "subdir": "linux-64",
+      "timestamp": 1680203842131,
+      "version": "v0.1.0"
+    }
+  },
+  "packages.conda": {},
+  "removed": [],
+  "repodata_version": 1
+}
