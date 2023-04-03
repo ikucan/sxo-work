@@ -1,5 +1,9 @@
+# running with Docker Compose version 2.17.2, needs post 1.28
+version: "3.9"
+
 services:
-  frontend:
+  # generate a new 24hr loing token
+  token_grabber:
     image:
         iztokkucan/sxo-token-grabber:0.0.1
     environment:
@@ -9,5 +13,24 @@ services:
       TOKEN_FILE: saxo_token
     volumes:
       - type: bind
-        source: /workstem/scratch/
+        source: /tmp/
         target: /tokendir/
+
+  # when you have the token, start the data feeds
+  feed:
+    depends_on:
+      token_grabber:
+        condition: service_completed_successfully
+    image:
+        iztokkucan/sxo-data-feeds:0.0.1
+    environment:
+      TOKEN_FILE: /tokendir/saxo_token
+      DATA_DIR: /data
+      INSTRUMENTS: GBPUSD,GBPEUR,GBPJPY,JPYUSD,USDJPY,GBPCHF,CHFEUR
+    volumes:
+      - type: bind
+        source: /tmp/
+        target: /tokendir/
+      - type: bind
+        source: /data/
+        target: /data/
