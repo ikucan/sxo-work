@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-from genericpath import exists
-import os
+import os, sys, signal
 import datetime as dt
+from utils.threads import kill_executor_threads
+
 import numpy as np
 import json
 import time
 import datetime as dt
 from typing import Any
 from typing import Dict
+from typing import Callable
 from pathlib import Path
 
 #from concurrent.futures import ProcessPoolExecutor as exec
@@ -15,15 +17,6 @@ from concurrent.futures import ThreadPoolExecutor as exec
 
 from sxo.interface.client import SaxoClient
 from sxo.util.quote import Quote
-
-# ###
-# # convenience forever loop
-# ###
-def foreva(sleep_period:int):
-    while 1 < 2:
-        print(f"{dt.datetime.now().strftime('%Y.%m.%d %H:%M:%S')}")
-        time.sleep(10 if sleep_period is None else sleep_period)
-
 
 # ###
 # # TODO:>>  try one loop per thread
@@ -37,7 +30,7 @@ class DataWriterError(BaseException):
 # ###
 class DataWriter:
 
-    def __init__(self, out_dir: str, instr:str):
+    def __init__(self, out_dir: str, instr:str, heartbeat:Callable = None):
         '''
         check output details and crate output writer
         '''
@@ -55,6 +48,8 @@ class DataWriter:
         self._metadata_file = self.__make_output_file("metadata")
         self._data_file = self.__make_output_file()
         self._quote = None
+
+        self._heartbeat = heartbeat
 
     def __change_file(self,):
         '''
@@ -82,6 +77,8 @@ class DataWriter:
         self._data_file.write(self._quote.to_csv())
         self._data_file.write("\n")
         self._data_file.flush()
+        if self._heartbeat is not None:
+            self._heartbeat()
 
     def __update_snapshot(self, update: Dict[str, Any]):
         '''
@@ -145,26 +142,64 @@ def config():
     target_dir = read_env('DATA_DIR')
     raw_instruments = read_env('INSTRUMENTS')
     loop_sleep = read_env('SLEEP_PERIOD', raise_if_missing= False)
+    hb_tolerrance= read_env('HB_TOLERANCE', raise_if_missing= False)
+    if loop_sleep is None:
+        loop_sleep = 5
+    if hb_tolerrance is None:
+        hb_tolerrance = 15
     instruments = parse_instruments(raw_instruments)
-    return token_file, target_dir, instruments, loop_sleep
+    return token_file, target_dir, instruments, loop_sleep, hb_tolerrance
+
+
+# ####
+# a heartbeat function for data readers to
+# report they are still receiving data
+# ####
+last_tick = dt.datetime.now()    
+
+def heartbeat():
+    # assignment is atomic in python
+    global last_tick
+    last_tick = dt.datetime.now()
+
+
+executor = None
+
+# ###
+# # convenience forever loop
+# ###
+def heartbeat_monitor(sleep_period:int, hb_tol_s:int):
+    global last_tick, executor
+    while 1 < 2:
+        now = dt.datetime.now()
+        hb_lag = now - last_tick
+        print(f"{now.strftime('%Y.%m.%d %H:%M:%S')} last hb was  {hb_lag.seconds}.{hb_lag.microseconds:06d} s ago (tolerance is {hb_tol_s}s)")
+        if hb_lag.seconds > hb_tol_s:
+            print(f"ERROR. Heartbeat older than {hb_tol_s}s. Exiting")
+            kill_executor_threads(executor)
+            sys.exit(-1)
+        else:
+            time.sleep(sleep_period)
+
 
 # ###
 # mainline
 # ###
 def mainline():
+    global executor
     # get config
-    token_file, output_dir, instruments, loop_sleep = config()
+    token_file, output_dir, instruments, loop_sleep, hb_max_tolerance = config()
 
-    # make the thread pool and connect to sxo
-    executor = exec(max_workers=10)   
+    executor = exec(max_workers=10)
+
     client = SaxoClient(token_file = token_file)
 
     # subscribe to each instrument and dispatch to the thread pool
     for instr in instruments:
-        executor.submit(client.subscribe_fx_spot, instr,  DataWriter(output_dir, instr))
+        executor.submit(client.subscribe_fx_spot, instr,  DataWriter(output_dir, instr, heartbeat))
 
     # wait until stop
-    foreva(loop_sleep)
+    heartbeat_monitor(loop_sleep, hb_max_tolerance)
 
 if __name__ == "__main__":
     mainline()
