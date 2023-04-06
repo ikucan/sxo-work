@@ -4,8 +4,8 @@ import os, sys, signal
 import datetime as dt
 from threading import current_thread
 import numpy as np
-from utils.threads import kill_thread
-from utils.threads import kill_executor_threads
+from sxo.util.threads import kill_thread
+from sxo.util.threads import kill_executor_threads
 import time
 import datetime as dt
 from typing import Any

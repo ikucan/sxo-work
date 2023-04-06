@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os, sys, signal
 import datetime as dt
-from utils.threads import kill_executor_threads
+from sxo.util.threads import kill_executor_threads
 
 import numpy as np
 import json
@@ -48,8 +48,8 @@ class DataWriter:
         self._metadata_file = self.__make_output_file("metadata")
         self._data_file = self.__make_output_file()
         self._quote = None
-
         self._heartbeat = heartbeat
+        self._tick_count = 0
 
     def __change_file(self,):
         '''
@@ -78,7 +78,8 @@ class DataWriter:
         self._data_file.write("\n")
         self._data_file.flush()
         if self._heartbeat is not None:
-            self._heartbeat()
+            self._heartbeat(self.instrument)
+        self._tick_count += 1
 
     def __update_snapshot(self, update: Dict[str, Any]):
         '''
@@ -156,11 +157,16 @@ def config():
 # report they are still receiving data
 # ####
 last_tick = dt.datetime.now()    
-
-def heartbeat():
+tick_info = {}
+def heartbeat(instr:str = None, n:int = None):
     # assignment is atomic in python
-    global last_tick
+    global last_tick, tick_info 
     last_tick = dt.datetime.now()
+    if instr is not None:
+        if instr in tick_info:
+            tick_info[instr] += 1
+        else:
+            tick_info[instr] = 0
 
 
 executor = None
@@ -169,11 +175,12 @@ executor = None
 # # convenience forever loop
 # ###
 def heartbeat_monitor(sleep_period:int, hb_tol_s:int):
-    global last_tick, executor
+    global last_tick, executor, tick_info
     while 1 < 2:
         now = dt.datetime.now()
         hb_lag = now - last_tick
-        print(f"{now.strftime('%Y.%m.%d %H:%M:%S')} last hb was  {hb_lag.seconds}.{hb_lag.microseconds:06d} s ago (tolerance is {hb_tol_s}s)")
+        print(f"{now.strftime('%Y.%m.%d %H:%M:%S')} last hb was  {hb_lag.seconds}.{hb_lag.microseconds:06d}s "
+              f"ago (tolerance is {hb_tol_s}s). #s: {tick_info}")
         if hb_lag.seconds > hb_tol_s:
             print(f"ERROR. Heartbeat older than {hb_tol_s}s. Exiting")
             kill_executor_threads(executor)

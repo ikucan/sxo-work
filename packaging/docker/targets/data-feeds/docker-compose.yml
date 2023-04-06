@@ -22,7 +22,7 @@ services:
       token_grabber:
         condition: service_completed_successfully
     image:
-        iztokkucan/sxo-data-feeds:0.0.1
+        iztokkucan/sxo-data-feeds:0.0.2
     environment:
       TOKEN_FILE: /tokendir/saxo_token
       DATA_DIR: /data

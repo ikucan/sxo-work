@@ -13,12 +13,12 @@
         "python_abi 3.11.* *_cp311",
         "websockets >=10"
       ],
-      "md5": "a577f2c8ed4c34f74d2bb5550b0b832e",
+      "md5": "b804d06671064098bba750582aac4391",
       "name": "ik.sxo",
-      "sha256": "534e1b9bfbeeb05f77a2b9bee8373770ce2cdd5a9e3fc64c2b3b2ddb10f2f7b6",
-      "size": 688363,
+      "sha256": "206de83b4927af53b9ef1e772e7f996467593969093d81ce634881ddb1b9b89f",
+      "size": 689424,
       "subdir": "linux-64",
-      "timestamp": 1680634263004,
+      "timestamp": 1680769969641,
       "version": "v0.1.0"
     }
   },
