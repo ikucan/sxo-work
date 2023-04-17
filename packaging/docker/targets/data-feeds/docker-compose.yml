@@ -16,6 +16,7 @@ services:
         source: /tmp/
         target: /tokendir/
 
+
   # when you have the token, start the data feeds
   feed:
     depends_on:
@@ -23,6 +24,7 @@ services:
         condition: service_completed_successfully
     image:
         iztokkucan/sxo-data-feeds:0.0.2
+    container_name: feed-server
     environment:
       TOKEN_FILE: /tokendir/saxo_token
       DATA_DIR: /data
@@ -41,3 +43,30 @@ services:
             max_attempts: 100
             window: 60s
   
+
+  ssh-server:
+    depends_on:
+      feed:
+        condition: service_started
+    image: iztokkucan/ssh:0.0.1
+    container_name: ssh-sidecar
+    hostname: ssh-sidecar
+
+    environment:
+      - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
+      - USER_NAME=admin
+      - SUDO_ACCESS=true
+
+    ports:
+      - 2222:2222
+
+    volumes:
+      - type: bind
+        source: /data
+        target: /data/
+        read_only: true
+        
+    deploy:
+        restart_policy:
+            condition: any
+            
