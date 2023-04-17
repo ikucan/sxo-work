@@ -15,7 +15,9 @@ RUN rm google-chrome-stable_current_amd64.deb
 RUN google-chrome --version | sed "s/[A-z ]*//" > chrome_ver
  
 # install chrome driver
-RUN wget https://chromedriver.storage.googleapis.com/110.0.5481.77/chromedriver_linux64.zip
+#RUN wget https://chromedriver.storage.googleapis.com/110.0.5481.77/chromedriver_linux64.zip
+RUN wget https://chromedriver.storage.googleapis.com/112.0.5615.49/chromedriver_linux64.zip
+ 
 
 # create a selenium conda env;
 
