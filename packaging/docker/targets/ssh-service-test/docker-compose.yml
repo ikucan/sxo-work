@@ -1,0 +1,10 @@
+services:
+  frontend:
+    image:
+        linuxserver/openssh-server:latest
+    environment:
+      PUBLIC_KEY_FILE: /home/iztok/.ssh/id_rsa.pub
+    volumes:
+      - type: bind
+        source: /data
+        target: /data/

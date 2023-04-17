@@ -26,7 +26,7 @@ services:
     environment:
       TOKEN_FILE: /tokendir/saxo_token
       DATA_DIR: /data
-      INSTRUMENTS: GBPUSD,GBPEUR,GBPJPY,JPYUSD,USDJPY,GBPCHF,CHFEUR
+      INSTRUMENTS: GBPUSD,GBPCAD,GBPBRL,GBPEUR,GBPJPY,GBPCNY,USDGBP,USDCAD,USDBRL,USDJPY,USDCNY,EURUSD,EURCAD,EURBRL,EURJPY,EURCNY
     volumes:
       - type: bind
         source: /tmp/
@@ -37,7 +37,7 @@ services:
     deploy:
         restart_policy:
             condition: on-failure
-            delay: 3s
-            max_attempts: 500000
+            delay: 1s
+            max_attempts: 100
             window: 60s
   
