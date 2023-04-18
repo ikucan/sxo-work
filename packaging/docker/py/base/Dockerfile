@@ -9,7 +9,6 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update
 RUN apt-get install -qq vim tree htop dstat tmux
 RUN apt-get install -qq curl wget
-RUN apt-get install -qq unl
 RUN apt-get install -qq unzip
 
 RUN mkdir /scratch
