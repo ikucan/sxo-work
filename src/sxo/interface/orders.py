@@ -55,6 +55,48 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         return order_json
 
 
+# class FxLimitOrder(OrderCommandBase):
+#     """
+#     https://www.developer.saxo/openapi/tutorial#/8
+#     https://github.com/SaxoBank/openapi-samples-js/tree/master/orders
+
+#     >>> https://github.com/SaxoBank/openapi-samples-js/blob/master/orders/stocks/demo.js
+#     >>> lines 52 ono
+
+#     """
+
+#     def __call__(
+#         self,
+#         ccy_pair: str,
+#         price: float,
+#         amount: float,
+#     ):
+#         if isinstance(ccy_pair, str):
+#             instr_id = FxSpotInstruments.get_instrument_id(ccy_pair)
+#         else:
+#             raise ValueError(f"unexpected type: {type(ccy_pair)}")
+
+#         entry_order = self._make_order_json(
+#             instrument_id=instr_id,
+#             direction=OrderDirection.Buy,
+#             asset_class=AssetType.FxSpot,
+#             amount=amount,
+#             price=price,
+#             order_type=OrderType.Limit,
+#         )
+#         exit_order = self._make_order_json(
+#             instrument_id=instr_id,
+#             direction=OrderDirection.Buy.flip(),
+#             asset_class=AssetType.FxSpot,
+#             amount=amount,
+#             price=1.23,
+#             order_type=OrderType.Limit,
+#         )
+
+#         entry_order["Orders"] = [exit_order]
+#         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
+#         return res
+
 class FxLimitOrder(OrderCommandBase):
     """
     https://www.developer.saxo/openapi/tutorial#/8

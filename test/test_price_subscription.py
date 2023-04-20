@@ -43,9 +43,9 @@ if __name__ == "__main__":
     # # f1 = exectr.submit(client.subscribe_fx_spot, "EURGBP", lambda x :print(f"EURGBP:>> {x}"))
     # # f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", lambda x :print(f"GBPEUR:>> {x}"))
     f1 = exectr.submit(client.subscribe_fx_spot, "EURGBP", partial(print_price, "EURGBP"))
-    f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", partial(print_price, "GBPEUR"))
-    f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", partial(print_price, "GBPUSD"))
-    f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", partial(print_price, "USDJPY"))
+    # f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", partial(print_price, "GBPEUR"))
+    # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", partial(print_price, "GBPUSD"))
+    # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", partial(print_price, "USDJPY"))
     
     # # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", lambda x :print(x))
     # # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", lambda x :print(x))

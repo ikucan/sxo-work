@@ -6,7 +6,6 @@ from typing import List
 from typing import Set
 from typing import Union
 
-
 class JsonDataBase:
     def __init__(self, asset_type: str, _json: Union[Dict, str, Path, None]):
         if asset_type is None:
@@ -30,7 +29,55 @@ class JsonDataBase:
                 "parameter _json needs to be either a" " parsed json dict, a Path to file or a" " string containing unparsed json"
             )
 
+        self._by_symbol = {x["Symbol"]: x for x in self._data}
+        self._all_symbols = set(self._by_symbol.keys())
+        asset_types = {x["AssetType"] for x in self._data}
+        if len(asset_types) != 1:
+            raise ValueError(f"expected single asset type, got : {asset_types}")
+        if self._asset_type not in asset_types:
+            raise ValueError(f"expected {self._asset_type} as the asset type, got : {asset_types}")
 
+    def get_asset_type(
+        self,
+    ) -> str:
+        return self._asset_type
+
+    def all_symbols(
+        self,
+    ) -> Set[str]:
+        return self._all_symbols
+
+    def has_pair(
+        self,
+        pair: str,
+    ) -> bool:
+        return pair in self._all_symbols
+
+    def get_instrument(
+        self,
+        pair: str,
+    ) -> Dict:
+        if pair not in self._by_symbol:
+            raise ValueError(f"unknown pair: {pair}")
+        return self._by_symbol[pair]
+
+    def get_instrument_id(
+        self,
+        symbol: Union[str, List[str]],
+    ) -> Union[int, List]:
+        if isinstance(symbol, List):
+            return [self.get_instrument_id(p) for p in symbol]
+
+        instrument = self.get_pair(symbol)
+        if "Identifier" not in instrument:
+            raise ValueError(f"unknown instrument: {symbol}")
+        return instrument["Identifier"]
+
+
+
+# TODO:>> ik:>> make singleton, ensure thread safety
+# from singleton_decorator import singleton
+# @singleton
 class FxSpot(JsonDataBase):
     """
     a wrapper for the FxSpot entity reference data
@@ -38,52 +85,13 @@ class FxSpot(JsonDataBase):
 
     def __init__(self, _json: Union[Dict, str, Path, None] = None):
         super().__init__(asset_type="FxSpot", _json=_json)
-        self._by_pair = {x["Symbol"]: x for x in self._data}
-        self._all_pairs = set(self._by_pair.keys())
-        asset_types = {x["AssetType"] for x in self._data}
-        if len(asset_types) != 1:
-            raise ValueError(f"expected single asset type, got : {asset_types}")
-        if self._asset_type not in asset_types:
-            raise ValueError(f"expected FxSpot as the asset type, got : {asset_types}")
-
-    def get_asset_type(
-        self,
-    ) -> str:
-        return self._asset_type
-
-    def all_pairs(
-        self,
-    ) -> Set[str]:
-        return self._all_pairs
-
-    def has_pair(
-        self,
-        pair: str,
-    ) -> bool:
-        return pair in self._all_pairs
-
-    def get_pair(
-        self,
-        pair: str,
-    ) -> Dict:
-        if pair not in self._by_pair:
-            raise ValueError(f"unknown pair: {pair}")
-        return self._by_pair[pair]
-
-    def get_instrument_id(
-        self,
-        pair: Union[str, List[str]],
-    ) -> Union[int, List]:
-        if isinstance(pair, List):
-            return [self.get_instrument_id(p) for p in pair]
-
-        instrument = self.get_pair(pair)
-        if "Identifier" not in instrument:
-            raise ValueError(f"unknown property: {pair}")
-        return instrument["Identifier"]
 
 
-# if __name__ == "__main__":
-#     spot = FxSpot()
-#     print(spot.get_instrument_id("GBPUSD"))
-#     print(spot.get_instrument_id(["GBPUSD", "EURGBP","USDJPY"]))
+# EQUITY symbology
+class Equity(JsonDataBase):
+    """
+    a wrapper for the FxSpot entity reference data
+    """
+
+    def __init__(self, _json: Union[Dict, str, Path, None] = None):
+        super().__init__(asset_type="Stock", _json=_json)
