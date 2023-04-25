@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 import json
-from abc import ABC
-from abc import abstractmethod
 from pathlib import Path
 from typing import Dict
 from typing import List
@@ -76,16 +74,10 @@ class JsonDataBase:
         return instrument["Identifier"]
 
 
-class SaxoAssetBase(ABC):    
-    @abstractmethod
-    def get_asset_class():
-        pass
-
-
 # TODO:>> ik:>> make singleton, ensure thread safety
 # from singleton_decorator import singleton
 # @singleton
-class FxSpot(SaxoAssetBase,JsonDataBase):
+class FxSpotSyms(JsonDataBase):
     """
     a wrapper for the FxSpot entity reference data
     """
@@ -94,11 +86,8 @@ class FxSpot(SaxoAssetBase,JsonDataBase):
         super().__init__(asset_type="FxSpot", _json=_json)
 
 
-    def get_asset_class():
-        return "xxx"
-
 # EQUITY symbology
-class Equity(SaxoAssetBase, JsonDataBase):
+class EquitySyms(JsonDataBase):
     """
     a wrapper for the FxSpot entity reference data
     """
@@ -106,9 +95,3 @@ class Equity(SaxoAssetBase, JsonDataBase):
     def __init__(self, _json: Union[Dict, str, Path, None] = None):
         super().__init__(asset_type="Stock", _json=_json)
 
-    def get_asset_class():
-        return "xxx"
-
-
-if __name__ == "__main__":
-    print(123)
