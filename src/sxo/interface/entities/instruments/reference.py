@@ -6,7 +6,7 @@ from typing import List
 from typing import Set
 from typing import Union
 
-class JsonDataBase:
+class InstrumentDb:
     def __init__(self, asset_type: str, _json: Union[Dict, str, Path, None]):
         if asset_type is None:
             raise ValueError("you must pass a valid asset_type parameter")
@@ -37,17 +37,17 @@ class JsonDataBase:
         if self._asset_type not in asset_types:
             raise ValueError(f"expected {self._asset_type} as the asset type, got : {asset_types}")
 
-    def get_asset_type(
+    def get_asset_class(
         self,
     ) -> str:
         return self._asset_type
 
-    def all_symbols(
+    def all_instruments(
         self,
     ) -> Set[str]:
         return self._all_symbols
 
-    def has_pair(
+    def has_instrument(
         self,
         pair: str,
     ) -> bool:
@@ -77,7 +77,7 @@ class JsonDataBase:
 # TODO:>> ik:>> make singleton, ensure thread safety
 # from singleton_decorator import singleton
 # @singleton
-class FxSpotSyms(JsonDataBase):
+class FxSpotSyms(InstrumentDb):
     """
     a wrapper for the FxSpot entity reference data
     """
@@ -87,7 +87,7 @@ class FxSpotSyms(JsonDataBase):
 
 
 # EQUITY symbology
-class EquitySyms(JsonDataBase):
+class EquitySyms(InstrumentDb):
     """
     a wrapper for the FxSpot entity reference data
     """
