@@ -11,10 +11,10 @@ class InstrumentDb:
         if asset_type is None:
             raise ValueError("you must pass a valid asset_type parameter")
 
-        self._asset_type = asset_type
+        self._asset_class = asset_type
         # if none, look for the asset class relevant json db
         if _json is None:
-            _json = Path(__file__).parent / f"{self._asset_type}.json"
+            _json = Path(__file__).parent / f"{self._asset_class}.json"
             if not _json.exists():
                 raise ValueError("No asssed db json passed. Using default {self._asset_type}.json did not work.")
 
@@ -30,48 +30,57 @@ class InstrumentDb:
             )
 
         self._by_symbol = {x["Symbol"]: x for x in self._data}
-        self._all_symbols = set(self._by_symbol.keys())
+        self._by_id = {x['Identifier']:x for x in self._data}
+
         asset_types = {x["AssetType"] for x in self._data}
         if len(asset_types) != 1:
             raise ValueError(f"expected single asset type, got : {asset_types}")
-        if self._asset_type not in asset_types:
-            raise ValueError(f"expected {self._asset_type} as the asset type, got : {asset_types}")
+        if self._asset_class not in asset_types:
+            raise ValueError(f"expected {self._asset_class} as the asset type, got : {asset_types}")
 
     def get_asset_class(
         self,
     ) -> str:
-        return self._asset_type
+        return self._asset_class
 
     def all_instruments(
         self,
     ) -> Set[str]:
-        return self._all_symbols
+        return set(self._by_symbol.keys())
 
     def has_instrument(
         self,
-        pair: str,
+        instrument: str,
     ) -> bool:
-        return pair in self._all_symbols
+        return instrument in self.all_instruments()
+
+    def all_ids(
+        self,
+    ) -> Set[str]:
+        return set(self._by_id.keys())
+
+    def has_id(
+        self,
+        id: str,
+    ) -> bool:
+        return id in self.all_ids()
 
     def get_instrument(
         self,
         instrument: str,
     ) -> Dict:
-        if instrument not in self._by_symbol:
-            raise ValueError(f"unknown pair: {instrument}")
+        if not self.has_instrument(instrument):
+            raise ValueError(f"unknown instrument: {instrument}")
         return self._by_symbol[instrument]
 
-    def get_instrument_id(
+    def get_by_id(
         self,
-        symbol: Union[str, List[str]],
-    ) -> Union[int, List]:
-        if isinstance(symbol, List):
-            return [self.get_instrument_id(p) for p in symbol]
+        id: str,
+    ) -> Dict:
+        if not self.has_id(id):
+            raise ValueError(f"unknown instrument ID: {id}")
+        return self._by_id[id]
 
-        instrument = self.get_instrument(symbol)
-        if "Identifier" not in instrument:
-            raise ValueError(f"unknown instrument: {symbol}")
-        return instrument["Identifier"]
 
 
 # TODO:>> ik:>> make singleton, ensure thread safety

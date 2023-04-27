@@ -13,6 +13,28 @@ import websockets
 from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
+from sxo.interface.entities.instruments.entities import Instrument
+
+class InfoAssetPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
+    """
+    https://www.developer.saxo/openapi/referencedocs/trade/v1/infoprices/getinfopricelistasync/2eaaceb6373a7eff36c5f04f345cabe0
+
+    """
+
+    def __call__(
+        self,
+        instrument: Instrument,
+    ):
+        instr_ids = f"?Uic={instrument}"
+        
+        endpoint = (
+            f"/infoprices/{instr_ids}&AssetType={FxSpotInstruments.get_asset_class()}"
+            "&FieldGroups=Quote,Commissions"
+            # "&FieldGroups=Quote,PriceInfoDetails,PriceInfo,MarketDepth,HistoricalChanges,Commissions"
+        )
+
+        price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
+        return price
 
 
 class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
@@ -33,7 +55,7 @@ class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             raise ValueError(f"unexpected type: {type(ccy_pair)}")
 
         endpoint = (
-            f"/infoprices/{instr_ids}&AssetType={FxSpotInstruments.get_asset_type()}"
+            f"/infoprices/{instr_ids}&AssetType={FxSpotInstruments.get_asset_class()}"
             "&FieldGroups=Quote,Commissions"
             # "&FieldGroups=Quote,PriceInfoDetails,PriceInfo,MarketDepth,HistoricalChanges,Commissions"
         )
