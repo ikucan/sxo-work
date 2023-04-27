@@ -83,12 +83,7 @@ class InstrumentDb:
     ) -> Dict[Any, Any]:
         if not self.has_instrument(instrument):
             raise ValueError(f"unknown instrument: {instrument}")
-        all = self._by_symbol[instrument]
-        # if more than one instrumetn under the same symbol
-        if len(all) > 1:
-            pass
-        else :
-            return all[0]
+        return self._by_symbol[instrument]
 
     def get_by_id(
         self,

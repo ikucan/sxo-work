@@ -35,7 +35,7 @@ class Instrument(ABC):
                 case other:
                     raise Exception(f"unknown asset class {assetClass}. Must be one of: {Instrument.known_asset_classes}")
             if not symbology.has_instrument(symbol):
-                raise Exception("CXXXXX")
+                raise Exception("XXXXX")
             else:
                 instrMetadata = symbology.get_instrument(symbol)
                 return typeClass(instrMetadata)
@@ -64,19 +64,22 @@ class Instrument(ABC):
         #if assetClass is None:
 
 
-    def __init__(self, metadata:Dict[Any, Any]):
-        self._json = metadata
-        self._symbol = metadata["Symbol"]
-        self._canonical_asset_class = metadata["AssetType"]
+    def __init__(self, json:List[Dict[Any, Any]]):
+        self._json = json
+        self._symbol = json[0]["Symbol"]
+        self._canonical_asset_class = json[0]["AssetType"]
+        self._uid = json[0]["Identifier"]
+        self._descr = json[0]["Description"]
 
+    @abstractmethod
     def uid(self) -> str:
-        return self._json['Identifier']
+        ...
 
     def symbol(self) -> str:
         return self._symbol
 
     def descr(self) -> str:
-        return self._json['Description']
+        return self._descr
 
     def asset_class(self) -> Dict[Any, Any]:
         return self._canonical_asset_class
@@ -94,6 +97,13 @@ class FxSpot(Instrument):
     """
     def __init__(self, metadata:Dict[Any, Any]):
         super().__init__(metadata)
+        if len(self._json) != 1:
+            raise Exception(f"Expecting excactly one instrumetn entry (json record) for instrument {self._symbol}")
+
+    
+    def uid(self) -> str:
+        return self._uid        
+
 
 
 class Equity(Instrument):
@@ -109,4 +119,3 @@ if __name__ == "__main__":
         print(s1)
         s2 = Instrument.find(s1.uid())
         print(s2)
-
