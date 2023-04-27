@@ -31,9 +31,14 @@ class Instrument(ABC):
             
             match assetClass: 
                 case "Fx" :
-                    return FxSpot(symbol)
+                    symbology, typeClass = FxSpotInstruments, FxSpot
                 case other:
                     raise Exception(f"unknown asset class {assetClass}. Must be one of: {Instrument.known_asset_classes}")
+            if not symbology.has_instrument(symbol):
+                raise Exception("CXXXXX")
+            else:
+                instrMetadata = symbology.get_instrument(symbol)
+                return typeClass(instrMetadata)
         except ValueError as ve:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
         #if assetClass is None:
@@ -41,18 +46,16 @@ class Instrument(ABC):
     @staticmethod
     def find(uid:Union[str, int]) : # -> Instrument
         '''
-        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each database
+        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each databas
         we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold 
         but have not seen it stated
         '''
         try:
             iid = int(uid)
             if FxSpotInstruments.has_id(iid):
-                json = FxSpotInstruments.get_by_id(iid)
-                return FxSpot(json['Symbol'])
+                return FxSpot(FxSpotInstruments.get_by_id(iid))
             elif EquityInstruments.has_id(iid):
-                json = EquityInstruments.get_by_id(iid)
-                return EquityInstruments(json['Symbol'])
+                return FxSpot(FxSpotInstruments.get_by_id(iid))
             else:
                 raise Exception(f"Id {iid} does not exist in any known universe: [FxSpot, Equity]")
              
@@ -61,12 +64,10 @@ class Instrument(ABC):
         #if assetClass is None:
 
 
-    def __init__(self, symbol:str, symbology:AssetClassDb):
-        if symbol not in symbology.all_instruments():
-            raise Exception(f"ERROR: Instrument {symbol} not known in symbology for asset class {symbology.get_asset_class()}. Use one of {symbology.all_instruments()}")
-        self._symbol = symbol
-        self._canonical_asset_class = symbology.get_asset_class()
-        self._json = symbology.get_instrument(symbol)
+    def __init__(self, metadata:Dict[Any, Any]):
+        self._json = metadata
+        self._symbol = metadata["Symbol"]
+        self._canonical_asset_class = metadata["AssetType"]
 
     def uid(self) -> str:
         return self._json['Identifier']
@@ -89,15 +90,18 @@ class Instrument(ABC):
     
 class FxSpot(Instrument):
     """
-    a wrapper for the FxSpot entity reference data
+    a wrapper for the FxSpot reference data
     """
-    def __init__(self, pair:str):
-        super().__init__(pair, FxSpotInstruments)
-        pass
+    def __init__(self, metadata:Dict[Any, Any]):
+        super().__init__(metadata)
 
 
 class Equity(Instrument):
-    pass
+    """
+    a wrapper for the Equity reference data
+    """
+    def __init__(self, metadata:Dict[Any, Any]):
+        super().__init__(metadata)
 
 if __name__ == "__main__":
     for sym in ["Fx::GBPEUR", "Fx::GBPJPY" , "Fx::GBPUSD" , "Fx::USDJPY" , "Fx::EURAUD" , "Fx::EURGBP" , ]:

@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 from typing import Dict
+from typing import Any
 from typing import List
 from typing import Set
 from typing import Union
@@ -19,20 +20,31 @@ class InstrumentDb:
                 raise ValueError("No asssed db json passed. Using default {self._asset_type}.json did not work.")
 
         if isinstance(_json, Dict):
-            self._data = _json["Data"]
+            self._database = _json["Data"]
         elif isinstance(_json, str):
-            self._data = json.loads(_json)["Data"]
+            self._database = json.loads(_json)["Data"]
         elif isinstance(_json, Path):
-            self._data = json.load(open(_json.as_posix()))["Data"]
+            self._database = json.load(open(_json.as_posix()))["Data"]
         else:
             raise ValueError(
                 "parameter _json needs to be either a" " parsed json dict, a Path to file or a" " string containing unparsed json"
             )
 
-        self._by_symbol = {x["Symbol"]: x for x in self._data}
-        self._by_id = {x['Identifier']:x for x in self._data}
+        # arrange instruments by symbol. must allow for mutliple instrumetns per symbol. e.g. mutiple
+        # listings for an equity. keep a list of instruments indexed by symbol
+        self._by_symbol = dict()
+        for instr in self._database:
+            sym = instr["Symbol"]
+            if sym in self._by_symbol:
+                self._by_symbol[sym].append(instr)
+            else:
+                newList = [instr]
+                self._by_symbol[sym] = newList
 
-        asset_types = {x["AssetType"] for x in self._data}
+
+        self._by_id = {x['Identifier']:x for x in self._database}
+
+        asset_types = {x["AssetType"] for x in self._database}
         if len(asset_types) != 1:
             raise ValueError(f"expected single asset type, got : {asset_types}")
         if self._asset_class not in asset_types:
@@ -68,10 +80,15 @@ class InstrumentDb:
     def get_instrument(
         self,
         instrument: str,
-    ) -> Dict:
+    ) -> Dict[Any, Any]:
         if not self.has_instrument(instrument):
             raise ValueError(f"unknown instrument: {instrument}")
-        return self._by_symbol[instrument]
+        all = self._by_symbol[instrument]
+        # if more than one instrumetn under the same symbol
+        if len(all) > 1:
+            pass
+        else :
+            return all[0]
 
     def get_by_id(
         self,
