@@ -29,9 +29,11 @@ class Instrument(ABC):
         try:
             asset_class, symbol = sym.split("::")
             
-            match asset_class: 
+            match asset_class:
                 case "Fx" :
                     symbology, type_class = FxSpotInstruments, FxSpot
+                case "Equity" | "Stock" :
+                    symbology, type_class = EquityInstruments, Equity
                 case other:
                     raise Exception(f"unknown asset class {asset_class}. Must be one of: {Instrument.known_asset_classes}")
             if not symbology.has_instrument(symbol):
@@ -55,7 +57,7 @@ class Instrument(ABC):
             if FxSpotInstruments.has_id(iid):
                 return FxSpot(FxSpotInstruments.get_by_id(iid))
             elif EquityInstruments.has_id(iid):
-                return FxSpot(FxSpotInstruments.get_by_id(iid))
+                return Equity(EquityInstruments.get_by_id(iid))
             else:
                 raise Exception(f"Id {iid} does not exist in any known universe: [FxSpot, Equity]")
              
@@ -78,13 +80,19 @@ class Instrument(ABC):
         self._symbol = json["Symbol"]
         self._canonical_asset_class = json["AssetType"]
         self._uid = json["Identifier"]
+        self._gid = json["GroupId"]
         self._descr = json["Description"]
         self._primary_index = idx
         self._primary_json = json
 
-    @abstractmethod
+    # @abstractmethod
+    # def uid(self) -> str:
+    #     ...
     def uid(self) -> str:
-        ...
+        return self._uid        
+
+    def gid(self) -> str:
+        return self._gid        
 
     def symbol(self) -> str:
         return self._symbol
@@ -99,7 +107,7 @@ class Instrument(ABC):
         return pformat(self._json, indent=2)
 
     def __str__(self) -> str:
-        return f"{self.asset_class()}::{self.symbol()}::{self.uid()}. {self.descr()}."
+        return f"{self.asset_class()} # {self.symbol()} # {self.uid()} # {self.descr()}."
     
     def __eq__(self, other) :
         return isinstance(other, Instrument) and \
@@ -117,22 +125,35 @@ class FxSpot(Instrument):
         if len(self._json) != 1:
             raise Exception(f"Expecting excactly one instrument entry (json record) for instrument {self._symbol}")
 
-    def uid(self) -> str:
-        return self._uid        
-
 
 class Equity(Instrument):
-    """
-    a wrapper for the Equity reference data
-    """
     def __init__(self, metadata:Dict[Any, Any]):
         super().__init__(metadata)
+        if len(self._json) != 1:
+            raise Exception(f"Expecting excactly one instrument entry (json record) for instrument {self._symbol}")
+
+    def exchange(self) -> str:
+        return self._primary_json['ExchangeId']
+
+    def primary_listing_id(self) -> str:
+        return self._primary_json['PrimaryListing']
+
+    def __str__(self) -> str:
+        return f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # {self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
 
 if __name__ == "__main__":
-    for sym in ["Fx::GBPEUR", "Fx::GBPJPY" , "Fx::GBPUSD" , "Fx::USDJPY" , "Fx::EURAUD" , "Fx::EURGBP" , ]:
+    # for sym in ["Fx::GBPEUR", "Fx::GBPJPY" , "Fx::GBPUSD" , "Fx::USDJPY" , "Fx::EURAUD" , "Fx::EURGBP" , ]:
+    #     print("----------")
+    #     s1 = Instrument.parse(sym)
+    #     print(s1)
+    #     s2 = Instrument.find(s1.uid())
+    #     print(s2)
+    #     print(s1 != s2)
+
+    for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
         print("----------")
         s1 = Instrument.parse(sym)
         print(s1)
         s2 = Instrument.find(s1.uid())
         print(s2)
-        print(s1 != s2)
+        assert(s1 == s2)    
