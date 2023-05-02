@@ -8,7 +8,7 @@ from typing import List
 from typing import Set
 from typing import Any
 from typing import Union
-from sxo.interface.entities.instruments import AssetClassDb
+#from sxo.interface.entities.instruments import AssetClassDb
 from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.entities.instruments import EquityInstruments
 from pprint import pformat
@@ -30,7 +30,7 @@ class Instrument(ABC):
             asset_class, symbol = sym.split("::")
             
             match asset_class:
-                case "Fx" :
+                case "Fx" | "FxSpot" :
                     symbology, type_class = FxSpotInstruments, FxSpot
                 case "Equity" | "Stock" :
                     symbology, type_class = EquityInstruments, Equity

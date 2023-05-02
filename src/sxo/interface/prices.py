@@ -13,7 +13,7 @@ import websockets
 from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
-from sxo.interface.entities.instruments.entities import Instrument
+from sxo.interface.entities.instruments.symbology import Instrument
 
 class InfoAssetPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     """
@@ -48,7 +48,8 @@ class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         ccy_pair: Union[str, List[str]],
     ):
         if isinstance(ccy_pair, str):
-            instr_ids = f"?Uic={FxSpotInstruments.get_instrument_id(ccy_pair)}"
+            fx_spot = Instrument.parse(f"FxSpot::{ccy_pair}")
+            instr_ids = f"?Uic={fx_spot.uid()}"
         elif isinstance(ccy_pair, list):
             instr_ids = f"list?Uics={','.join([str(FxSpotInstruments.get_instrument_id(p)) for p in ccy_pair])}"
         else:
