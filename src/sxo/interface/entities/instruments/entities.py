@@ -27,18 +27,18 @@ class Instrument(ABC):
         contain a "::"
         '''
         try:
-            assetClass, symbol = sym.split("::")
+            asset_class, symbol = sym.split("::")
             
-            match assetClass: 
+            match asset_class: 
                 case "Fx" :
-                    symbology, typeClass = FxSpotInstruments, FxSpot
+                    symbology, type_class = FxSpotInstruments, FxSpot
                 case other:
-                    raise Exception(f"unknown asset class {assetClass}. Must be one of: {Instrument.known_asset_classes}")
+                    raise Exception(f"unknown asset class {asset_class}. Must be one of: {Instrument.known_asset_classes}")
             if not symbology.has_instrument(symbol):
-                raise Exception("XXXXX")
+                raise Exception(f"Instrument {symbol} is not known in (known) asset class {asset_class}")
             else:
                 instrMetadata = symbology.get_instrument(symbol)
-                return typeClass(instrMetadata)
+                return type_class(instrMetadata)
         except ValueError as ve:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
         #if assetClass is None:
@@ -64,12 +64,23 @@ class Instrument(ABC):
         #if assetClass is None:
 
 
-    def __init__(self, json:List[Dict[Any, Any]]):
+    def __init__(self, json:Union[Dict[Any, Any], List[Dict[Any, Any]]]):
+        # assume a single dict or list of dicts, treat all as a list
+        if not isinstance(json, list):
+            json = [json]
+        
         self._json = json
-        self._symbol = json[0]["Symbol"]
-        self._canonical_asset_class = json[0]["AssetType"]
-        self._uid = json[0]["Identifier"]
-        self._descr = json[0]["Description"]
+        self.__set_primary()
+
+    def __set_primary(self, idx = 0):
+
+        json = self._json[idx]
+        self._symbol = json["Symbol"]
+        self._canonical_asset_class = json["AssetType"]
+        self._uid = json["Identifier"]
+        self._descr = json["Description"]
+        self._primary_index = idx
+        self._primary_json = json
 
     @abstractmethod
     def uid(self) -> str:
@@ -89,7 +100,13 @@ class Instrument(ABC):
 
     def __str__(self) -> str:
         return f"{self.asset_class()}::{self.symbol()}::{self.uid()}. {self.descr()}."
+    
+    def __eq__(self, other) :
+        return isinstance(other, Instrument) and \
+            self.uid() == other.uid()
 
+    def __ne__(self, other) :
+        return not self == other
     
 class FxSpot(Instrument):
     """
@@ -98,12 +115,10 @@ class FxSpot(Instrument):
     def __init__(self, metadata:Dict[Any, Any]):
         super().__init__(metadata)
         if len(self._json) != 1:
-            raise Exception(f"Expecting excactly one instrumetn entry (json record) for instrument {self._symbol}")
+            raise Exception(f"Expecting excactly one instrument entry (json record) for instrument {self._symbol}")
 
-    
     def uid(self) -> str:
         return self._uid        
-
 
 
 class Equity(Instrument):
@@ -115,7 +130,9 @@ class Equity(Instrument):
 
 if __name__ == "__main__":
     for sym in ["Fx::GBPEUR", "Fx::GBPJPY" , "Fx::GBPUSD" , "Fx::USDJPY" , "Fx::EURAUD" , "Fx::EURGBP" , ]:
+        print("----------")
         s1 = Instrument.parse(sym)
         print(s1)
         s2 = Instrument.find(s1.uid())
         print(s2)
+        print(s1 != s2)
