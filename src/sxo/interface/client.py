@@ -11,6 +11,7 @@ from sxo.interface.orders import DeleteOrders
 from sxo.interface.orders import FxLimitOrder
 from sxo.interface.orders import GetOrderDetails
 from sxo.interface.orders import ListAllOrders
+from sxo.interface.prices import InfoPrice
 from sxo.interface.prices import InfoSpotFxPrices
 from sxo.interface.prices import InfoSpotFxPriceSubscription
 from sxo.interface.reference import RefCountries
@@ -62,7 +63,9 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "currency_pairs": RefCurrencyPairs,
         "exchanges": RefExchanges,
         "instruments": RefInstruments,
+        # pricing
         "info_spotfx_prices": InfoSpotFxPrices,
+        "info_price": InfoPrice,
         # subscriptions
         "subscribe_fx_spot": InfoSpotFxPriceSubscription,
         # orders

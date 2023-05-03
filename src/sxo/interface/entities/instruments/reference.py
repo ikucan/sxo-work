@@ -30,17 +30,15 @@ class InstrumentDb:
                 "parameter _json needs to be either a" " parsed json dict, a Path to file or a" " string containing unparsed json"
             )
 
+        self._by_symbol = {x['Symbol']:x for x in self._database}
+        
         # arrange instruments by symbol. must allow for mutliple instrumetns per symbol. e.g. mutiple
         # listings for an equity. keep a list of instruments indexed by symbol
-        self._by_symbol = dict()
-        for instr in self._database:
-            sym = instr["Symbol"]
-            if sym in self._by_symbol:
-                self._by_symbol[sym].append(instr)
-            else:
-                newList = [instr]
-                self._by_symbol[sym] = newList
-
+        # self._by_symbol = dict()
+        # symbols should be unique
+        # for instr in self._database:
+        #     sym = instr["Symbol"]
+        #     self._by_symbol.setdefault(sym, []).append(instr)
 
         self._by_id = {x['Identifier']:x for x in self._database}
 

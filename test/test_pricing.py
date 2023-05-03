@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+'''
+this is a legacy test for a legacy function
+use client.info_price instead
+'''
+
 import time
 from pprint import pprint
 
@@ -12,3 +17,4 @@ if __name__ == "__main__":
         time.sleep(2)
     pass
     # pprint(client.info_spotfx_prices(["GBPEUR", "GBPUSD", "USDJPY"]))
+

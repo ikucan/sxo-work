@@ -14,8 +14,9 @@ from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
 from sxo.interface.entities.instruments.symbology import Instrument
+from sxo.interface.entities.instruments.symbology import InstrumentUtil
 
-class InfoAssetPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
+class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     """
     https://www.developer.saxo/openapi/referencedocs/trade/v1/infoprices/getinfopricelistasync/2eaaceb6373a7eff36c5f04f345cabe0
 
@@ -48,7 +49,7 @@ class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         ccy_pair: Union[str, List[str]],
     ):
         if isinstance(ccy_pair, str):
-            fx_spot = Instrument.parse(f"FxSpot::{ccy_pair}")
+            fx_spot = InstrumentUtil.parse(f"FxSpot::{ccy_pair}")
             instr_ids = f"?Uic={fx_spot.uid()}"
         elif isinstance(ccy_pair, list):
             instr_ids = f"list?Uics={','.join([str(FxSpotInstruments.get_instrument_id(p)) for p in ccy_pair])}"
