@@ -13,7 +13,9 @@ if __name__ == "__main__":
     client = SaxoClient()
 
     while 1 < 2:
-        pprint(client.info_spotfx_prices("GBPEUR"))
+        l1 = client.info_spotfx_prices(["GBPEUR",])
+        l2 = client.info_spotfx_prices(["USDJPY"])
+#        # pprint(client.info_spotfx_prices("GBPEUR"))
         time.sleep(2)
     pass
     # pprint(client.info_spotfx_prices(["GBPEUR", "GBPUSD", "USDJPY"]))

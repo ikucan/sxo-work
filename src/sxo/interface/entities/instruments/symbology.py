@@ -79,21 +79,24 @@ class Equity(Instrument):
     def __str__(self) -> str:
         return f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # {self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
 
-class InstrumentGroup():
-    def __init__(self, json:List[Dict[Any, Any]]):
-        self._instruments = [j for j in json]
-        self._instruments = [j for j in json]
+class InstrumentGroup:
+    def __init__(self, instruments:Union[str, List[str]]):
+        self._instruments = [InstrumentUtil.parse(i) for i in instruments]
+        self._by_asset_class = {}
+        for i in self._instruments:
+            self._by_asset_class.setdefault(i.asset_class, []).append(i)
 
+    def asset_classes(self):
+        return self._by_asset_class.keys()
 
+    def byAssetClass(self, asset_class:str):
+        if asset_class in self._by_asset_class:
+            return self._by_asset_class[asset_class]
+        else:
+            raise ValueError(f"Unknown asset class: {asset_class}")
 
-    def exchange(self) -> str:
-        return self._json['ExchangeId']
-
-    def primary_listing_id(self) -> str:
-        return self._json['PrimaryListing']
-
-    def __str__(self) -> str:
-        return f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # {self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
+    def all(self,):
+        return self._instrumennts
 
 
 class InstrumentUtil:

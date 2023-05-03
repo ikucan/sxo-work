@@ -52,7 +52,9 @@ class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             fx_spot = InstrumentUtil.parse(f"FxSpot::{ccy_pair}")
             instr_ids = f"?Uic={fx_spot.uid()}"
         elif isinstance(ccy_pair, list):
-            instr_ids = f"list?Uics={','.join([str(FxSpotInstruments.get_instrument_id(p)) for p in ccy_pair])}"
+            listOfIds = [InstrumentUtil.parse(f"FxSpot::{p}").uid() for p in ccy_pair]
+ 
+            instr_ids = f"list?Uics={','.join([str(id) for id in listOfIds])}"
         else:
             raise ValueError(f"unexpected type: {type(ccy_pair)}")
 
