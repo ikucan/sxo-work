@@ -13,8 +13,9 @@ import websockets
 from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
-from sxo.interface.entities.instruments.symbology import Instrument
-from sxo.interface.entities.instruments.symbology import InstrumentUtil
+from sxo.interface.entities.instruments import Instrument
+from sxo.interface.entities.instruments import InstrumentGroup
+from sxo.interface.entities.instruments import InstrumentUtil
 
 class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     """
@@ -24,19 +25,45 @@ class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
 
     def __call__(
         self,
-        instrument: Instrument,
+        instruments: Union[str, List[str]],
     ):
-        instr_ids = f"?Uic={instrument}"
         
-        endpoint = (
-            f"/infoprices/{instr_ids}&AssetType={FxSpotInstruments.get_asset_class()}"
-            "&FieldGroups=Quote,Commissions"
-            # "&FieldGroups=Quote,PriceInfoDetails,PriceInfo,MarketDepth,HistoricalChanges,Commissions"
-        )
+        instr_grp = InstrumentUtil.parse(instruments)
+        if isinstance(instr_grp, InstrumentGroup):
+            for ac in instr_grp.asset_classes():
+                all_ac_instr = instr_grp.get_by_asset_class(ac)
+                listOfIds = [i.uid() for i in all_ac_instr]
+                uicsParam = f"list?Uics={','.join([str(id) for id in listOfIds])}"
+                endpoint = (
+                    f"/infoprices/{uicsParam}&AssetType={ac}"
+                    "&FieldGroups=Quote,Commissions"
+                )
+                price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
+                prices += price['Data']
+            return {'Data':prices}
+        elif isinstance(instr_grp, Instrument):
+            instr_id = f"?Uic={instr_grp.uid()}"
+            endpoint = (
+                f"/infoprices/{instr_id}&AssetType={instr_grp.asset_class()}"
+                "&FieldGroups=Quote,Commissions"
+            )
+            price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
+            prices += price['Data']
+                
+        else:
+            raise ValueError(f"unexpected parsed instrument type. {type(instr_grp)}")
+        i = 123
+        # instr_ids = f"?Uic={instrument}"
+        
+        # endpoint = (
+        #     f"/infoprices/{instr_ids}&AssetType={FxSpotInstruments.get_asset_class()}"
+        #     "&FieldGroups=Quote,Commissions"
+        #     # "&FieldGroups=Quote,PriceInfoDetails,PriceInfo,MarketDepth,HistoricalChanges,Commissions"
+        # )
 
-        price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
-        return price
-
+        # price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
+        # return price
+        pass
 
 class InfoSpotFxPrices(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     """

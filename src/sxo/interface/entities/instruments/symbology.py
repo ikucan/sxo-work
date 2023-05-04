@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import json
 import re
 import datetime as dt
 from pathlib import Path
 from abc import ABC
 from abc import abstractmethod
 from pathlib import Path
+from io import StringIO
 from typing import Dict
 from typing import List
 from typing import Set
@@ -91,7 +91,7 @@ class Equity(Instrument):
         return f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # {self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
 
 class InstrumentGroup:
-    def __init__(self, instruments:Union[str, List[str]]):
+    def __init__(self, instruments:List[str]):
         self._instruments = [InstrumentUtil.parse(i) for i in instruments]
         self._by_asset_class = {}
         for i in self._instruments:
@@ -109,6 +109,14 @@ class InstrumentGroup:
     def all(self,):
         return self._instrumennts
 
+    def __repr__(self) -> str:
+        buffer = StringIO()
+        for ac in self.asset_classes():
+            buffer.write(f"{ac}\n")
+            for instr in self.get_by_asset_class(ac):
+                buffer.write(f"  {instr} \n")
+            pass
+        return buffer.getvalue()
 
 class InstrumentUtil:
 
@@ -145,6 +153,15 @@ class InstrumentUtil:
     def parse(sym:Union[str, List[str]]) : # -> Instrument
         if isinstance(sym, str):
             return InstrumentUtil.__parse_one(sym)
+        elif isinstance(sym, list):
+            return InstrumentGroup(sym)
+        else:
+            raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
+
+    @staticmethod
+    def parse_grp(sym:Union[str, List[str]]) : # -> Instrument
+        if isinstance(sym, str):
+            return InstrumentGroup([sym])
         elif isinstance(sym, list):
             return InstrumentGroup(sym)
         else:

@@ -14,5 +14,6 @@ EquityInstruments = EquitySyms(Path(ref_db.__file__).parent / "Stock.json")
 
 from sxo.interface.entities.instruments.symbology import InstrumentUtil
 from sxo.interface.entities.instruments.symbology import Instrument
+from sxo.interface.entities.instruments.symbology import InstrumentGroup
 from sxo.interface.entities.instruments.symbology import FxSpot
 from sxo.interface.entities.instruments.symbology import Equity
