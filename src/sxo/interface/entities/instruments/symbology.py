@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
+import re
+import datetime as dt
+from pathlib import Path
 from abc import ABC
 from abc import abstractmethod
 from pathlib import Path
@@ -44,7 +47,15 @@ class Instrument(ABC):
 
     def asset_class(self) -> Dict[Any, Any]:
         return self._canonical_asset_class
-    
+
+    def path(self, root:Union[str, Path] = None, ext:str = None, dated:bool = False):
+        base = Path(self.asset_class())
+        fname = re.sub(":", "_", self.symbol())
+        ext = f".{ext}" if ext is not None else ""
+        ext = f"_{dt.datetime.now().strftime('%Y%m%d')}{ext}" if dated else ext
+        rel = base / f"{fname}{ext}"
+        return rel if root is None else root / rel
+
     def __repr__(self) -> str:
         return pformat(self._json, indent=2)
 
@@ -153,12 +164,13 @@ class InstrumentUtil:
 
 
 if __name__ == "__main__":
-    for sym in ["Fx::GBPEUR", "Fx::GBPJPY" , "Fx::GBPUSD" , "Fx::USDJPY" , "Fx::EURAUD" , "Fx::EURGBP" , ]:
+    for sym in ["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "FxSpot::GBPUSD" , "FxSpot::USDJPY" , "FxSpot::EURAUD" , "FxSpot::EURGBP" , ]:
         print("----------")
         s1 = InstrumentUtil.parse(sym)
         print(s1)
         s2 = InstrumentUtil.find(s1.uid())
         print(s2)
+        print(s2.path(root="/data", ext="ccsv"))
         print(s1 != s2)
 
     for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
@@ -167,4 +179,5 @@ if __name__ == "__main__":
         print(s1)
         s2 = InstrumentUtil.find(s1.uid())
         print(s2)
+        print(s2.path(root="/data", ext="ccsv", dated=True))
         assert(s1 == s2)    
