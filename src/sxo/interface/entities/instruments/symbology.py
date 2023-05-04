@@ -95,12 +95,12 @@ class InstrumentGroup:
         self._instruments = [InstrumentUtil.parse(i) for i in instruments]
         self._by_asset_class = {}
         for i in self._instruments:
-            self._by_asset_class.setdefault(i.asset_class, []).append(i)
+            self._by_asset_class.setdefault(i.asset_class(), []).append(i)
 
-    def asset_classes(self):
-        return self._by_asset_class.keys()
+    def asset_classes(self) -> Set[str]:
+        return set(self._by_asset_class.keys())
 
-    def byAssetClass(self, asset_class:str):
+    def get_by_asset_class(self, asset_class:str):
         if asset_class in self._by_asset_class:
             return self._by_asset_class[asset_class]
         else:
@@ -115,7 +115,7 @@ class InstrumentUtil:
     known_asset_classes = {"FxSpot", "FxForward", "FxSpot", "FxOption", "Stock", "StockIndex", "StockIndexOption", "StockOption", "CfdOnFutures", "CfdOnIndex", "CfdOnStock"}
 
     @staticmethod
-    def parse(sym:str) : # -> Instrument
+    def __parse_one(sym:str) : # -> Instrument
         '''
         Static method to parse an instrument from a string description. String is expected
         to be of the form <Asset Class>::<Instrument Id Valid in that asset class>.
@@ -140,7 +140,15 @@ class InstrumentUtil:
                 return type_class(instrMetadata)
         except ValueError as ve:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
-        #if assetClass is None:
+
+    @staticmethod
+    def parse(sym:Union[str, List[str]]) : # -> Instrument
+        if isinstance(sym, str):
+            return InstrumentUtil.__parse_one(sym)
+        elif isinstance(sym, list):
+            return InstrumentGroup(sym)
+        else:
+            raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
     def find(uid:Union[str, int]) : # -> Instrument
@@ -164,20 +172,25 @@ class InstrumentUtil:
 
 
 if __name__ == "__main__":
-    for sym in ["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "FxSpot::GBPUSD" , "FxSpot::USDJPY" , "FxSpot::EURAUD" , "FxSpot::EURGBP" , ]:
-        print("----------")
-        s1 = InstrumentUtil.parse(sym)
-        print(s1)
-        s2 = InstrumentUtil.find(s1.uid())
-        print(s2)
-        print(s2.path(root="/data", ext="ccsv"))
-        print(s1 != s2)
 
-    for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
-        print("----------")
-        s1 = InstrumentUtil.parse(sym)
-        print(s1)
-        s2 = InstrumentUtil.find(s1.uid())
-        print(s2)
-        print(s2.path(root="/data", ext="ccsv", dated=True))
-        assert(s1 == s2)    
+    # for sym in ["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "FxSpot::GBPUSD" , "FxSpot::USDJPY" , "FxSpot::EURAUD" , "FxSpot::EURGBP" , ]:
+    #     print("----------")
+    #     s1 = InstrumentUtil.parse(sym)
+    #     print(s1)
+    #     s2 = InstrumentUtil.find(s1.uid())
+    #     print(s2)
+    #     print(s2.path(root="/data", ext="ccsv"))
+    #     print(s1 != s2)
+
+    # for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
+    #     print("----------")
+    #     s1 = InstrumentUtil.parse(sym)
+    #     print(s1)
+    #     s2 = InstrumentUtil.find(s1.uid())
+    #     print(s2)
+    #     print(s2.path(root="/data", ext="ccsv", dated=True))
+    #     assert(s1 == s2)
+
+    group = InstrumentUtil.parse(["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "Equity::TSLA:xmil", "Stock::TL0:xetr",])
+    print(group)
+    
