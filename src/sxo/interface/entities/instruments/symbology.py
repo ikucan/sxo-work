@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
-import re
 import datetime as dt
-from pathlib import Path
-from abc import ABC
-from abc import abstractmethod
-from pathlib import Path
+import re
 from io import StringIO
+from pathlib import Path
+from pprint import pformat
+from typing import Any
 from typing import Dict
 from typing import List
 from typing import Set
-from typing import Any
 from typing import Union
-#from sxo.interface.entities.instruments import AssetClassDb
-from sxo.interface.entities.instruments import FxSpotInstruments
+
 from sxo.interface.entities.instruments import EquityInstruments
-from pprint import pformat
+from sxo.interface.entities.instruments import FxSpotInstruments
 
-class Instrument(ABC):
+# from sxo.interface.entities.instruments import AssetClassDb
 
-    def __init__(self, json:Dict[Any, Any]):
-        # assume a single dict or list of dicts, treat all as a list        
+
+class Instrument:
+    def __init__(self, json: Dict[Any, Any]):
+        # assume a single dict or list of dicts, treat all as a list
         self._json = json
         self.__set_detail()
 
@@ -34,10 +33,10 @@ class Instrument(ABC):
     # def uid(self) -> str:
     #     ...
     def uid(self) -> str:
-        return self._uid        
+        return self._uid
 
     def gid(self) -> str:
-        return self._gid        
+        return self._gid
 
     def symbol(self) -> str:
         return self._symbol
@@ -48,7 +47,7 @@ class Instrument(ABC):
     def asset_class(self) -> Dict[Any, Any]:
         return self._canonical_asset_class
 
-    def path(self, root:Union[str, Path] = None, ext:str = None, dated:bool = False):
+    def path(self, root: Union[str, Path] = None, ext: str = None, dated: bool = False):
         base = Path(self.asset_class())
         fname = re.sub(":", "_", self.symbol())
         ext = f".{ext}" if ext is not None else ""
@@ -61,37 +60,42 @@ class Instrument(ABC):
 
     def __str__(self) -> str:
         return f"{self.asset_class()} # {self.symbol()} # {self.uid()} # {self.descr()}."
-    
-    def __eq__(self, other) :
-        return isinstance(other, Instrument) and \
-            self.uid() == other.uid()
 
-    def __ne__(self, other) :
+    def __eq__(self, other):
+        return isinstance(other, Instrument) and self.uid() == other.uid()
+
+    def __ne__(self, other):
         return not self == other
-    
+
+
 class FxSpot(Instrument):
     """
     a wrapper for the FxSpot reference data
     """
-    def __init__(self, metadata:Dict[Any, Any]):
+
+    def __init__(self, metadata: Dict[Any, Any]):
         super().__init__(metadata)
 
 
 class Equity(Instrument):
-    def __init__(self, metadata:Dict[Any, Any]):
+    def __init__(self, metadata: Dict[Any, Any]):
         super().__init__(metadata)
 
     def exchange(self) -> str:
-        return self._json['ExchangeId']
+        return self._json["ExchangeId"]
 
     def primary_listing_id(self) -> str:
-        return self._json['PrimaryListing']
+        return self._json["PrimaryListing"]
 
     def __str__(self) -> str:
-        return f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # {self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
+        return (
+            f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # "
+            f"{self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
+        )
+
 
 class InstrumentGroup:
-    def __init__(self, instruments:List[str]):
+    def __init__(self, instruments: List[str]):
         self._instruments = [InstrumentUtil.parse(i) for i in instruments]
         self._by_asset_class = {}
         for i in self._instruments:
@@ -100,13 +104,15 @@ class InstrumentGroup:
     def asset_classes(self) -> Set[str]:
         return set(self._by_asset_class.keys())
 
-    def get_by_asset_class(self, asset_class:str):
+    def get_by_asset_class(self, asset_class: str):
         if asset_class in self._by_asset_class:
             return self._by_asset_class[asset_class]
         else:
             raise ValueError(f"Unknown asset class: {asset_class}")
 
-    def all(self,):
+    def all(
+        self,
+    ):
         return self._instrumennts
 
     def __repr__(self) -> str:
@@ -118,39 +124,51 @@ class InstrumentGroup:
             pass
         return buffer.getvalue()
 
-class InstrumentUtil:
 
-    known_asset_classes = {"FxSpot", "FxForward", "FxSpot", "FxOption", "Stock", "StockIndex", "StockIndexOption", "StockOption", "CfdOnFutures", "CfdOnIndex", "CfdOnStock"}
+class InstrumentUtil:
+    known_asset_classes = {
+        "FxSpot",
+        "FxForward",
+        "FxSpot",
+        "FxOption",
+        "Stock",
+        "StockIndex",
+        "StockIndexOption",
+        "StockOption",
+        "CfdOnFutures",
+        "CfdOnIndex",
+        "CfdOnStock",
+    }
 
     @staticmethod
-    def __parse_one(sym:str) : # -> Instrument
-        '''
+    def __parse_one(sym: str):  # -> Instrument
+        """
         Static method to parse an instrument from a string description. String is expected
         to be of the form <Asset Class>::<Instrument Id Valid in that asset class>.
         If multiple "::" delineators are contained in the string, the first one is used
         to separate the asset class from instrument description. hence asset class ids cannot
         contain a "::"
-        '''
+        """
         try:
             asset_class, symbol = sym.split("::")
-            
+
             match asset_class:
-                case "FxSpot" :
+                case "FxSpot":
                     symbology, type_class = FxSpotInstruments, FxSpot
-                case "Equity" | "Stock" :
+                case "Equity" | "Stock":
                     symbology, type_class = EquityInstruments, Equity
-                case other:
+                case _:
                     raise Exception(f"unknown asset class {asset_class}. Must be one of: {Instrument.known_asset_classes}")
             if not symbology.has_instrument(symbol):
                 raise Exception(f"Instrument {symbol} is not known in (known) asset class {asset_class}")
             else:
                 instrMetadata = symbology.get_instrument(symbol)
                 return type_class(instrMetadata)
-        except ValueError as ve:
+        except ValueError:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
 
     @staticmethod
-    def parse(sym:Union[str, List[str]]) : # -> Instrument
+    def parse(sym: str | List[str]):  # -> Instrument
         if isinstance(sym, str):
             return InstrumentUtil.__parse_one(sym)
         elif isinstance(sym, list):
@@ -159,7 +177,7 @@ class InstrumentUtil:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
-    def parse_grp(sym:Union[str, List[str]]) : # -> Instrument
+    def parse_grp(sym: Union[str, List[str]]):  # -> Instrument
         if isinstance(sym, str):
             return InstrumentGroup([sym])
         elif isinstance(sym, list):
@@ -168,12 +186,12 @@ class InstrumentUtil:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
-    def find(uid:Union[str, int]) : # -> Instrument
-        '''
+    def find(uid: Union[str, int]):  # -> Instrument
+        """
         find an instrument if you have an id already... this is fairly stupid, just looks up the id in each databas
-        we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold 
+        we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold
         but have not seen it stated
-        '''
+        """
         try:
             iid = int(uid)
             if FxSpotInstruments.has_id(iid):
@@ -182,14 +200,13 @@ class InstrumentUtil:
                 return Equity(EquityInstruments.get_by_id(iid))
             else:
                 raise Exception(f"Id {iid} does not exist in any known universe: [FxSpot, Equity]")
-             
-        except ValueError as ve:
+
+        except ValueError:
             raise Exception("Error parsing instrument id. Expecting a integer (123) or a number string ('123')")
-        #if assetClass is None:
+        # if assetClass is None:
 
 
 if __name__ == "__main__":
-
     # for sym in ["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "FxSpot::GBPUSD" , "FxSpot::USDJPY" , "FxSpot::EURAUD" , "FxSpot::EURGBP" , ]:
     #     print("----------")
     #     s1 = InstrumentUtil.parse(sym)
@@ -208,6 +225,12 @@ if __name__ == "__main__":
     #     print(s2.path(root="/data", ext="ccsv", dated=True))
     #     assert(s1 == s2)
 
-    group = InstrumentUtil.parse(["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "Equity::TSLA:xmil", "Stock::TL0:xetr",])
+    group = InstrumentUtil.parse(
+        [
+            "FxSpot::GBPEUR",
+            "FxSpot::GBPJPY",
+            "Equity::TSLA:xmil",
+            "Stock::TL0:xetr",
+        ]
+    )
     print(group)
-    

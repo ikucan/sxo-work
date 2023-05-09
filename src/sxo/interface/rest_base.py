@@ -32,7 +32,7 @@ class SaxoRestBase:
         self.token_header = f"Bearer {self.token24}"
         self.url_base = url_base
 
-    @cache
+    @cache  # noqa
     def _make_default_headers(
         self,
     ) -> Dict[str, str]:

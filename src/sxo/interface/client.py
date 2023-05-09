@@ -24,6 +24,7 @@ from sxo.interface.rest_base import SaxoRestBase
 
 # from functools import cache
 
+
 class GetUserInfo(metaclass=SaxoAPIMethodFactory):
     def __call__(
         self,
@@ -52,7 +53,6 @@ class ClientMethodFactory(type):
 
 
 class SaxoClient(metaclass=ClientMethodFactory):
-
     _methods = {
         "user_details": GetUserInfo,
         "client_details": GetClientInfo,
@@ -80,7 +80,6 @@ class SaxoClient(metaclass=ClientMethodFactory):
         *,
         url_base: str = "https://gateway.saxobank.com/sim/openapi",
         token_file: str = "/tmp/saxo_token",
-
     ):
         self.rest_helper = SaxoRestBase(url_base=url_base, token_file=token_file)
         self.user_info = UserDetails(self.user_details())  # type: ignore

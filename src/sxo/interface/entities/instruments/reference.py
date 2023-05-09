@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
 from pathlib import Path
-from typing import Dict
 from typing import Any
-from typing import List
+from typing import Dict
 from typing import Set
 from typing import Union
+
 
 class InstrumentDb:
     def __init__(self, asset_type: str, _json: Union[Dict, str, Path, None]):
@@ -30,8 +30,8 @@ class InstrumentDb:
                 "parameter _json needs to be either a" " parsed json dict, a Path to file or a" " string containing unparsed json"
             )
 
-        self._by_symbol = {x['Symbol']:x for x in self._database}
-        
+        self._by_symbol = {x["Symbol"]: x for x in self._database}
+
         # arrange instruments by symbol. must allow for mutliple instrumetns per symbol. e.g. mutiple
         # listings for an equity. keep a list of instruments indexed by symbol
         # self._by_symbol = dict()
@@ -40,7 +40,7 @@ class InstrumentDb:
         #     sym = instr["Symbol"]
         #     self._by_symbol.setdefault(sym, []).append(instr)
 
-        self._by_id = {x['Identifier']:x for x in self._database}
+        self._by_id = {x["Identifier"]: x for x in self._database}
 
         asset_types = {x["AssetType"] for x in self._database}
         if len(asset_types) != 1:
@@ -92,7 +92,6 @@ class InstrumentDb:
         return self._by_id[id]
 
 
-
 # TODO:>> ik:>> make singleton, ensure thread safety
 # from singleton_decorator import singleton
 # @singleton
@@ -113,4 +112,3 @@ class EquitySyms(InstrumentDb):
 
     def __init__(self, _json: Union[Dict, str, Path, None] = None):
         super().__init__(asset_type="Stock", _json=_json)
-

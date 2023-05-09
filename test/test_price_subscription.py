@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from concurrent.futures import ThreadPoolExecutor as exec
+from functools import partial
 from pprint import pprint
 
 from sxo.interface.client import SaxoClient
@@ -19,20 +20,20 @@ exectr = exec(max_workers=10)
 # # https://docs.python.org/3/library/asyncio-eventloop.html
 # ###
 
+
 class tick_handler:
-    def __init__(self, instr:str):
+    def __init__(self, instr: str):
         self.instr = instr
 
-    def __call__(self, msg:str):
-        msg['_instrument'] = self.instr
+    def __call__(self, msg: str):
+        msg["_instrument"] = self.instr
         pprint(msg)
 
-from functools import partial
 
 if __name__ == "__main__":
     client = SaxoClient()
 
-    def subscribe(instr:str) :
+    def subscribe(instr: str):
         handler = tick_handler(instr)
         client.subscribe_fx_spot(instr, handler)
 
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     # f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", partial(print_price, "GBPEUR"))
     # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", partial(print_price, "GBPUSD"))
     # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", partial(print_price, "USDJPY"))
-    
+
     # # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", lambda x :print(x))
     # # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", lambda x :print(x))
 

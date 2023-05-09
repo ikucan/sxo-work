@@ -97,6 +97,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
 #         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
 #         return res
 
+
 class FxLimitOrder(OrderCommandBase):
     """
     https://www.developer.saxo/openapi/tutorial#/8

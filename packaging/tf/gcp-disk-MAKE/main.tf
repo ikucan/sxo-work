@@ -46,7 +46,7 @@ resource "google_compute_disk" "default" {
 #   cors {
 #     origin          = ["http://image-store.com"]
 #     method          = ["GET", "HEAD", "PUT", "POST", "DELETE"]
-#     response_header = ["*"] 
+#     response_header = ["*"]
 #     max_age_seconds = 3600
 #   }
 # }
