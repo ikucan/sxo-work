@@ -47,33 +47,49 @@ class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             raise ValueError(f"unexpected parsed instrument type. {type(instruments)}")
 
 
-class InfoSpotFxPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
+class InfoPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
     """
     initiate an info price suibscription
-    """
+    https://www.developer.saxo/openapi/referencedocs/trade/v1/prices/addsubscriptionasync/e1dbfa7d3e2ef801a7c4ade9e57f8812
+    https://www.developer.saxo/openapi/learn/streaming
 
+    """
     def __call__(
         self,
-        ccy_pair: Union[str, List[str]],
+        instrument: str,
         callback: Callable[[Dict[Any, Any]], Any],
     ):
-        context_id = secrets.token_urlsafe(16)
-        reference_id = secrets.token_urlsafe(8)
+        try:
+            context_id = secrets.token_urlsafe(16)
+            reference_id = secrets.token_urlsafe(8)
 
-        json = {
-            "Arguments": {
-                "Uic": FxSpotInstruments.get_instrument_id(ccy_pair),
-                "AssetType": "FxSpot",
-            },
-            "ContextId": context_id,
-            "ReferenceId": reference_id,
-            "RefreshRate": 1,
-        }
+            if isinstance(instrument, Instrument):
+                instr = instrument
+            elif isinstance(instrument, str):
+                instr = InstrumentUtil.parse(instrument)
+                if not isinstance(instr, Instrument):
+                    raise ValueError(f"the instrument spec {instrument} does not parse into a single instrument: {type(instrument)}")
+            else:
+                raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
-        res = self.rest_conn._POST_json(api_set="trade", endpoint="/prices/subscriptions", api_ver=1, json=json)  # type: ignore
-        callback(res)
-        loop = asyncio.new_event_loop()
-        loop.run_until_complete(self.streamer(context_id, callback))
+
+            json = {
+                "Arguments": {
+                    "Uic": instr.uid(),
+                    "AssetType": instr.asset_class(),
+                },
+                "ContextId": context_id,
+                "ReferenceId": reference_id,
+                "RefreshRate": 1,
+            }
+
+            res = self.rest_conn._POST_json(api_set="trade", endpoint="/prices/subscriptions", api_ver=1, json=json)  # type: ignore
+            callback(res)
+            loop = asyncio.new_event_loop()
+            loop.run_until_complete(self.streamer(context_id, callback))
+        except Exception as e:
+            print(f"error trying to initiate a subscription for :{instrument}. {e}")
+            raise e
 
     async def streamer(
         self,

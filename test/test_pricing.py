@@ -21,6 +21,7 @@ from sxo.interface.client import SaxoClient
 if __name__ == "__main__":
     client = SaxoClient()
 
-    # l1 = client.info_price(["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "Equity::TSLA:xmil", "Stock::TL0:xetr",])
-    l1 = client.info_price("FxSpot::GBPEUR")
+    l1 = client.info_price(["FxSpot::GBPEUR", "FxSpot::GBPJPY" , "Equity::TSLA:xmil", "Stock::TL0:xetr",])
     i = 123
+    l2 = client.info_price("FxSpot::GBPEUR")
+    i = 234

@@ -11,6 +11,8 @@ from typing import Callable
 from typing import Dict
 
 from sxo.interface.client import SaxoClient
+from sxo.interface.entities.instruments import Instrument
+from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.quote import Quote
 from sxo.util.threads import kill_executor_threads
 
@@ -35,7 +37,7 @@ class DataWriter:
         if not data_path.exists():
             raise DataWriterError(f"output location must exist: {out_dir}")
 
-        self.out_path = data_path / instr
+        self.out_path = data_path / instr.asset_class() / instr.symbol()
         Path(self.out_path).mkdir(parents=True, exist_ok=True)
 
         self.instrument = instr
@@ -60,7 +62,7 @@ class DataWriter:
         """
         pattern_ext = "" if pattern is None else f"-{pattern}"
         self.file_date = dt.datetime.now().date()
-        out_file = open(self.out_path / f"{self.instrument}{pattern_ext}-{self.file_date.strftime('%Y%m%d')}.csv", "a")
+        out_file = open(self.out_path / f"{self.instrument.symbol()}{pattern_ext}-{self.file_date.strftime('%Y%m%d')}.csv", "a")
         return out_file
 
     def __update(self, update: Dict[str, Any]):
@@ -161,15 +163,16 @@ last_tick = dt.datetime.now()
 tick_info = {}
 
 
-def heartbeat(instr: str = None, n: int = None):
+def heartbeat(instr: Instrument = None, n: int = None):
     # assignment is atomic in python
     global last_tick, tick_info
     last_tick = dt.datetime.now()
+
     if instr is not None:
-        if instr in tick_info:
-            tick_info[instr] += 1
+        if instr.symbol() in tick_info:
+            tick_info[instr.symbol()] += 1
         else:
-            tick_info[instr] = 0
+            tick_info[instr.symbol()] = 0
 
 
 executor = None
@@ -208,8 +211,9 @@ def mainline():
     client = SaxoClient(token_file=token_file)
 
     # subscribe to each instrument and dispatch to the thread pool
-    for instr in instruments:
-        executor.submit(client.subscribe_fx_spot, instr, DataWriter(output_dir, instr, heartbeat))
+    for i in instruments:
+        instr =  InstrumentUtil.parse(i)
+        executor.submit(client.subscribe_price, instr, DataWriter(output_dir, instr, heartbeat))
 
     # wait until stop
     heartbeat_monitor(loop_sleep, hb_max_tolerance)
