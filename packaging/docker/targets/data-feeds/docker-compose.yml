@@ -22,12 +22,12 @@ services:
         depends_on:
             token_grabber:
                 condition: service_completed_successfully
-        image: iztokkucan/sxo-data-feeds:0.0.2
+        image: iztokkucan/sxo-data-feeds:0.0.3
         container_name: feed-server
         environment:
             TOKEN_FILE: /tokendir/saxo_token
             DATA_DIR: /data
-            INSTRUMENTS: GBPUSD,GBPCAD,GBPBRL,GBPEUR,GBPJPY,GBPCNY,USDGBP
+            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPBRL,FxSpot::GBPEUR,FxSpot::GBPJPY,FxSpot::GBPCNY,FxSpot::USDGBP
             #,USDCAD,USDBRL,USDJPY,USDCNY,EURUSD,EURGBP,EURCAD,EURBRL,EURJPY,EURCNY
       #INSTRUMENTS: INTC:xnas
         volumes:
