@@ -4,30 +4,30 @@ version: '3.9'
 
 services:
   # generate a new 24hr loing token
-    token_grabber:
-        image: iztokkucan/sxo-token-grabber:0.0.1
-        environment:
-            SAXO_USER: 17541206
-            SAXO_PASS: h3f046da
-            TOKEN_PATH: /tokendir
-            TOKEN_FILE: saxo_token
-        volumes:
-            - type: bind
-              source: /tmp/
-              target: /tokendir/
+    # token_grabber:
+    #     image: iztokkucan/sxo-token-grabber:0.0.1
+    #     environment:
+    #         SAXO_USER: 17805023
+    #         SAXO_PASS: c45o55am
+    #         TOKEN_PATH: /tokendir
+    #         TOKEN_FILE: saxo_token
+    #     volumes:
+    #         - type: bind
+    #           source: /tmp/
+    #           target: /tokendir/
 
 
   # when you have the token, start the data feeds
     feed:
-        depends_on:
-            token_grabber:
-                condition: service_completed_successfully
+        # depends_on:
+        #     token_grabber:
+        #         condition: service_completed_successfully
         image: iztokkucan/sxo-data-feeds:0.0.3
         container_name: feed-server
         environment:
             TOKEN_FILE: /tokendir/saxo_token
             DATA_DIR: /data
-            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPBRL,FxSpot::GBPEUR,FxSpot::GBPJPY,FxSpot::GBPCNY,FxSpot::USDGBP
+            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
             #,USDCAD,USDBRL,USDJPY,USDCNY,EURUSD,EURGBP,EURCAD,EURBRL,EURJPY,EURCNY
       #INSTRUMENTS: INTC:xnas
         volumes:
