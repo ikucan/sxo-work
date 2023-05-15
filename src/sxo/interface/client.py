@@ -8,7 +8,7 @@ from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPIMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
 from sxo.interface.orders import DeleteOrders
-from sxo.interface.orders import FxLimitOrder
+from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import GetOrderDetails
 from sxo.interface.orders import ListAllOrders
 from sxo.interface.prices import InfoPrice
@@ -67,7 +67,7 @@ class SaxoClient(metaclass=ClientMethodFactory):
         # subscriptions
         "subscribe_price": InfoPriceSubscription,
         # orders
-        "buy_fx_spot": FxLimitOrder,
+        "limit_order": LimitOrder,
         "order_details": GetOrderDetails,
         "list_orders": ListAllOrders,
         "delete_orders": DeleteOrders,

@@ -10,7 +10,9 @@ from sxo.interface.definitions import OrderDirection
 from sxo.interface.definitions import OrderDuration
 from sxo.interface.definitions import OrderReleation
 from sxo.interface.definitions import OrderType
-from sxo.interface.entities.instruments import FxSpotInstruments
+from sxo.interface.entities.instruments import Instrument
+from sxo.interface.entities.instruments import InstrumentUtil
+
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 
 
@@ -98,7 +100,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
 #         return res
 
 
-class FxLimitOrder(OrderCommandBase):
+class LimitOrder(OrderCommandBase):
     """
     https://www.developer.saxo/openapi/tutorial#/8
     https://github.com/SaxoBank/openapi-samples-js/tree/master/orders
@@ -110,29 +112,33 @@ class FxLimitOrder(OrderCommandBase):
 
     def __call__(
         self,
-        ccy_pair: str,
+        instrument: Instrument,
+        direction: OrderDirection,
         price: float,
+        limit_price:float,
         amount: float,
     ):
-        if isinstance(ccy_pair, str):
-            instr_id = FxSpotInstruments.get_instrument_id(ccy_pair)
+        if isinstance(instrument, Instrument):
+            instr = instrument
+        elif isinstance(instrument, str):
+            instr = InstrumentUtil.parse(instrument)
         else:
-            raise ValueError(f"unexpected type: {type(ccy_pair)}")
+            raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
         entry_order = self._make_order_json(
-            instrument_id=instr_id,
-            direction=OrderDirection.Buy,
-            asset_class=AssetType.FxSpot,
+            instrument_id=instr.uid(),
+            direction=direction,
+            asset_class=instr.asset_class(),
             amount=amount,
             price=price,
             order_type=OrderType.Limit,
         )
         exit_order = self._make_order_json(
-            instrument_id=instr_id,
-            direction=OrderDirection.Buy.flip(),
-            asset_class=AssetType.FxSpot,
+            instrument_id=instr.uid(),
+            direction=direction.flip(),
+            asset_class=instr.asset_class(),
             amount=amount,
-            price=1.23,
+            price=limit_price,
             order_type=OrderType.Limit,
         )
 

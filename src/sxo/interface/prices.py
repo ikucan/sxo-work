@@ -67,8 +67,6 @@ class InfoPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
                 instr = instrument
             elif isinstance(instrument, str):
                 instr = InstrumentUtil.parse(instrument)
-                if not isinstance(instr, Instrument):
-                    raise ValueError(f"the instrument spec {instrument} does not parse into a single instrument: {type(instrument)}")
             else:
                 raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
