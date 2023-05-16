@@ -10,15 +10,14 @@
         "aiohttp >=3.8",
         "numpy >=1.22",
         "python >=3.11,<3.12.0a0",
-        "python_abi 3.11.* *_cp311",
         "websockets >=10"
       ],
-      "md5": "20afda8a6728411ea046956432de7232",
+      "md5": "f7a553d7ff3cd0d31da37f5b9478623f",
       "name": "ik.sxo",
-      "sha256": "d5fc0f0bcdfc0df8d9d034e6bafcacf6de775b1f72d3b397181d70b552ad09cc",
-      "size": 699128,
+      "sha256": "38f9e027437a00c37ab20ae55633e26ac8f99e02911c0ee8be0f1780e8922594",
+      "size": 698910,
       "subdir": "linux-64",
-      "timestamp": 1684172856849,
+      "timestamp": 1684262608542,
       "version": "v0.1.0"
     }
   },

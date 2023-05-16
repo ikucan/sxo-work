@@ -6,7 +6,7 @@ services:
 
   # when you have the token, start the data feeds
     feed:
-        image: iztokkucan/sxo-data-feeds:0.0.2
+        image: iztokkucan/sxo-data-feeds:0.0.4
         container_name: feed-server-TEST
         environment:
             TOKEN_FILE: /tokendir/saxo_token
