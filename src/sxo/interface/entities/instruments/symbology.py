@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime as dt
 import re
+from abc import ABC
+from abc import abstractmethod
 from io import StringIO
 from pathlib import Path
 from pprint import pformat
@@ -8,19 +10,22 @@ from typing import Any
 from typing import Dict
 from typing import List
 from typing import Set
-from typing import Union
+from typing import Type
 
+from sxo.interface.definitions import AssetType
+from sxo.interface.entities.instruments import AssetClassDb
 from sxo.interface.entities.instruments import EquityInstruments
 from sxo.interface.entities.instruments import FxSpotInstruments
 
 # from sxo.interface.entities.instruments import AssetClassDb
 
 
-class Instrument:
+class Instrument(ABC):
     def __init__(self, json: Dict[Any, Any]):
         # assume a single dict or list of dicts, treat all as a list
         self._json = json
         self.__set_detail()
+        self.__check_detail()
 
     def __set_detail(self):
         self._symbol = self._json["Symbol"]
@@ -28,6 +33,9 @@ class Instrument:
         self._uid = self._json["Identifier"]
         self._gid = self._json["GroupId"]
         self._descr = self._json["Description"]
+
+    def __check_detail(self):
+        assert self._canonical_asset_class == self.asset_type().name
 
     # @abstractmethod
     # def uid(self) -> str:
@@ -44,10 +52,14 @@ class Instrument:
     def descr(self) -> str:
         return self._descr
 
-    def asset_class(self) -> Dict[Any, Any]:
+    def asset_class(self) -> str:
         return self._canonical_asset_class
 
-    def path(self, root: Union[str, Path] = None, ext: str = None, dated: bool = False):
+    @abstractmethod
+    def asset_type(self) -> AssetType:
+        ...
+
+    def path(self, root: str | Path | None = None, ext: str | None = None, dated: bool = False):
         base = Path(self.asset_class())
         fname = re.sub(":", "_", self.symbol())
         ext = f".{ext}" if ext is not None else ""
@@ -76,10 +88,16 @@ class FxSpot(Instrument):
     def __init__(self, metadata: Dict[Any, Any]):
         super().__init__(metadata)
 
+    def asset_type(self) -> AssetType:
+        return AssetType.FxSpot
+
 
 class Equity(Instrument):
     def __init__(self, metadata: Dict[Any, Any]):
         super().__init__(metadata)
+
+    def asset_type(self) -> AssetType:
+        return AssetType.Stock
 
     def exchange(self) -> str:
         return self._json["ExchangeId"]
@@ -97,7 +115,7 @@ class Equity(Instrument):
 class InstrumentGroup:
     def __init__(self, instruments: List[str]):
         self._instruments = [InstrumentUtil.parse(i) for i in instruments]
-        self._by_asset_class = {}
+        self._by_asset_class: Dict[str, Any] = {}
         for i in self._instruments:
             self._by_asset_class.setdefault(i.asset_class(), []).append(i)
 
@@ -152,13 +170,16 @@ class InstrumentUtil:
         try:
             asset_class, symbol = sym.split("::")
 
+            symbology: AssetClassDb
+            type_class: Type[Instrument]
+
             match asset_class:
                 case "FxSpot":
                     symbology, type_class = FxSpotInstruments, FxSpot
                 case "Equity" | "Stock":
                     symbology, type_class = EquityInstruments, Equity
                 case _:
-                    raise Exception(f"unknown asset class {asset_class}. Must be one of: {Instrument.known_asset_classes}")
+                    raise Exception(f"unknown asset class {asset_class}. Must be one of: {InstrumentUtil.known_asset_classes}")
             if not symbology.has_instrument(symbol):
                 raise Exception(f"Instrument {symbol} is not known in (known) asset class {asset_class}")
             else:
@@ -177,7 +198,7 @@ class InstrumentUtil:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
-    def parse_grp(sym: Union[str, List[str]]):  # -> Instrument
+    def parse_grp(sym: str | List[str]):  # -> Instrument
         if isinstance(sym, str):
             return InstrumentGroup([sym])
         elif isinstance(sym, list):
@@ -186,7 +207,7 @@ class InstrumentUtil:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
-    def find(uid: Union[str, int]):  # -> Instrument
+    def find(uid: int):  # -> Instrument
         """
         find an instrument if you have an id already... this is fairly stupid, just looks up the id in each databas
         we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold

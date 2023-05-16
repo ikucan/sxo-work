@@ -7,10 +7,8 @@ from typing import Any
 from typing import Callable
 from typing import Dict
 from typing import List
-from typing import Union
 
 import websockets
-from sxo.interface.entities.instruments import FxSpotInstruments
 from sxo.interface.entities.instruments import Instrument
 from sxo.interface.entities.instruments import InstrumentGroup
 from sxo.interface.entities.instruments import InstrumentUtil
@@ -54,6 +52,7 @@ class InfoPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
     https://www.developer.saxo/openapi/learn/streaming
 
     """
+
     def __call__(
         self,
         instrument: str,
@@ -69,7 +68,6 @@ class InfoPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
                 instr = InstrumentUtil.parse(instrument)
             else:
                 raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
-
 
             json = {
                 "Arguments": {

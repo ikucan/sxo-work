@@ -4,11 +4,10 @@ from pathlib import Path
 from typing import Any
 from typing import Dict
 from typing import Set
-from typing import Union
 
 
 class InstrumentDb:
-    def __init__(self, asset_type: str, _json: Union[Dict, str, Path, None]):
+    def __init__(self, asset_type: str, _json: Dict | str | Path | None):
         if asset_type is None:
             raise ValueError("you must pass a valid asset_type parameter")
 
@@ -100,7 +99,7 @@ class FxSpotSyms(InstrumentDb):
     a wrapper for the FxSpot entity reference data
     """
 
-    def __init__(self, _json: Union[Dict, str, Path, None] = None):
+    def __init__(self, _json: Dict | str | Path | None = None):
         super().__init__(asset_type="FxSpot", _json=_json)
 
 
@@ -110,5 +109,5 @@ class EquitySyms(InstrumentDb):
     a wrapper for the FxSpot entity reference data
     """
 
-    def __init__(self, _json: Union[Dict, str, Path, None] = None):
+    def __init__(self, _json: Dict | str | Path | None = None):
         super().__init__(asset_type="Stock", _json=_json)

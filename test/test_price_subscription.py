@@ -29,6 +29,7 @@ class tick_handler:
         msg["_instrument"] = self.instr
         pprint(msg)
 
+
 if __name__ == "__main__":
     client = SaxoClient()
 

@@ -212,7 +212,7 @@ def mainline():
 
     # subscribe to each instrument and dispatch to the thread pool
     for i in instruments:
-        instr =  InstrumentUtil.parse(i)
+        instr = InstrumentUtil.parse(i)
         executor.submit(client.subscribe_price, instr, DataWriter(output_dir, instr, heartbeat))
 
     # wait until stop
