@@ -70,7 +70,7 @@ class InstrumentDb:
 
     def has_id(
         self,
-        id: str,
+        id: int,
     ) -> bool:
         return id in self.all_ids()
 
@@ -84,7 +84,7 @@ class InstrumentDb:
 
     def get_by_id(
         self,
-        id: str,
+        id: int,
     ) -> Dict:
         if not self.has_id(id):
             raise ValueError(f"unknown instrument ID: {id}")
