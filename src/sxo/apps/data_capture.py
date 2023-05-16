@@ -29,7 +29,7 @@ class DataWriterError(BaseException):
 # # tick data writer class for each instrument
 # ###
 class DataWriter:
-    def __init__(self, out_dir: str, instr: str, heartbeat: Callable = None):
+    def __init__(self, out_dir: str, instr: Instrument, heartbeat: Callable | None = None):
         """
         check output details and crate output writer
         """
@@ -44,7 +44,7 @@ class DataWriter:
 
         self._metadata_file = self.__make_output_file("metadata")
         self._data_file = self.__make_output_file()
-        self._quote = None
+        self._quote: Quote | None = None
         self._heartbeat = heartbeat
         self._tick_count = 0
 
@@ -56,7 +56,7 @@ class DataWriter:
         """
         return self.file_date < dt.datetime.now().date()
 
-    def __make_output_file(self, pattern: str = None):
+    def __make_output_file(self, pattern: str | None = None):
         """
         create an output file
         """
@@ -72,8 +72,8 @@ class DataWriter:
         if self.__change_file():
             self._data_file = self.__make_output_file()
 
-        self._quote.update(update)
-        self._data_file.write(self._quote.to_csv())
+        self._quote.update(update)  # type: ignore
+        self._data_file.write(self._quote.to_csv())  # type: ignore
         self._data_file.write("\n")
         self._data_file.flush()
         if self._heartbeat is not None:
@@ -160,10 +160,10 @@ def config():
 # report they are still receiving data
 # ####
 last_tick = dt.datetime.now()
-tick_info = {}
+tick_info: Dict[str, Any] = {}
 
 
-def heartbeat(instr: Instrument = None, n: int = None):
+def heartbeat(instr: Instrument | None = None):
     # assignment is atomic in python
     global last_tick, tick_info
     last_tick = dt.datetime.now()
@@ -175,7 +175,7 @@ def heartbeat(instr: Instrument = None, n: int = None):
             tick_info[instr.symbol()] = 0
 
 
-executor = None
+executor: exec | None = None
 
 
 # ###
@@ -192,7 +192,7 @@ def heartbeat_monitor(sleep_period: int, hb_tol_s: int):
         )
         if hb_lag.seconds > hb_tol_s:
             print(f"ERROR. Heartbeat older than {hb_tol_s}s. Exiting")
-            kill_executor_threads(executor)
+            kill_executor_threads(executor)  # type: ignore
             sys.exit(-1)
         else:
             time.sleep(sleep_period)
