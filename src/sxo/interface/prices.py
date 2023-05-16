@@ -40,7 +40,7 @@ class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         elif isinstance(instruments, Instrument):
             instr_id = f"?Uic={instruments.uid()}"
             endpoint = f"/infoprices/{instr_id}&AssetType={instruments.asset_class()}" "&FieldGroups=Quote,Commissions"
-            return {"Data": self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)}
+            return {"Data": self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)}  # type:ignore
         else:
             raise ValueError(f"unexpected parsed instrument type. {type(instruments)}")
 

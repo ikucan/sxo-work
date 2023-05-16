@@ -83,7 +83,7 @@ class LimitOrder(OrderCommandBase):
         entry_order = self._make_order_json(
             instrument_id=instr.uid(),
             direction=direction,
-            asset_class=instr.asset_class(),
+            asset_class=instr.asset_type(),
             amount=amount,
             price=price,
             order_type=OrderType.Limit,
@@ -91,7 +91,7 @@ class LimitOrder(OrderCommandBase):
         exit_order = self._make_order_json(
             instrument_id=instr.uid(),
             direction=direction.flip(),
-            asset_class=instr.asset_class(),
+            asset_class=instr.asset_type(),
             amount=amount,
             price=limit_price,
             order_type=OrderType.Limit,

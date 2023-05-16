@@ -40,10 +40,10 @@ class Instrument(ABC):
     # @abstractmethod
     # def uid(self) -> str:
     #     ...
-    def uid(self) -> str:
+    def uid(self) -> int:
         return self._uid
 
-    def gid(self) -> str:
+    def gid(self) -> int:
         return self._gid
 
     def symbol(self) -> str:

@@ -3,6 +3,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor as exec
 from functools import partial
 from pprint import pprint
+from typing import Any
+from typing import Dict
 
 from sxo.interface.client import SaxoClient
 
@@ -25,7 +27,7 @@ class tick_handler:
     def __init__(self, instr: str):
         self.instr = instr
 
-    def __call__(self, msg: str):
+    def __call__(self, msg: Dict[str, Any]):
         msg["_instrument"] = self.instr
         pprint(msg)
 

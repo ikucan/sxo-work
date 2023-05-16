@@ -117,7 +117,7 @@ class SaxoRestBase:
                     return await response.json()
                 raise Exception(f"a HTTP error occurred: {response.status}")
 
-    def _DELETE_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] = None):
+    def _DELETE_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None):
         url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
         headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
         return asyncio.new_event_loop().run_until_complete(self._delete_json_async(url=url, headers=headers))
