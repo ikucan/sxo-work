@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+    cache:
+        image: redis:7.2-rc1
+        container_name: redis-cache
+        hostname: redis-cache
+
+        restart: always
+        ports:
+            - 6379:6379
+
+        # command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+        command: redis-server --save 20 1 --loglevel warning --requirepass eYV7EwVmmxKPCDmwMtyKVge8oLd2t81
+        volumes:
+            - type: bind
+              source: /data/cache
+              target: /data/
+
+        deploy:
+            restart_policy:
+                condition: any

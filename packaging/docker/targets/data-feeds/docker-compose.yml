@@ -28,8 +28,6 @@ services:
             TOKEN_FILE: /tokendir/saxo_token
             DATA_DIR: /data
             INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
-            #,USDCAD,USDBRL,USDJPY,USDCNY,EURUSD,EURGBP,EURCAD,EURBRL,EURJPY,EURCNY
-      #INSTRUMENTS: INTC:xnas
         volumes:
             - type: bind
               source: /tmp/
