@@ -1,19 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime as dt
 import os
-import sys
-import time
-from concurrent.futures import ThreadPoolExecutor as exec
-from pathlib import Path
-from typing import Any
-from typing import Callable
-from typing import Dict
-
-from sxo.interface.client import SaxoClient
-from sxo.interface.entities.instruments import Instrument
-from sxo.interface.entities.instruments import InstrumentUtil
-from sxo.util.runtime.heartbeat import HeartBeatMonitor
-from sxo.util.quote import Quote
 
 
 # ###
@@ -45,7 +31,6 @@ def config():
             return default_value
 
     token_file = read_env("TOKEN_FILE")
-    target_dir = read_env("DATA_DIR")
     raw_instruments = read_env("INSTRUMENTS")
     loop_sleep = read_env("SLEEP_PERIOD", raise_if_missing=False)
     hb_tolerrance = read_env("HB_TOLERANCE", raise_if_missing=False)
@@ -54,4 +39,4 @@ def config():
     if hb_tolerrance is None:
         hb_tolerrance = 15
     instruments = parse_instruments(raw_instruments)
-    return token_file, target_dir, instruments, loop_sleep, hb_tolerrance
+    return token_file, instruments, loop_sleep, hb_tolerrance

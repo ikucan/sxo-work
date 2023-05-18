@@ -9,6 +9,7 @@ from sxo.interface.client import SaxoClient
 from sxo.interface.entities.instruments import Instrument
 from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.heartbeat import HeartBeatMonitor
+from sxo.util.runtime.cache import Cache
 
 
 class SimpleStratError(BaseException):
@@ -53,18 +54,25 @@ class SimpleStrat:
 def mainline():
     global executor
     # get config
-    token_file, output_dir, instruments, loop_sleep, hb_max_tolerance = config()
+    token_file, instruments, loop_sleep, hb_max_tolerance = config()
 
     executor = exec(max_workers=10)
-
     client = SaxoClient(token_file=token_file)
     hb_monitor = HeartBeatMonitor(executor, loop_sleep, hb_max_tolerance)
+
+    cache = Cache.make_redis_cache()
 
     # subscribe to each instrument and dispatch to the thread pool
     for i in instruments:
         instr = InstrumentUtil.parse(i)
-        # executor.submit(client.subscribe_price, instr, SimpleStrat(instr, heartbeat))
-        executor.submit(client.subscribe_price, instr, SimpleStrat(instr, hb_monitor))
+        cache.add_instrument_def(instr)
+        ii = cache.get_instrument_def(instr.uid())
+        assert ( i == ii)
+
+
+
+        # for now...
+        # executor.submit(client.subscribe_price, instr, SimpleStrat(instr, hb_monitor))
 
     # wait until stop
     # heartbeat_monitor(loop_sleep, hb_max_tolerance)

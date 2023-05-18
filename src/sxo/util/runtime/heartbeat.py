@@ -1,13 +1,20 @@
+# -*- coding: utf-8 -*-
+import datetime as dt
 import sys
 import time
 
+from sxo.util.threads import kill_executor_threads
+
+
 class HeartBeatMonitor:
-    def __init__(self, executor, sleep_period: int, tolerance: int) :
+    def __init__(self, executor, sleep_period: int, tolerance: int):
         self._executor = executor
         self._sleep = sleep_period
-        self._hb_tolerance= tolerance
+        self._hb_tolerance = tolerance
 
-    def __loop(self, ):
+    def __loop(
+        self,
+    ):
         self._last_tick = dt.datetime.now()
         while 1 < 2:
             now = dt.datetime.now()
@@ -23,10 +30,13 @@ class HeartBeatMonitor:
                 )
                 time.sleep(self._sleep)
 
-
-    def __call__(self, ):
+    def __call__(
+        self,
+    ):
         # assignment is atomic in python
         self._last_tick = dt.datetime.now()
 
-    def start(self, ):
+    def start(
+        self,
+    ):
         self.__loop()

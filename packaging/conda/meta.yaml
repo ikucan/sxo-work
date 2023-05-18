@@ -23,6 +23,7 @@ requirements:
         - aiohttp           >=3.8
         - numpy             >=1.22
         - websockets        >=10
+        - redis-py          >=4.5.4
 
 about:
     home: iztokkucan.io
