@@ -1,7 +1,5 @@
 import sys
 import time
-import datetime as dt
-from sxo.util.threads import kill_executor_threads
 
 class HeartBeatMonitor:
     def __init__(self, executor, sleep_period: int, tolerance: int) :
