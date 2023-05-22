@@ -17,14 +17,16 @@ from sxo.interface.entities.instruments import AssetClassDb
 from sxo.interface.entities.instruments import EquityInstruments
 from sxo.interface.entities.instruments import FxSpotInstruments
 
+
 # from sxo.interface.entities.instruments import AssetClassDb
 class InstrumentError(Exception):
     pass
 
+
 class Instrument(ABC):
     @staticmethod
     def of_json(json: Dict[Any, Any]):  # -> Instrument
-        if json['AssetType']  == 'FxSpot':
+        if json["AssetType"] == "FxSpot":
             return FxSpot(json)
         else:
             raise InstrumentError(f"unknown AssetType: {json['AssetType']}")
@@ -234,7 +236,6 @@ class InstrumentUtil:
             raise Exception("Error parsing instrument id. Expecting a integer (123) or a number string ('123')")
         # if assetClass is None:
 
-    
 
 if __name__ == "__main__":
     for sym in [
