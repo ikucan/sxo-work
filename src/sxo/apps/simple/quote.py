@@ -16,6 +16,10 @@ class Quote:
         self._asz = np.nan
         self._mid = np.nan
 
+
+    def time_as_str(self,) -> str:
+        return self._time.astype('datetime64[ms]').astype(str)
+    
     def update(self, json:Dict[Any, Any]) :
         if 'LastUpdated' in json:
             self._time = np.datetime64(json['LastUpdated'])

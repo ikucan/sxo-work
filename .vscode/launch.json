@@ -17,7 +17,7 @@
         //"INSTRUMENTS": "FxSpot::GBPUSD,FxSpot::GBPEUR,FxSpot::GBPJPY,FxSpot::EURUSD,FxSpot::EURJPY,FxSpot::JPYUSD,",
         "INSTRUMENTS": "FxSpot::GBPEUR",
         "DATA_DIR": "/data" ,
-        "REDIS_PASS": "pass",
+        //"REDIS_PASS": "pass",
       },
       "name": "Python: Current file",
       "program": "${file}",

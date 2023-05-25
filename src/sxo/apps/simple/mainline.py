@@ -25,16 +25,13 @@ def mainline():
     client = SaxoClient(token_file=token_file)
     hb_monitor = HeartBeatMonitor(executor, loop_sleep, hb_max_tolerance)
 
-    cache = Cache.make_redis_cache()
 
     # subscribe to each instrument and dispatch to the thread pool
     for i in instruments:
         instr = InstrumentUtil.parse(i)
-        cache.add_instrument_def(instr)
         executor.submit(client.subscribe_price, instr, SimpleStrat(instr, hb_monitor))
 
     # wait until stop
-    # heartbeat_monitor(loop_sleep, hb_max_tolerance)
     hb_monitor.start()
 
 

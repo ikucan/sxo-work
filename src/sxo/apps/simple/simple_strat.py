@@ -21,10 +21,13 @@ class SimpleStratError(BaseException):
 # ###
 class SimpleStrat:
     def __init__(self, instr: Instrument, heartbeat: Callable | None = None):
-        self.instrument = instr
+        self._instrument = instr
         self._heartbeat = heartbeat
         self._tick_count = 0
         self._qoute = Quote(instr)
+        self._cache = Cache.make_redis_cache()
+        self._cache.add_instrument_def(instr)
+
 
     def __call__(self, update: Dict[str, Any]):
         print(update)
@@ -36,8 +39,9 @@ class SimpleStrat:
         # the update should contain either a Quote or Snapshot
         # """
         try:
-            if "Quote" in update:
-                self.__update(update)
+            #if "Quote" in update:
+            self.__update(update)
+                
         except Exception:
             print("============================")
             print(update)
@@ -46,8 +50,17 @@ class SimpleStrat:
             print("============================")
 
     def __update(self, update: Dict[str, Any]):
-        print(update)
         self._qoute.update(update)
         print(self._qoute)
+        self.__test_cache()
+        
+
+    def __test_cache(self,):
+        ts_name = f"ts_{self._instrument.uid()}_quotes"
+        #score = self._qoute.time_as_str()
+        time = int(self._qoute._time.astype('datetime64[ms]').astype(int))
+        value = self._qoute.__str__()
+                                                  
+        self._cache._r.lpush(ts_name, self._qoute.__str__())
         
 
