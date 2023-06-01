@@ -11,7 +11,6 @@ from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.cache import Cache
 
 
-
 class SimpleStratError(BaseException):
     pass
 
@@ -28,7 +27,6 @@ class SimpleStrat:
         self._cache = Cache.make_redis_cache()
         self._cache.add_instrument_def(instr)
 
-
     def __call__(self, update: Dict[str, Any]):
         print(update)
         if self._heartbeat is not None:
@@ -39,13 +37,14 @@ class SimpleStrat:
         # the update should contain either a Quote or Snapshot
         # """
         try:
-            #if "Quote" in update:
+            # if "Quote" in update:
             self.__update(update)
-                
+
         except Exception:
             print("============================")
             print(update)
             import traceback
+
             traceback.print_exc()
             print("============================")
 
@@ -53,14 +52,13 @@ class SimpleStrat:
         self._qoute.update(update)
         print(self._qoute)
         self.__test_cache()
-        
 
-    def __test_cache(self,):
+    def __test_cache(
+        self,
+    ):
         ts_name = f"ts_{self._instrument.uid()}_quotes"
-        #score = self._qoute.time_as_str()
-        time = int(self._qoute._time.astype('datetime64[ms]').astype(int))
+        # score = self._qoute.time_as_str()
+        time = int(self._qoute._time.astype("datetime64[ms]").astype(int))
         value = self._qoute.__str__()
-                                                  
-        self._cache._r.lpush(ts_name, self._qoute.__str__())
-        
 
+        self._cache._r.lpush(ts_name, self._qoute.__str__())
