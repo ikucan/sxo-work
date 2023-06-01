@@ -2,8 +2,8 @@
 import os
 from typing import Tuple
 
-class RedisConfig:
 
+class RedisConfig:
     @staticmethod
     def get() -> Tuple[str, int, str | None]:
         host = os.getenv("REDIS_HOST")

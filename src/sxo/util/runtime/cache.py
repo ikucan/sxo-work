@@ -54,4 +54,3 @@ class RedisCache(Cache):
         jobj = json.loads(json_str)
         i = Instrument.of_json(jobj)
         return i
-
