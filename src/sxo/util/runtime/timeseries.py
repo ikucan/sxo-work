@@ -6,10 +6,13 @@ from typing import Tuple
 from typing import TypeVar
 
 import numpy as np
+import pandas as pd
 import redis
 from sxo.util.runtime.redis import RedisConfig
 
 T = TypeVar('T')
+
+TMIN, TMAX = 0, np.iinfo(np.int64).max
 
 class TsError(Exception):
     pass
@@ -32,10 +35,13 @@ class TimeSeries(ABC, Generic[T]):
         ...
 
 class PersistedTimeSeries(TimeSeries[T]):
-    pass
+    @abstractmethod
+    def set_retention(self, time_ms:np.int64):
+        ...
 
 
 class RedisTs(PersistedTimeSeries[T]):
+
     def __init__(self,
                  name: str,
                  retention_period_ms: int = 0,
@@ -64,11 +70,22 @@ class RedisTs(PersistedTimeSeries[T]):
                 key_type = self._redis.type(self._name)
                 if str(key_type, "UTF-8") != "TSDB-TYPE":
                     raise TsError(f"Redis key {self._name} already exists but is not a timeseries type: {key_type}")
+                
+                # even if ts exists, provided retention period may be different, so set
+                self.__set_retention()
+
         else:
             self.__create_redis_ts()
 
     def __create_redis_ts(self):
         self._ts_obj = self._ts_module.create(self._name, retention_msecs=self._retention, duplicate_policy=self._duplicates)
+
+    def __set_retention(self,):        
+        self._ts_module.alter(self._name, retention_msecs=self._retention)
+
+    def set_retention(self, retention_period_ms:np.int64):
+        self._retention = retention_period_ms
+        self.__set_retention()
 
 
     def add(self, t:np.int64, v:T):
@@ -86,8 +103,19 @@ class RedisTs(PersistedTimeSeries[T]):
             t0 = 0
         if t1 is None:
             t1 = t0
-            
+
         self._ts_module.delete(self._name, t0, t1)
 
-    def get_range(self, t0:np.int64 | None = None, t1:np.int64 | None = None):
-        pass
+    def get_range_raw(self, t0:np.int64 = TMIN, t1:np.int64 = TMAX) :
+        return self._ts_module.range(self._name, t0, t1)
+ 
+    def get_range(self, t0:np.int64 = TMIN, t1:np.int64 = TMAX, convert:str = 'frame') :
+        entries = self.get_range_raw(t0, t1)
+        times = np.array([x[0] for x in entries])
+        vals = np.array([x[1] for x in entries])
+        if convert == 'frame':
+            return pd.DataFrame({'t':times, 'v':vals})
+        elif convert == 'vector':
+            return (times, vals)
+        else:
+            raise TsError(f' convert parameter must be either frame or vector. you supplied: {convert}')

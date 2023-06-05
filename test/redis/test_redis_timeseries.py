@@ -15,10 +15,14 @@ class Test:
 def ms_now():
     return int(np.datetime64('now').astype('datetime64[ms]').astype(np.int64))
 
+#######
+# insertion of a bunch of stuff
+#######
 # if __name__ == "__main__":
 #     print("--- start ---")
-#     ts = RedisTs[np.float32]('ts1', retention_period_ms=50000, delete_if_exists=True)
-#     #ts = RedisTs[np.float32]('ts1', retention_period_ms=50000)
+#     ts = RedisTs[np.float32]('ts1', delete_if_exists=True)
+#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=500000, delete_if_exists=True)
+#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=50000)
     
 #     for i in range(1000):
 #         k, v = ms_now(), 10 + r.random()
@@ -30,19 +34,39 @@ def ms_now():
 #     print("--- end ---")
 
 
-if __name__ == "__main__":
-    print("--- start ---")
-    ts = RedisTs[np.float32]('ts1', retention_period_ms=50000, delete_if_exists=True)
+#######
+# manipulation
+#######
+# if __name__ == "__main__":
+#     print("--- start ---")
+#     ts = RedisTs[np.float32]('ts1', retention_period_ms=50000, delete_if_exists=True)
     
-    k, v = ms_now(), 10 + r.random()
-    print(f'inserting values {k}:{v} into timeseries {ts._name}')
-    for i in range(1,11):
-        ts.add(i, 10 + i)
-    ts.del_range(10)
+#     k, v = ms_now(), 10 + r.random()
+#     print(f'inserting values {k}:{v} into timeseries {ts._name}')
+#     for i in range(1,11):
+#         ts.add(i, 10 + i)
+#     ts.del_range(10)
+#     ts.del_range(t1 = 4)
+#     ts.del_range(6,7)
+#     print("--- end ---")
 
-    ts.del_range(t1 = 4)
 
-    ts.del_range(6,7)
+#######
+# retreival
+#######
+# if __name__ == "__main__":
+#     print("--- start ---")
+#     ts = RedisTs[np.float32]('ts1')
+#     ts = ts.get_range()
+#     print("--- end ---")
 
 
-    print("--- end ---")
+# #######
+# # create with options
+# #######
+# if __name__ == "__main__":
+#     print("--- start ---")
+#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=10000)
+#     ts = RedisTs[np.float32]('ts1')
+#     ts = ts.get_range()
+#     print("--- end ---")
