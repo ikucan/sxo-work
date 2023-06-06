@@ -23,15 +23,19 @@ class TimeSeries(ABC, Generic[T]):
         pass
 
     @abstractmethod
-    def add(self, t:np.int64, v:T):
+    def add(self, t:np.int64, v:T) -> int:
         ...
 
     @abstractmethod
-    def del_range(self, t0:np.int64 | None = None, t1:np.int64 | None = None):
+    def madd(self, t:np.array, v:np.array) -> np.array:
         ...
 
     @abstractmethod
-    def get_range(self, t0:np.int64, t1:np.int64):
+    def del_range(self, t0:np.int64 | None = None, t1:np.int64 | None = None) -> int:
+        ...
+
+    @abstractmethod
+    def get_range(self, t0:np.int64, t1:np.int64) -> Tuple[np.array, np.array] | pd.DataFrame :
         ...
 
 class PersistedTimeSeries(TimeSeries[T]):
@@ -88,13 +92,28 @@ class RedisTs(PersistedTimeSeries[T]):
         self.__set_retention()
 
 
-    def add(self, t:np.int64, v:T):
+    def add(self, t:np.int64, v:T) -> int:
         '''
             add a time series value
         '''
-        self._ts_module.add(self._name, t, v)
+        return self._ts_module.add(self._name, t, v)
 
-    def del_range(self, t0:np.int64 | None = None, t1:np.int64 | None = None):
+
+    def madd(self, t:np.array, v:np.array) -> np.array:
+        '''
+            add a time series value
+        '''
+        N, M = len(t), len(v)
+        if M != N:
+            raise TsError('ERROR. Need same number of times and values. you passed {M} times and {N} values')
+        if M == 0:
+            return []
+        
+        ts_and_vs = [(self._name, int(t[i]), v[i]) for i in range(N)]
+        retval = self._ts_module.madd(ts_and_vs)
+        return np.array(retval).astype(np.int64)
+
+    def del_range(self, t0:np.int64 | None = None, t1:np.int64 | None = None) -> int:
         '''
            if t0 is None, set it to 0
            if t1 is None, set it to be same as t0
@@ -104,12 +123,12 @@ class RedisTs(PersistedTimeSeries[T]):
         if t1 is None:
             t1 = t0
 
-        self._ts_module.delete(self._name, t0, t1)
+        return self._ts_module.delete(self._name, t0, t1)
 
     def get_range_raw(self, t0:np.int64 = TMIN, t1:np.int64 = TMAX) :
         return self._ts_module.range(self._name, t0, t1)
  
-    def get_range(self, t0:np.int64 = TMIN, t1:np.int64 = TMAX, convert:str = 'frame') :
+    def get_range(self, t0:np.int64 = TMIN, t1:np.int64 = TMAX, convert:str = 'frame') -> Tuple[np.array, np.array] | pd.DataFrame :
         entries = self.get_range_raw(t0, t1)
         times = np.array([x[0] for x in entries])
         vals = np.array([x[1] for x in entries])

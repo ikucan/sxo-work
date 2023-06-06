@@ -37,18 +37,18 @@ def ms_now():
 #######
 # manipulation
 #######
-# if __name__ == "__main__":
-#     print("--- start ---")
-#     ts = RedisTs[np.float32]('ts1', retention_period_ms=50000, delete_if_exists=True)
+if __name__ == "__main__":
+    print("--- start ---")
+    ts = RedisTs[np.float32]('ts1', retention_period_ms=50000, delete_if_exists=True)
     
-#     k, v = ms_now(), 10 + r.random()
-#     print(f'inserting values {k}:{v} into timeseries {ts._name}')
-#     for i in range(1,11):
-#         ts.add(i, 10 + i)
-#     ts.del_range(10)
-#     ts.del_range(t1 = 4)
-#     ts.del_range(6,7)
-#     print("--- end ---")
+    k, v = ms_now(), 10 + r.random()
+    print(f'inserting values {k}:{v} into timeseries {ts._name}')
+    for i in range(1,11):
+        ts.add(i, 10 + i)
+    ts.del_range(10)
+    ts.del_range(t1 = 4)
+    ts.del_range(6,7)
+    print("--- end ---")
 
 
 #######
@@ -69,4 +69,16 @@ def ms_now():
 #     # ts = RedisTs[np.float32]('ts1', retention_period_ms=10000)
 #     ts = RedisTs[np.float32]('ts1')
 #     ts = ts.get_range()
+#     print("--- end ---")
+
+# #######
+# # multiple add / copy timeseries
+# #######
+# if __name__ == "__main__":
+#     print("--- start ---")
+#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=10000)
+#     ts1 = RedisTs[np.float32]('ts1')
+#     ts2 = RedisTs[np.float32]('ts2')
+#     ts = ts1.get_range()
+#     ts2.madd(ts.t.values, ts.v.values)
 #     print("--- end ---")
