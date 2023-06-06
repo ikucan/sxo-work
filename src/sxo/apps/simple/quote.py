@@ -44,7 +44,7 @@ class Quote:
     ) -> Dict[Any, Any]:
         i = self._instrument
         return {
-            #'instrument': f"{i.asset_type()}::{i.symbol()}",
+            # 'instrument': f"{i.asset_type()}::{i.symbol()}",
             "uic": f"{i.uid()}",
             "t": f"{self._time}",
             "bid": f"{self._bid}",

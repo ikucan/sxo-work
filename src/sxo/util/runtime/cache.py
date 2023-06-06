@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
-import os
 from abc import ABC
 from abc import abstractmethod
-from typing import Tuple
 
 import redis
 from sxo.interface.entities.instruments import Instrument
@@ -45,7 +43,7 @@ class RedisCache(Cache):
         key = f"instrument_def_{i.uid()}"
         value = json.dumps(i._json)
         if not self._r.set(key, value):
-            raise CacheError(f"ERROR. Failed to set a redis DB object with key {keyS}")
+            raise CacheError(f"ERROR. Failed to set a redis DB object with key {key}")
         return key
 
     def get_instrument_def(self, uid: int) -> Instrument:
