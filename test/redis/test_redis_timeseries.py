@@ -4,13 +4,10 @@ import time
 
 import numpy as np
 from sxo.util.runtime.timeseries import RedisTs
-from sxo.util.runtime.timeseries import TimeSeries
 
 
 class Test:
-    def __init__(
-        self,
-    ):
+    def __init__(self):
         self.tt = None
 
 

@@ -12,9 +12,7 @@ class HeartBeatMonitor:
         self._sleep = sleep_period
         self._hb_tolerance = tolerance
 
-    def __loop(
-        self,
-    ):
+    def __loop(self):
         self._last_tick = dt.datetime.now()
         while 1 < 2:
             now = dt.datetime.now()
@@ -30,13 +28,9 @@ class HeartBeatMonitor:
                 )
                 time.sleep(self._sleep)
 
-    def __call__(
-        self,
-    ):
+    def __call__(self):
         # assignment is atomic in python
         self._last_tick = dt.datetime.now()
 
-    def start(
-        self,
-    ):
+    def start(self):
         self.__loop()

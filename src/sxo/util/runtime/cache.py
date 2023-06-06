@@ -27,9 +27,7 @@ class Cache(ABC):
 
 
 class RedisCache(Cache):
-    def __init__(
-        self,
-    ):
+    def __init__(self):
         (h, p, pwd) = RedisConfig.get()
 
         self._r = redis.Redis(host=h, port=p, password=pwd)
