@@ -29,7 +29,7 @@ class TimeSeries(ABC):
         ...
 
     @abstractmethod
-    def get_range(self, t0: np.int64, t1: np.int64) -> Tuple[np.array, np.array] | pd.DataFrame:
+    def get_range(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX, convert: str = "frame", name: str | None = None, index:bool = True) -> Tuple[np.array, np.array] | pd.DataFrame:
         ...
 
 
@@ -123,12 +123,17 @@ class RedisTs(PersistedTimeSeries):
     def get_range_raw(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX):
         return self._ts_module.range(self._name, t0, t1)
 
-    def get_range(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX, convert: str = "frame") -> Tuple[np.array, np.array] | pd.DataFrame:
+    def get_range(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX, convert: str = "frame", name: str | None = None, index:bool = True) -> Tuple[np.array, np.array] | pd.DataFrame:
         entries = self.get_range_raw(t0, t1)
         times = np.array([x[0] for x in entries])
         vals = np.array([x[1] for x in entries])
         if convert == "frame":
-            return pd.DataFrame({"t": times, "v": vals})
+            val_col = 'v' if name is None else name
+            df = pd.DataFrame({"t": times, val_col: vals})
+            if index:
+                return df.set_index('t')
+            else:
+                return df
         elif convert == "vector":
             return (times, vals)
         else:
