@@ -1,24 +1,26 @@
-from typing import Dict
+# -*- coding: utf-8 -*-
 from typing import Any
+from typing import Dict
+
 
 class QuoteError(Exception):
     pass
 
-class Quote:
 
+class Quote:
     @staticmethod
-    def __check(expected_key:str, parent_key:str, data: Dict[str, Any]):
+    def __check(expected_key: str, parent_key: str, data: Dict[str, Any]):
         if expected_key not in data:
             raise QuoteError(f"Constructor expecting element '{expected_key}' in '{parent_key}' dict")
 
     def __init__(self, update: Dict[str, Any]):
         Quote.__check("Snapshot", "<root>", update)
 
-        snapshot = update['Snapshot']
+        snapshot = update["Snapshot"]
         Quote.__check("LastUpdated", "Snapshot", snapshot)
         Quote.__check("Quote", "Snapshot", snapshot)
 
-        quote = snapshot['Quote']
+        quote = snapshot["Quote"]
         Quote.__check("Bid", "Quote", quote)
         Quote.__check("BidSize", "Quote", quote)
         Quote.__check("Ask", "Quote", quote)
@@ -26,13 +28,12 @@ class Quote:
 
         self.update(snapshot)
 
-
     def update(self, snapshot: Dict[str, Any]):
         if "LastUpdated" in snapshot:
             self._t = snapshot["LastUpdated"]
 
         if "Quote" in snapshot:
-            quote = snapshot['Quote']
+            quote = snapshot["Quote"]
             if "Bid" in quote:
                 self._bid = quote["Bid"]
             if "BidSize" in quote:
@@ -42,8 +43,11 @@ class Quote:
             if "AskSize" in quote:
                 self._asz = quote["AskSize"]
 
-    def to_csv(self,):
+    def to_csv(
+        self,
+    ):
         return f"{self._t},{self._bid},{self._bsz},{self._ask},{self._asz}"
+
 
 # {
 #     "ContextId": "a8G3iiMG_WB64Lut3E9MgQ",
@@ -75,4 +79,3 @@ class Quote:
 #     },
 #     "State": "Active",
 #     "_instrument": "GBPEUR"}
-    

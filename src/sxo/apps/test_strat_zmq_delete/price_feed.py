@@ -10,7 +10,6 @@ from sxo.interface.client import SaxoClient
 
 
 if __name__ == "__main__":
-
     instrument = "GBPEUR"
     pub_port = 5556
 

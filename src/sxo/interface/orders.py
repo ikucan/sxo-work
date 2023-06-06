@@ -3,14 +3,14 @@
 from typing import Any
 from typing import Dict
 from typing import List
-from typing import Union
 
 from sxo.interface.definitions import AssetType
 from sxo.interface.definitions import OrderDirection
 from sxo.interface.definitions import OrderDuration
 from sxo.interface.definitions import OrderReleation
 from sxo.interface.definitions import OrderType
-from sxo.interface.entities.instruments import FxSpotInstruments
+from sxo.interface.entities.instruments import Instrument
+from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 
 
@@ -19,7 +19,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     base class for order commands
     """
 
-    def string_or_list(self, ofg: Union[str, List[str]]) -> str:
+    def string_or_list(self, ofg: str | List[str]) -> str:
         if isinstance(ofg, str):
             return ofg
         elif isinstance(ofg, list):
@@ -30,7 +30,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     def _make_order_json(
         self,
         *,
-        instrument_id: Union[int, List],
+        instrument_id: int,
         direction: OrderDirection,
         asset_class: AssetType,
         amount: float,
@@ -55,49 +55,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         return order_json
 
 
-# class FxLimitOrder(OrderCommandBase):
-#     """
-#     https://www.developer.saxo/openapi/tutorial#/8
-#     https://github.com/SaxoBank/openapi-samples-js/tree/master/orders
-
-#     >>> https://github.com/SaxoBank/openapi-samples-js/blob/master/orders/stocks/demo.js
-#     >>> lines 52 ono
-
-#     """
-
-#     def __call__(
-#         self,
-#         ccy_pair: str,
-#         price: float,
-#         amount: float,
-#     ):
-#         if isinstance(ccy_pair, str):
-#             instr_id = FxSpotInstruments.get_instrument_id(ccy_pair)
-#         else:
-#             raise ValueError(f"unexpected type: {type(ccy_pair)}")
-
-#         entry_order = self._make_order_json(
-#             instrument_id=instr_id,
-#             direction=OrderDirection.Buy,
-#             asset_class=AssetType.FxSpot,
-#             amount=amount,
-#             price=price,
-#             order_type=OrderType.Limit,
-#         )
-#         exit_order = self._make_order_json(
-#             instrument_id=instr_id,
-#             direction=OrderDirection.Buy.flip(),
-#             asset_class=AssetType.FxSpot,
-#             amount=amount,
-#             price=1.23,
-#             order_type=OrderType.Limit,
-#         )
-
-#         entry_order["Orders"] = [exit_order]
-#         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
-#         return res
-
-class FxLimitOrder(OrderCommandBase):
+class LimitOrder(OrderCommandBase):
     """
     https://www.developer.saxo/openapi/tutorial#/8
     https://github.com/SaxoBank/openapi-samples-js/tree/master/orders
@@ -109,29 +67,33 @@ class FxLimitOrder(OrderCommandBase):
 
     def __call__(
         self,
-        ccy_pair: str,
+        instrument: Instrument,
+        direction: OrderDirection,
         price: float,
+        limit_price: float,
         amount: float,
     ):
-        if isinstance(ccy_pair, str):
-            instr_id = FxSpotInstruments.get_instrument_id(ccy_pair)
+        if isinstance(instrument, Instrument):
+            instr = instrument
+        elif isinstance(instrument, str):
+            instr = InstrumentUtil.parse(instrument)
         else:
-            raise ValueError(f"unexpected type: {type(ccy_pair)}")
+            raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
         entry_order = self._make_order_json(
-            instrument_id=instr_id,
-            direction=OrderDirection.Buy,
-            asset_class=AssetType.FxSpot,
+            instrument_id=instr.uid(),
+            direction=direction,
+            asset_class=instr.asset_type(),
             amount=amount,
             price=price,
             order_type=OrderType.Limit,
         )
         exit_order = self._make_order_json(
-            instrument_id=instr_id,
-            direction=OrderDirection.Buy.flip(),
-            asset_class=AssetType.FxSpot,
+            instrument_id=instr.uid(),
+            direction=direction.flip(),
+            asset_class=instr.asset_type(),
             amount=amount,
-            price=1.23,
+            price=limit_price,
             order_type=OrderType.Limit,
         )
 
@@ -155,7 +117,7 @@ class GetOrderDetails(OrderCommandBase):
         self,
         order_id: str,
         *,
-        field_groups: Union[str, List[str]] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
+        field_groups: str | List[str] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
     ):
         endpoint = f"orders/{self.client_key}/{order_id}/?FieldGroups={self.string_or_list(field_groups)}"  # type: ignore
 
@@ -175,7 +137,7 @@ class ListAllOrders(OrderCommandBase):
     def __call__(
         self,
         *,
-        field_groups: Union[str, List[str]] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
+        field_groups: str | List[str] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
     ):
         endpoint = f"orders/me/?FieldGroups={self.string_or_list(field_groups)}"
 
@@ -193,7 +155,7 @@ class DeleteOrders(OrderCommandBase):
 
     def __call__(
         self,
-        order_id: Union[str, List[str]] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
+        order_id: str | List[str] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
     ):
         endpoint = f"orders/{self.string_or_list(order_id)}/?AccountKey={self.account_key}"  # type: ignore
 

@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 import time
 from concurrent.futures import ThreadPoolExecutor as exec
+from functools import partial
 from pprint import pprint
+from typing import Any
+from typing import Dict
 
 from sxo.interface.client import SaxoClient
 
@@ -19,20 +22,20 @@ exectr = exec(max_workers=10)
 # # https://docs.python.org/3/library/asyncio-eventloop.html
 # ###
 
+
 class tick_handler:
-    def __init__(self, instr:str):
+    def __init__(self, instr: str):
         self.instr = instr
 
-    def __call__(self, msg:str):
-        msg['_instrument'] = self.instr
+    def __call__(self, msg: Dict[str, Any]):
+        msg["_instrument"] = self.instr
         pprint(msg)
 
-from functools import partial
 
 if __name__ == "__main__":
     client = SaxoClient()
 
-    def subscribe(instr:str) :
+    def subscribe(instr: str):
         handler = tick_handler(instr)
         client.subscribe_fx_spot(instr, handler)
 
@@ -42,18 +45,15 @@ if __name__ == "__main__":
 
     # # f1 = exectr.submit(client.subscribe_fx_spot, "EURGBP", lambda x :print(f"EURGBP:>> {x}"))
     # # f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", lambda x :print(f"GBPEUR:>> {x}"))
-    f1 = exectr.submit(client.subscribe_fx_spot, "EURGBP", partial(print_price, "EURGBP"))
+    f1 = exectr.submit(client.subscribe_price, "FxSpot::EURGBP", partial(print_price, "FxSpot::EURGBP"))
     # f2 = exectr.submit(client.subscribe_fx_spot, "GBPEUR", partial(print_price, "GBPEUR"))
     # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", partial(print_price, "GBPUSD"))
     # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", partial(print_price, "USDJPY"))
-    
+
     # # f3 = exectr.submit(client.subscribe_fx_spot, "GBPUSD", lambda x :print(x))
     # # f4 = exectr.submit(client.subscribe_fx_spot, "USDJPY", lambda x :print(x))
 
-    # subscribe("EURGBP")
-    # subscribe("GBPEUR")
-    # subscribe("GBPEUR")
-    # subscribe("GBPEUR")
+    # subscribe("FxSpot::EURGBP")
 
     # # #exec.submit(foreva)
     pass

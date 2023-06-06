@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 import ctypes
 from concurrent.futures import ThreadPoolExecutor
+
 
 def kill_thread(thread):
     """
@@ -12,8 +14,7 @@ def kill_thread(thread):
         return
 
     exc = ctypes.py_object(SystemExit)
-    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(
-        ctypes.c_long(thread.ident), exc)
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(thread.ident), exc)
     if res == 0:
         raise ValueError("nonexistent thread id")
     elif res > 1:
@@ -23,7 +24,6 @@ def kill_thread(thread):
         raise SystemError("PyThreadState_SetAsyncExc failed")
 
 
-
-def kill_executor_threads(executor:ThreadPoolExecutor):
+def kill_executor_threads(executor: ThreadPoolExecutor):
     for t in executor._threads:
         kill_thread(t)

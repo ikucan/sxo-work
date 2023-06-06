@@ -68,4 +68,3 @@ variable "subnetwork" {
   description = "The name of the subnetwork to deploy instances into"
   default = "default"
 }
-

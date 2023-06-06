@@ -1,4 +1,4 @@
-TAG = 0.0.2
+TAG = 0.0.4
 PFX = iztokkucan/sxo-data-feeds
 
 build:

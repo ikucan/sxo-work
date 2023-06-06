@@ -1,73 +1,70 @@
+---
 # running with Docker Compose version 2.17.2, needs post 1.28
-version: "3.9"
+version: '3.9'
 
 services:
   # generate a new 24hr loing token
-  token_grabber:
-    image:
-        iztokkucan/sxo-token-grabber:0.0.1
-    environment:
-      SAXO_USER: 17541206
-      SAXO_PASS: h3f046da 
-      TOKEN_PATH: /tokendir
-      TOKEN_FILE: saxo_token
-    volumes:
-      - type: bind
-        source: /tmp/
-        target: /tokendir/
+    token_grabber:
+        image: iztokkucan/sxo-token-grabber:0.0.1
+        environment:
+            SAXO_USER: 17805023
+            SAXO_PASS: c45o55am
+            TOKEN_PATH: /tokendir
+            TOKEN_FILE: saxo_token
+        volumes:
+            - type: bind
+              source: /tmp/
+              target: /tokendir/
 
 
   # when you have the token, start the data feeds
-  feed:
-    depends_on:
-      token_grabber:
-        condition: service_completed_successfully
-    image:
-        iztokkucan/sxo-data-feeds:0.0.2
-    container_name: feed-server
-    environment:
-      TOKEN_FILE: /tokendir/saxo_token
-      DATA_DIR: /data
-      INSTRUMENTS: GBPUSD,GBPCAD,GBPBRL,GBPEUR,GBPJPY,GBPCNY,USDGBP,USDCAD,USDBRL,USDJPY,USDCNY,EURUSD,EURGBP,EURCAD,EURBRL,EURJPY,EURCNY
-      #INSTRUMENTS: INTC:xnas
-    volumes:
-      - type: bind
-        source: /tmp/
-        target: /tokendir/
-      - type: bind
-        source: /data/
-        target: /data/
-    deploy:
-        restart_policy:
-            condition: on-failure
-            delay: 1s
-            max_attempts: 100
-            window: 60s
-  
+    feed:
+        depends_on:
+            token_grabber:
+                condition: service_completed_successfully
+        image: iztokkucan/sxo-data-feeds:0.0.4
+        container_name: feed-server
+        environment:
+            TOKEN_FILE: /tokendir/saxo_token
+            DATA_DIR: /data
+            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+        volumes:
+            - type: bind
+              source: /tmp/
+              target: /tokendir/
+            - type: bind
+              source: /data/
+              target: /data/
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 1s
+                max_attempts: 100
+                window: 60s
 
-  ssh-server:
-    depends_on:
-      feed:
-        condition: service_started
-    image: iztokkucan/ssh:0.0.1
-    container_name: ssh-sidecar
-    hostname: ssh-sidecar
 
-    environment:
-      - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
-      - USER_NAME=admin
-      - SUDO_ACCESS=true
+    ssh-server:
+        depends_on:
+            feed:
+                condition: service_started
+        image: iztokkucan/ssh:0.0.1
+        container_name: ssh-sidecar
+        hostname: ssh-sidecar
 
-    ports:
-      - 2222:2222
+        environment:
+            - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
+            - USER_NAME=admin
+            - SUDO_ACCESS=true
 
-    volumes:
-      - type: bind
-        source: /data
-        target: /data/
-        read_only: true
-        
-    deploy:
-        restart_policy:
-            condition: any
-            
+        ports:
+            - 2222:2222
+
+        volumes:
+            - type: bind
+              source: /data
+              target: /data/
+              read_only: true
+
+        deploy:
+            restart_policy:
+                condition: any

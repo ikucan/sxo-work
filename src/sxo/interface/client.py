@@ -8,11 +8,11 @@ from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 from sxo.interface.factories import SaxoAPIMethodFactory
 from sxo.interface.factories import SaxoAPISubscriptionClientMethodFactory
 from sxo.interface.orders import DeleteOrders
-from sxo.interface.orders import FxLimitOrder
 from sxo.interface.orders import GetOrderDetails
+from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import ListAllOrders
-from sxo.interface.prices import InfoSpotFxPrices
-from sxo.interface.prices import InfoSpotFxPriceSubscription
+from sxo.interface.prices import InfoPrice
+from sxo.interface.prices import InfoPriceSubscription
 from sxo.interface.reference import RefCountries
 from sxo.interface.reference import RefCultures
 from sxo.interface.reference import RefCurrencies
@@ -22,6 +22,7 @@ from sxo.interface.reference import RefInstruments
 from sxo.interface.rest_base import SaxoRestBase
 
 # from functools import cache
+
 
 class GetUserInfo(metaclass=SaxoAPIMethodFactory):
     def __call__(
@@ -51,7 +52,6 @@ class ClientMethodFactory(type):
 
 
 class SaxoClient(metaclass=ClientMethodFactory):
-
     _methods = {
         "user_details": GetUserInfo,
         "client_details": GetClientInfo,
@@ -62,11 +62,12 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "currency_pairs": RefCurrencyPairs,
         "exchanges": RefExchanges,
         "instruments": RefInstruments,
-        "info_spotfx_prices": InfoSpotFxPrices,
+        # pricing
+        "info_price": InfoPrice,
         # subscriptions
-        "subscribe_fx_spot": InfoSpotFxPriceSubscription,
+        "subscribe_price": InfoPriceSubscription,
         # orders
-        "buy_fx_spot": FxLimitOrder,
+        "limit_order": LimitOrder,
         "order_details": GetOrderDetails,
         "list_orders": ListAllOrders,
         "delete_orders": DeleteOrders,
@@ -77,7 +78,6 @@ class SaxoClient(metaclass=ClientMethodFactory):
         *,
         url_base: str = "https://gateway.saxobank.com/sim/openapi",
         token_file: str = "/tmp/saxo_token",
-
     ):
         self.rest_helper = SaxoRestBase(url_base=url_base, token_file=token_file)
         self.user_info = UserDetails(self.user_details())  # type: ignore

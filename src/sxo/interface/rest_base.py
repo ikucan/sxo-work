@@ -32,7 +32,7 @@ class SaxoRestBase:
         self.token_header = f"Bearer {self.token24}"
         self.url_base = url_base
 
-    @cache
+    @cache  # noqa
     def _make_default_headers(
         self,
     ) -> Dict[str, str]:
@@ -52,13 +52,13 @@ class SaxoRestBase:
                     return await response.json()
                 raise Exception(f"a HTTP error occurred: {response.status}")
 
-    def _GET_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] = None):
+    def _GET_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None):
         url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
         headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
         # return self.aio_loop.run_until_complete(self._get_json_async(url=url, headers=headers))
         return asyncio.new_event_loop().run_until_complete(self._get_json_async(url=url, headers=headers))
 
-    def _GET_drain_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] = None):
+    def _GET_drain_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None):
         """
         http get for the windowed data, get first window and drain subsequent if there
         """
@@ -100,7 +100,9 @@ class SaxoRestBase:
         # return self.aio_loop.run_until_complete(self._post_json_async(url=url, headers=headers, json=json))
         return asyncio.new_event_loop().run_until_complete(self._post_json_async(url=url, headers=headers, json=json))
 
-    def _POST_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] = None, json: Dict[str, str] = None):
+    def _POST_json(
+        self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None, json: Dict[str, str] | None = None
+    ):
         url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
         headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
         return asyncio.new_event_loop().run_until_complete(self._post_json_async(url=url, headers=headers, json=json))
@@ -115,7 +117,7 @@ class SaxoRestBase:
                     return await response.json()
                 raise Exception(f"a HTTP error occurred: {response.status}")
 
-    def _DELETE_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] = None):
+    def _DELETE_json(self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None):
         url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
         headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
         return asyncio.new_event_loop().run_until_complete(self._delete_json_async(url=url, headers=headers))

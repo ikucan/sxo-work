@@ -1,23 +1,24 @@
+---
 services:
-  ssh-server:
-    image: iztokkucan/ssh:0.0.1
-    container_name: ssh-test
-    hostname: ssh-test
+    ssh-server:
+        image: iztokkucan/ssh:0.0.1
+        container_name: ssh-test
+        hostname: ssh-test
 
-    environment:
-      - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
-      - USER_NAME=panda
-      - SUDO_ACCESS=true
+        environment:
+            - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
+            - USER_NAME=panda
+            - SUDO_ACCESS=true
 
-    ports:
-      - 3333:2222
+        ports:
+            - 3333:2222
 
-    volumes:
-      - type: bind
-        source: /data
-        target: /data/
-        read_only: true
-        
-    deploy:
-        restart_policy:
-            condition: any
+        volumes:
+            - type: bind
+              source: /data
+              target: /data/
+              read_only: true
+
+        deploy:
+            restart_policy:
+                condition: any

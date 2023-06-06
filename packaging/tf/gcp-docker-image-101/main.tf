@@ -15,7 +15,7 @@ module "gce-container" {
   // source = "/workstem/gcp/terraform-google-container-vm/"
   source = "terraform-google-modules/container-vm/google"
   version = "~> 2.0"
-  
+
   container = {
     image = "iztokkucan/pybuild:0.0.1"
 
@@ -85,7 +85,7 @@ resource "google_compute_instance" "vm" {
     google-logging-enabled    = "true"
     google-monitoring-enabled = "true"
   }
-  
+
   labels = {
     container-vm = module.gce-container.vm_container_label
   }

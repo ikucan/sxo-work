@@ -11,6 +11,7 @@ token_file = "/tmp/saxo_token"
 saxo_username = "17541206"
 saxo_password = "h3f046da"
 
+
 #
 # # write a string to file
 #
@@ -19,7 +20,9 @@ def wrt_str(fnm, str):
     fle.writelines([str])
     fle.close()
 
+
 display = None
+
 
 def mk_drvr():
     usr_tmp_dir = f"/tmp/selenium_chomium_profile_dir_{123}"
