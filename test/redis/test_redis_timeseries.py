@@ -23,9 +23,9 @@ def ms_now():
 #######
 # if __name__ == "__main__":
 #     print("--- start ---")
-#     ts = RedisTs[np.float32]('ts1', delete_if_exists=True)
-#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=500000, delete_if_exists=True)
-#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=50000)
+#     ts = RedisTs('ts1', delete_if_exists=True)
+#     # ts = RedisTs('ts1', retention_period_ms=500000, delete_if_exists=True)
+#     # ts = RedisTs('ts1', retention_period_ms=50000)
 
 #     for i in range(1000):
 #         k, v = ms_now(), 10 + r.random()
@@ -42,7 +42,7 @@ def ms_now():
 #######
 if __name__ == "__main__":
     print("--- start ---")
-    ts = RedisTs[np.float32]("ts1", retention_period_ms=50000, delete_if_exists=True)
+    ts = RedisTs("ts1", retention_period_ms=50000, delete_if_exists=True)
 
     k, v = ms_now(), 10 + r.random()
     print(f"inserting values {k}:{v} into timeseries {ts._name}")
@@ -59,7 +59,7 @@ if __name__ == "__main__":
 #######
 # if __name__ == "__main__":
 #     print("--- start ---")
-#     ts = RedisTs[np.float32]('ts1')
+#     ts = RedisTs('ts1')
 #     ts = ts.get_range()
 #     print("--- end ---")
 
@@ -69,8 +69,8 @@ if __name__ == "__main__":
 # #######
 # if __name__ == "__main__":
 #     print("--- start ---")
-#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=10000)
-#     ts = RedisTs[np.float32]('ts1')
+#     # ts = RedisTs('ts1', retention_period_ms=10000)
+#     ts = RedisTs('ts1')
 #     ts = ts.get_range()
 #     print("--- end ---")
 
@@ -79,9 +79,9 @@ if __name__ == "__main__":
 # #######
 # if __name__ == "__main__":
 #     print("--- start ---")
-#     # ts = RedisTs[np.float32]('ts1', retention_period_ms=10000)
-#     ts1 = RedisTs[np.float32]('ts1')
-#     ts2 = RedisTs[np.float32]('ts2')
+#     # ts = RedisTs('ts1', retention_period_ms=10000)
+#     ts1 = RedisTs('ts1')
+#     ts2 = RedisTs('ts2')
 #     ts = ts1.get_range()
 #     ts2.madd(ts.t.values, ts.v.values)
 #     print("--- end ---")
