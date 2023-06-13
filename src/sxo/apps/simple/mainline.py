@@ -35,4 +35,8 @@ def mainline():
 
 
 if __name__ == "__main__":
-    mainline()
+    for i in range(1000):
+        try:
+            mainline()
+        except Exception as e:
+            print(e)
