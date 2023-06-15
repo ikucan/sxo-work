@@ -37,6 +37,6 @@ def config():
     if loop_sleep is None:
         loop_sleep = 5
     if hb_tolerrance is None:
-        hb_tolerrance = 15
+        hb_tolerrance = 20
     instruments = parse_instruments(raw_instruments)
     return token_file, instruments, loop_sleep, hb_tolerrance
