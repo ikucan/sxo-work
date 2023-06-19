@@ -9,5 +9,5 @@ services:
             TOKEN_FILE: saxo_token
         volumes:
             - type: bind
-              source: /tmp/
+              source: /data/
               target: /tokendir/
