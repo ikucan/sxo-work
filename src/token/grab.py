@@ -7,9 +7,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-token_file = "/tmp/saxo_token"
-saxo_username = "17541206"
-saxo_password = "h3f046da"
+token_file = "/data/saxo_token"
+saxo_username = "17805023"
+saxo_password = "c45o55am"
 
 
 #
@@ -37,8 +37,8 @@ def mk_drvr():
     chrome_options.add_argument("--start-maximized")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_argument(f"--user-data-dir={usr_tmp_dir}")
-    chrome_options.add_argument("--headless")
-    chrome_options.headless = True
+    # chrome_options.add_argument("--headless")
+    # chrome_options.headless = True
     # return webdriver.Chrome(desired_capabilities=chrome_options.to_capabilities())
     return webdriver.Chrome(options=chrome_options)
 
