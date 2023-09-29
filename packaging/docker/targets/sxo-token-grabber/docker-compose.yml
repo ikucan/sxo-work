@@ -3,8 +3,8 @@ services:
     frontend:
         image: iztokkucan/sxo-token-grabber:0.0.1
         environment:
-            SAXO_USER: 18033935
-            SAXO_PASS: sfo859c1
+            SAXO_USER: 18286731
+            SAXO_PASS: t62455gu
             TOKEN_PATH: /tokendir
             TOKEN_FILE: saxo_token
         volumes:
