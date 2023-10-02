@@ -28,7 +28,7 @@ def mainline():
     # subscribe to each instrument and dispatch to the thread pool
     for i in instruments:
         instr = InstrumentUtil.parse(i)
-        executor.submit(client.subscribe_price, instr, SimpleStrat(instr, hb_monitor))
+inn        executor.submit(client.subscribe_price, instr, SimpleStrat(instr, hb_monitor))
 
     # wait until stop
     hb_monitor.start()
