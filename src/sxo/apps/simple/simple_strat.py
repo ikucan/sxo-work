@@ -6,6 +6,7 @@ from typing import Dict
 
 from sxo.apps.simple.config import config
 from sxo.apps.simple.persisted_quote import RedisQuote
+from sxo.apps.simple.strategy_impl import StrategyImpl
 from sxo.interface.entities.instruments import Instrument
 from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.cache import Cache
@@ -20,12 +21,14 @@ class SimpleStratError(BaseException):
 # ###
 class SimpleStrat:
     def __init__(self, instr: Instrument, heartbeat: Callable | None = None):
+
         self._instrument = instr
         self._heartbeat = heartbeat
         self._tick_count = 0
         self._qoute = RedisQuote(instr)
-        self._cache = Cache.make_redis_cache()
-        self._cache.add_instrument_def(instr)
+        # self._cache = Cache.make_redis_cache()
+        # self._cache.add_instrument_def(instr)
+        self._strat = StrategyImpl(instr)
 
     def __call__(self, update: Dict[str, Any]):
         print(update)
@@ -51,3 +54,4 @@ class SimpleStrat:
     def __update(self, update: Dict[str, Any]):
         self._qoute.update(update)
         print(self._qoute)
+        self._strat()

@@ -62,3 +62,9 @@ Thumbs.db
 *.flv
 *.mov
 *.wmv
+
+
+# database files
+**/*.parquet
+**/*.parq
+

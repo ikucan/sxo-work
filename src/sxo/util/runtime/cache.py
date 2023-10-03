@@ -38,7 +38,7 @@ class RedisCache(Cache):
             raise CacheError(f"ERROR thrown while trying to connect to redis DB. {e}")
 
     def add_instrument_def(self, i: Instrument) -> str:
-        key = f"instrument_def_{i.uid()}"
+        key = f"instr_def_{i.canonical_symbol()}"
         value = json.dumps(i._json)
         if not self._r.set(key, value):
             raise CacheError(f"ERROR. Failed to set a redis DB object with key {key}")

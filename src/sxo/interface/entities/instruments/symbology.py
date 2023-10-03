@@ -56,6 +56,11 @@ class Instrument(ABC):
     def gid(self) -> int:
         return self._gid
 
+    # an unique id combiing the group id aith the instrument id
+    def canonical_id(self) ->str:
+        return f"{self._gid}_{self._uid}"
+
+
     def symbol(self) -> str:
         return self._symbol
 
@@ -64,6 +69,10 @@ class Instrument(ABC):
 
     def asset_class(self) -> str:
         return self._canonical_asset_class
+
+    def canonical_symbol(self) ->str:
+        return f"{self._canonical_asset_class}_{self._symbol}"
+
 
     @abstractmethod
     def asset_type(self) -> AssetType:

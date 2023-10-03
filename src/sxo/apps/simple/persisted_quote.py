@@ -18,11 +18,11 @@ class RedisQuote:
         self._asz = np.nan
         self._mid = np.nan
 
-        self._bid_ts = RedisTs(f'ts_bid_{instr.gid()}')
-        self._bsz_ts = RedisTs(f'ts_bsz_{instr.gid()}')
-        self._ask_ts = RedisTs(f'ts_ask_{instr.gid()}')
-        self._asz_ts = RedisTs(f'ts_asz_{instr.gid()}')
-        self._mid_ts = RedisTs(f'ts_mid_{instr.gid()}')
+        self._bid_ts = RedisTs(f'ts_bid_{instr.canonical_symbol()}')
+        self._bsz_ts = RedisTs(f'ts_bsz_{instr.canonical_symbol()}')
+        self._ask_ts = RedisTs(f'ts_ask_{instr.canonical_symbol()}')
+        self._asz_ts = RedisTs(f'ts_asz_{instr.canonical_symbol()}')
+        self._mid_ts = RedisTs(f'ts_mid_{instr.canonical_symbol()}')
 
 
     def update(self, json: Dict[Any, Any]):
@@ -81,3 +81,12 @@ class RedisQuote:
         self,
     ):
         return json.dumps(self.to_json())
+
+    def get(self,):
+        bid = self._bid_ts.get_range(name='bid')
+        ask = self._ask_ts.get_range(name='ask')
+        bsz = self._bsz_ts.get_range(name='bsz')
+        asz = self._asz_ts.get_range(name='asz')
+        bid_ask = bid.join(ask, how='inner').join(bsz, how='inner').join(asz, how='inner').reset_index()
+        bid_ask['t'] = bid_ask['t'].values.astype('datetime64[ms]').astype('datetime64[ns]')
+        return bid_ask
