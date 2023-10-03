@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import time
 import os
 
 from sxo.apps.simple.persisted_quote import RedisQuote
@@ -33,5 +34,7 @@ class StrategyImpl(StrategyConfig):
         self._quote = RedisQuote(instr)
 
     def __call__(self,):
+        t0 = time.time()
         df = self._quote.get()
-        print(df)
+        t1 = time.time()
+        print(f"update took {t1 - t0}s. looking at {len(df)} quotes")

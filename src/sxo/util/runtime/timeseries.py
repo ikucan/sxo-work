@@ -123,7 +123,7 @@ class RedisTs(PersistedTimeSeries):
     def get_range_raw(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX):
         return self._ts_module.range(self._name, t0, t1)
 
-    def get_range(self, t0: np.int64 = TMIN, t1: np.int64 = TMAX, convert: str = "frame", name: str | None = None, index:bool = True) -> Tuple[np.array, np.array] | pd.DataFrame:
+    def get_range(self, t0: int = TMIN, t1: int = TMAX, convert: str = "frame", name: str | None = None, index:bool = True) -> Tuple[np.array, np.array] | pd.DataFrame:
         entries = self.get_range_raw(t0, t1)
         times = np.array([x[0] for x in entries])
         vals = np.array([x[1] for x in entries])
