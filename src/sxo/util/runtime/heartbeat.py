@@ -13,7 +13,7 @@ class HeartBeatMonitor:
         self._hb_tolerance = tolerance
 
     def __loop(self):
-        self._last_tick = dt.datetime.now()
+        self._last_tick = dt.datetime.now() 
         while 1 < 2:
             now = dt.datetime.now()
             hb_lag = now - self._last_tick

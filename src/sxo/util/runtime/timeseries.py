@@ -16,6 +16,9 @@ class TsError(Exception):
 
 
 class TimeSeries(ABC):
+    '''
+    A timeseries interface
+    '''
     @abstractmethod
     def add(self, t: np.int64, v: float) -> int:
         ...
@@ -34,12 +37,25 @@ class TimeSeries(ABC):
 
 
 class PersistedTimeSeries(TimeSeries):
+    '''
+    Abstract class for a persisted timeseries
+    '''
     @abstractmethod
     def set_retention(self, time_ms: np.int64):
+        '''
+        Set a time window for how much data to keep in the persisted timeseries.
+
+        :param time_ms np.int64. window size. any data older than 'now' - time_ms will be deleted
+        '''
         ...
 
 
 class RedisTs(PersistedTimeSeries):
+    '''
+    A redis ts module implementation of a persisted time series. 
+    Manages the data using the Redis TS module.
+    Note that Redis TS module operations are reasonable expensive (1s for a lookup of 10K value/pairs)
+    '''
     def __init__(
         self,
         name: str,
@@ -72,6 +88,7 @@ class RedisTs(PersistedTimeSeries):
 
                 # even if ts exists, provided retention period may be different, so set
                 self.__set_retention()
+                self.__set_duplicates()
 
         else:
             self.__create_redis_ts()
@@ -83,6 +100,11 @@ class RedisTs(PersistedTimeSeries):
         self,
     ):
         self._ts_module.alter(self._name, retention_msecs=self._retention)
+
+    def __set_duplicates(
+        self,
+    ):
+        self._ts_module.alter(self._name, duplicate_policy=self._duplicates)
 
     def set_retention(self, retention_period_ms: np.int64):
         self._retention = retention_period_ms

@@ -12,7 +12,6 @@ from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.cache import Cache
 from sxo.util.runtime.heartbeat import HeartBeatMonitor
 
-
 # ###
 # mainline
 # ###
@@ -39,5 +38,9 @@ if __name__ == "__main__":
     for i in range(1000):
         try:
             mainline()
-        except Exception as e:
-            print(e)
+        except Exception:
+            print("============================")
+            import traceback
+
+            traceback.print_exc()
+            print("============================")

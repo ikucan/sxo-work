@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import time
 import os
+import numpy as np
+import pandas as pd
+from sxo.apps.simple.config import strategy_config
 
 from sxo.apps.simple.persisted_quote import RedisQuote
 from sxo.interface.entities.instruments import Instrument
@@ -30,11 +33,27 @@ class StrategyConfig:
 
 
 class StrategyImpl(StrategyConfig):
-    def __init__(self, instr: Instrument):
-        self._quote = RedisQuote(instr)
+
+    def __init__(self,
+                instr: Instrument,
+                data_window_mins: int = 24 * 60,):
+        
+        self._tick_db = RedisQuote(instr)
+        alpha, beta,  frequency, data_win = strategy_config()
+        self._alpha= alpha
+        self._beta = beta
+        self._freequency = np.timedelta64(frequency, 's')
+        self._data_window = np.timedelta64(data_win, 'm')
+        self._ticks = self.__read_tick_history(self._data_window)
+        ii = 123
+        
+        
+    def __read_tick_history(self, window:np.timedelta64) -> pd.DataFrame:
+        df = self._tick_db.tail(window)
+        return df
 
     def __call__(self,):
         t0 = time.time()
-        df = self._quote.get()
+        df = self._tick_db.tail(np.timedelta64(5, 'm'))
         t1 = time.time()
         print(f"update took {t1 - t0}s. looking at {len(df)} quotes")

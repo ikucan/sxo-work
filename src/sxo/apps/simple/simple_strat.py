@@ -25,7 +25,7 @@ class SimpleStrat:
         self._instrument = instr
         self._heartbeat = heartbeat
         self._tick_count = 0
-        self._qoute = RedisQuote(instr)
+        self._tick_db = RedisQuote(instr)
         # self._cache = Cache.make_redis_cache()
         # self._cache.add_instrument_def(instr)
         self._strat = StrategyImpl(instr)
@@ -34,12 +34,12 @@ class SimpleStrat:
         print(update)
         if self._heartbeat is not None:
             self._heartbeat()
-        self._tick_count += 1
         # """
         # callback handler for each update
         # the update should contain either a Quote or Snapshot
         # """
         try:
+            self._tick_count += 1
             # if "Quote" in update:
             self.__update(update)
 
@@ -52,6 +52,6 @@ class SimpleStrat:
             print("============================")
 
     def __update(self, update: Dict[str, Any]):
-        self._qoute.update(update)
-        print(self._qoute)
+        self._tick_db.update(update)
+        print(self._tick_db)
         self._strat()

@@ -18,10 +18,13 @@
         "INSTRUMENTS": "FxSpot::GBPEUR",
         "DATA_DIR": "/data" ,
         "REDIS_PASS": "boss",
+        // general config
+        "HB_TOLERANCE": "60",
         // strategy config
-        "TRADE_FREQUENCY": "300",
-        "ALPHA": "3.2",
-        "BETA": "1.1",
+        "STRATEGY_DATA_WINDOW_M": "1440",
+        "STRATEGY_FREQUENCY_S": "300",
+        "STRATEGYALPHA": "3.2",
+        "STRATEGY_BETA": "1.1",
       },
       "name": "Python: Current file",
       "program": "${file}",
@@ -32,3 +35,4 @@
   ],
   "version": "0.2.0"
 }
+

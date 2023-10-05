@@ -29,7 +29,7 @@ class RedisQuote:
         self._mid_ts = RedisTs(f'ts_mid_{instr.canonical_symbol()}')
 
 
-    def update(self, json: Dict[Any, Any]):
+    def update(self, json: Dict[Any, Any]) -> bool:
         if "LastUpdated" in json:
             self._time = int(np.datetime64(json["LastUpdated"]).astype("datetime64[ms]").astype(np.int64))
 
@@ -90,16 +90,16 @@ class RedisQuote:
         tt0 = time.time()
         bid = self._bid_ts.get_range(name='bid', t0=t0, t1=t1)
         ask = self._ask_ts.get_range(name='ask', t0=t0, t1=t1)
-        bsz = self._bsz_ts.get_range(name='bsz', t0=t0, t1=t1)
+        bsz = self._bsz_ts.get_range(name='bsz', t0=t0, t1=t1)  
         asz = self._asz_ts.get_range(name='asz', t0=t0, t1=t1)
         tt1 = time.time()
         bid_ask = bid.join(ask, how='inner').join(bsz, how='inner').join(asz, how='inner').reset_index()
         tt2 = time.time()
         bid_ask['t'] = bid_ask['t'].values.astype('datetime64[ms]').astype('datetime64[ns]')
         tt3 = time.time()
-        print(f"lookup stage: {len(bid_ask)} -> time {tt1-tt0}")
-        print(f"join   stage: {len(bid_ask)} -> time {tt2-tt1}")
-        print(f"conv   stage: {len(bid_ask)} -> time {tt3-tt2}")
+        # print(f"lookup stage: {len(bid_ask)} -> time {tt1-tt0}")
+        # print(f"join   stage: {len(bid_ask)} -> time {tt2-tt1}")
+        # print(f"conv   stage: {len(bid_ask)} -> time {tt3-tt2}")
         return bid_ask
 
     def tail(self, window = np.timedelta64) -> pd.DataFrame:
@@ -109,17 +109,17 @@ class RedisQuote:
         return self.get_range(t0, t1)
 
 
-if __name__ == "__main__":
-    import time
-    from sxo.interface.entities.instruments import InstrumentUtil
+# if __name__ == "__main__":
+#     import time
+#     from sxo.interface.entities.instruments import InstrumentUtil
 
-    instr = InstrumentUtil.parse("FxSpot::GBPEUR")
-    q =  RedisQuote(instr)
-    t0 = time.time()
-    df1 = q.get_range()
-    t1 = time.time()
-    df2 = q.tail(np.timedelta64(2, 'h'))
-    t2 = time.time()
-    print(f"all data: {len(df1)} -> time {t1-t0}")
-    print(f"2hrs data: {len(df2)} -> time {t2-t1}")
-    i = 123
+#     instr = InstrumentUtil.parse("FxSpot::GBPEUR")
+#     q =  RedisQuote(instr)
+#     t0 = time.time()
+#     df1 = q.get_range()
+#     t1 = time.time()
+#     df2 = q.tail(np.timedelta64(2, 'h'))
+#     t2 = time.time()
+#     print(f"all data: {len(df1)} -> time {t1-t0}")
+#     print(f"2hrs data: {len(df2)} -> time {t2-t1}")
+#     i = 123
