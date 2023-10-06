@@ -59,8 +59,9 @@ class StrategyImpl(StrategyConfig):
             t0 = time.time()
             update['t'] = np.int64(update['t']).astype('datetime64[ms]')
             tick_history = self._ticks
-            new_row = pd.DataFrame(update, index=[0])
-            combined = pd.concat([tick_history, new_row], ignore_index=True)
+
+            new_row = pd.DataFrame( {'t':[update['t']], 'bid':[update['bid']], 'ask':[update['ask']], 'bsz':[update['bsz']], 'asz':[update['asz']], })
+            combined = pd.concat([tick_history, new_row], axis = 0, ignore_index=True)
             self._ticks = combined
             t1 = time.time()
             print(f"update took {t1 - t0}s. looking at {len(combined)} quotes. \n---\n{combined.tail(5)}")
