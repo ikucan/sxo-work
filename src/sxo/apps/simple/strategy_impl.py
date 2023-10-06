@@ -3,10 +3,14 @@ import time
 import os
 import numpy as np
 import pandas as pd
-from sxo.apps.simple.config import strategy_config
 
+from typing import Any
+from typing import Dict
+
+from sxo.apps.simple.config import strategy_config
 from sxo.apps.simple.persisted_quote import RedisQuote
 from sxo.interface.entities.instruments import Instrument
+
 
 class StrategyConfig:
     TRADE_FREQUENCY = "TRADE_FREQUENCY"
@@ -45,15 +49,20 @@ class StrategyImpl(StrategyConfig):
         self._freequency = np.timedelta64(frequency, 's')
         self._data_window = np.timedelta64(data_win, 'm')
         self._ticks = self.__read_tick_history(self._data_window)
-        ii = 123
-        
-        
+
     def __read_tick_history(self, window:np.timedelta64) -> pd.DataFrame:
         df = self._tick_db.tail(window)
         return df
 
-    def __call__(self,):
-        t0 = time.time()
-        df = self._tick_db.tail(np.timedelta64(5, 'm'))
-        t1 = time.time()
-        print(f"update took {t1 - t0}s. looking at {len(df)} quotes")
+    def __call__(self, update:Dict[Any, Any] | None):
+        if update:
+            t0 = time.time()
+            update['t'] = np.int64(update['t']).astype('datetime64[ms]')
+            tick_history = self._ticks
+            new_row = pd.DataFrame(update, index=[0])
+            combined = pd.concat([tick_history, new_row], ignore_index=True)
+            self._ticks = combined
+            t1 = time.time()
+            print(f"update took {t1 - t0}s. looking at {len(combined)} quotes. \n---\n{combined.tail(5)}")
+        else:
+            print("ignorring NULL update")

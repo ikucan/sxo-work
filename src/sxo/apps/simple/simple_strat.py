@@ -52,6 +52,6 @@ class SimpleStrat:
             print("============================")
 
     def __update(self, update: Dict[str, Any]):
-        self._tick_db.update(update)
-        print(self._tick_db)
-        self._strat()
+        tick = self._tick_db.update(update)
+        print(tick)
+        self._strat(tick )
