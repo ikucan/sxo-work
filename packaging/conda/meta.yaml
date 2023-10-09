@@ -15,15 +15,16 @@ build:
 
 requirements:
     build:
-        - python            >=3.10
+        - python            ==3.11.6
         - setuptools_scm    >=1.1.6
 
     run:
-        - python            >=3.10
-        - aiohttp           >=3.8
-        - numpy             >=1.22
-        - websockets        >=10
-        - redis-py          >=4.5.4
+        - python            ==3.11.6
+        - aiohttp           >=3.8.6
+        - numpy             >=1.26.0
+        - pandas            >=2.1.1
+        - websockets        >=11.0.3
+        - redis-py          >=5.0.1
 
 about:
     home: iztokkucan.io
