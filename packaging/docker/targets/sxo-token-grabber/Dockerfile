@@ -5,7 +5,6 @@ FROM iztokkucan/selenium:0.1.0
 USER root
 
 RUN mkdir -p /scratch
-#RUN rm -f /scratch/*
 WORKDIR /scratch
 
 COPY grab.py /scratch
