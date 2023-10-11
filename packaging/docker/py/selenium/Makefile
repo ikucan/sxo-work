@@ -1,4 +1,4 @@
-TAG = 0.0.1
+TAG = 0.1.0
 PFX = iztokkucan/selenium
 
 build:
