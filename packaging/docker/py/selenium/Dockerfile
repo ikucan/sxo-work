@@ -1,7 +1,6 @@
 # -------------------------------------------------------
 # -------------------------------------------------------
-# FROM iztokkucan/pybase:0.0.2
-FROM iztokkucan/pybase:0.1.0
+FROM iztokkucan/pybase:0.2.0
 
 WORKDIR /scratch
 

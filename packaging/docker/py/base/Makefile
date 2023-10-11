@@ -1,4 +1,4 @@
-TAG = 0.1.0
+TAG = 0.2.0
 PFX = iztokkucan/pybase
 
 build:

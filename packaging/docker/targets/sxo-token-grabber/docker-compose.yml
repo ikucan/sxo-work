@@ -1,7 +1,7 @@
 ---
 services:
     frontend:
-        image: iztokkucan/sxo-token-grabber:0.1.0
+        image: iztokkucan/sxo-token-grabber:0.2.0
         environment:
             SAXO_USER: 18286731
             SAXO_PASS: t62455gu
