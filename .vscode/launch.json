@@ -22,7 +22,7 @@
         "HB_TOLERANCE": "60",
         // strategy config
         "STRATEGY_DATA_WINDOW_M": "1440",
-        "STRATEGY_FREQUENCY_S": "300",
+        "STRATEGY_FREQUENCY_S": "15",
         "STRATEGYALPHA": "3.2",
         "STRATEGY_BETA": "1.1",
       },

@@ -7,7 +7,6 @@ from typing import Dict
 from sxo.apps.simple.config import config
 from sxo.apps.simple.simple_strat import SimpleStrat
 from sxo.interface.client import SaxoClient
-from sxo.interface.entities.instruments import Instrument
 from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.cache import Cache
 from sxo.util.runtime.heartbeat import HeartBeatMonitor
@@ -31,7 +30,7 @@ def mainline():
 
     # wait until stop
     hb_monitor.start()
-
+    
 
 if __name__ == "__main__":
     for i in range(1000):
