@@ -15,7 +15,7 @@ from sxo.util.runtime.heartbeat import HeartBeatMonitor
 # mainline
 # ###
 def mainline():
-    global executor
+    global executor 
     # get config
     token_file, instruments, loop_sleep, hb_max_tolerance = config()
 
