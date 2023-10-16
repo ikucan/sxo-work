@@ -20,7 +20,7 @@ class SimpleStratError(BaseException):
 # # tick data writer class for each instrument
 # ###
 class SimpleStrat:
-    def __init__(self, instr: Instrument, heartbeat: Callable | None = None):
+    def __init__(self, instr: Instrument, sxo_client:int, heartbeat: Callable | None = None):
 
         self._instrument = instr
         self._heartbeat = heartbeat
@@ -28,7 +28,7 @@ class SimpleStrat:
         self._tick_db = RedisQuote(instr)
         # self._cache = Cache.make_redis_cache()
         # self._cache.add_instrument_def(instr)
-        self._strat = StrategyImpl(instr)
+        self._strat = StrategyImpl(instr, sxo_client)
 
     def __call__(self, update: Dict[str, Any]):
         print(update)

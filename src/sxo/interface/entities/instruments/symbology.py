@@ -90,7 +90,7 @@ class Instrument(ABC):
         return pformat(self._json, indent=2)
 
     def __str__(self) -> str:
-        return f"{self.asset_class()} # {self.symbol()} # {self.uid()} # {self.descr()}."
+        return f"{self.asset_class()}::{self.symbol()}"
 
     def __eq__(self, other):
         return isinstance(other, Instrument) and self.uid() == other.uid()
