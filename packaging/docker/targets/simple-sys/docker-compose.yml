@@ -28,22 +28,23 @@ services:
             redis:
                 condition: service_started
 
-        image: iztokkucan/sxo-data-feeds:0.0.4
+        image: iztokkucan/simple-strat-data-feed:0.2.0
         container_name: feed-server
         environment:
-            TOKEN_FILE: /tokendir/saxo_token
+            TOKEN_FILE: /token
             INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+            REDIS_PASS: boss
+
         volumes:
             - type: bind
-              source: /tmp/
-              target: /tokendir/
-            - type: bind
-              source: /data/
-              target: /data/
+              source: /data/saxo_token
+              target: /token
         deploy:
             restart_policy:
                 condition: on-failure
                 delay: 1s
-                max_attempts: 100
-                window: 60s
+                max_attempts: 10000
+                window: 1s
 

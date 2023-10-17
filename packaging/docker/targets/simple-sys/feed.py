@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
-import sxo.apps.data_capture as capture
+import sxo.apps.simple.data_feed_mainline as capture
 
 capture.mainline()
