@@ -1,0 +1,27 @@
+---
+# running with Docker Compose version 2.17.2, needs post 1.28
+version: '3.9'
+
+services:
+
+  # when you have the token, start the data feeds
+    feed:
+        image: iztokkucan/sxo-data-feeds:0.0.4
+        container_name: feed-server-TEST
+        environment:
+            TOKEN_FILE: /tokendir/saxo_token
+            DATA_DIR: /data
+            INSTRUMENTS: US500.I,GBPUSD,GBPJPY,GBPEUR
+        volumes:
+            - type: bind
+              source: /tmp/
+              target: /tokendir/
+            - type: bind
+              source: /data/
+              target: /data/
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 1s
+                max_attempts: 100
+                window: 60s

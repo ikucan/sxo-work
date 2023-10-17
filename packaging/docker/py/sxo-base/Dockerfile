@@ -20,8 +20,4 @@ RUN . /root/.bashrc && mamba install -yq -n sxo -c /scratch ik.sxo
 
 RUN rm -rf /scrath/*
 COPY run.py /scratch
-COPY mainline.sh /scratch
-RUN chmod ugo+x /scratch/mainline.sh
 ENV PATH=$PATH:/opt/mambaforge/bin
-
-ENTRYPOINT ["/scratch/mainline.sh"]

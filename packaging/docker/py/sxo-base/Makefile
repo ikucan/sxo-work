@@ -1,5 +1,5 @@
 TAG = 0.2.0
-PFX = iztokkucan/sxo-data-feeds
+PFX = iztokkucan/sxo-base
 
 build:
 	docker build -t $(PFX):$(TAG) .
