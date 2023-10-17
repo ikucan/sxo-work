@@ -1,0 +1,18 @@
+# -------------------------------------------------------
+# -------------------------------------------------------
+FROM iztokkucan/sxo-base:0.2.0
+
+USER root
+
+RUN rm -Rf /scratch
+RUN mkdir -p /scratch
+WORKDIR /scratch
+
+
+COPY feed.py /scratch
+COPY feed.sh /scratch
+RUN chmod ugo+x /scratch/feed.sh
+ENV PATH=$PATH:/opt/mambaforge/bin
+RUN . /root/.bashrc && mamba init
+
+ENTRYPOINT ["/scratch/feed.sh"]

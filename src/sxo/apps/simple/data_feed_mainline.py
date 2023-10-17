@@ -5,13 +5,13 @@ from typing import Callable
 from typing import Dict
 
 from sxo.apps.simple.config import config
-from sxo.apps.simple.simple_strat import SimpleStrat
+from sxo.apps.simple.data_feed import DataFeed
 from sxo.interface.client import SaxoClient
 from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.cache import Cache
 from sxo.util.runtime.heartbeat import HeartBeatMonitor
 
-# ###
+# ###5
 # mainline
 # ###
 def mainline():
@@ -26,7 +26,7 @@ def mainline():
     # subscribe to each instrument and dispatch to the thread pool
     for i in instruments:
         instr = InstrumentUtil.parse(i)
-        executor.submit(client.subscribe_price, instr, SimpleStrat(instr, client, hb_monitor))
+        executor.submit(client.subscribe_price, instr, DataFeed(instr, hb_monitor))
 
     # wait until stop
     hb_monitor.start()

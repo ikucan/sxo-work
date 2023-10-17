@@ -15,7 +15,7 @@
         "SETUPTOOLS_SCM_DEBUG": "True",
         "TOKEN_FILE": "/data/saxo_token" ,
         // "INSTRUMENTS": "FxSpot::GBPUSD,FxSpot::GBPEUR,FxSpot::GBPJPY,FxSpot::EURUSD,FxSpot::EURJPY,FxSpot::JPYUSD,",
-        "INSTRUMENTS": "FxSpot::GBPEUR",
+        "INSTRUMENTS": "FxSpot::GBPEUR,FxSpot::GBPUSD",
         "DATA_DIR": "/data" ,
         "REDIS_PASS": "boss",
         // general config

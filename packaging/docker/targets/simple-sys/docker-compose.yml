@@ -2,10 +2,10 @@
 version: '3.9'
 
 services:
-    cache:
+    redis:
         image: redis/redis-stack-server:latest
         container_name: redis-cache
-        hostname: redis-cache
+        hostname: redis
 
         restart: always
         ports:
@@ -22,6 +22,28 @@ services:
               source: /data/cache
               target: /var/lib/redis-stack
 
-        # deploy:
-        #     restart_policy:
-        #         condition: any
+  # when you have the token, start the data feeds
+    data-feed:
+        depends_on:
+            redis:
+                condition: service_started
+
+        image: iztokkucan/sxo-data-feeds:0.0.4
+        container_name: feed-server
+        environment:
+            TOKEN_FILE: /tokendir/saxo_token
+            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+        volumes:
+            - type: bind
+              source: /tmp/
+              target: /tokendir/
+            - type: bind
+              source: /data/
+              target: /data/
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 1s
+                max_attempts: 100
+                window: 60s
+
