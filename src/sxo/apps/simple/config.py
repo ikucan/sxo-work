@@ -43,18 +43,3 @@ def config():
     instruments = parse_instruments(raw_instruments)
     return token_file, instruments, loop_sleep, hb_tolerrance
 
-
-# ###
-# # read config for the actual strategy
-# ###
-def strategy_config() -> (float, float, int, int):
-    """
-    read the config from environemnt variables
-    """
-
-    data_window_minutes = int(read_env("STRATEGY_DATA_WINDOW_M", default_value=24*60))
-    stragey_frequency = int(read_env("STRATEGY_FREQUENCY_S", default_value=24*60))
-    alpha = float(read_env("STRATEGY_ALPHA", default_value=3))
-    beta = float(read_env("STRATEGY_BETA", default_value=1))
-
-    return alpha, beta, stragey_frequency, data_window_minutes

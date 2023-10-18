@@ -11,89 +11,72 @@ from typing import Dict
 from typing import Tuple
 
 
-from sxo.apps.simple.config import strategy_config
 from sxo.apps.simple.persisted_quote import RedisQuote
 
+from sxo.interface.client import SaxoClient
 from sxo.interface.definitions import OrderDirection
-from sxo.interface.entities.instruments import Instrument
+from sxo.apps.simple.strategy_config import StrategyConfig
 
 
 def round_sig(x, sig=100):
     return round(x, sig-int(floor(log10(abs(x))))-1)
 
 
-class StrategyConfig:
-    TRADE_FREQUENCY = "TRADE_FREQUENCY"
-    ALPHA = "ALPHA"
-    BETA = "BETA"
+class StrategyImpl():
 
     def __init__(self,):
-        frequency = os.getenv(StrategyConfig.TRADE_FREQUENCY)
-        alpha = os.getenv(StrategyConfig.ALPHA)
-        beta = os.getenv(StrategyConfig.BETA)
-        
-        self._frequency = int(frequency)
-        self._alpha = float(alpha)
-        self._beta = float(beta)
 
-    def frequency(self,) -> int:
-        return self._frequency
-
-    def alpha(self,) -> float:
-        return self._alpha
-
-    def beta(self,) -> float:
-        return self._beta
-
-
-class StrategyImpl(StrategyConfig):
-
-    def __init__(self,
-                instr: Instrument,
-                sxo_client: int,):
-        
-        self._instrument = instr
-        self._client = sxo_client
-        self._tick_db = RedisQuote(instr)
-        alpha, beta,  frequency, data_win = strategy_config()
-        self._alpha= alpha
-        self._beta = beta
+        # get config        
+        conf = StrategyConfig()
+        self._instrument = conf.instrument()
+        self._alpha= conf.alpha()
+        self._beta = conf.beta()
+        frequency = conf.frequency()        
         self._frequency = np.timedelta64(frequency, 's')
-        self._data_window = np.timedelta64(data_win, 'm')
+
+        # connect to db
+        self._tick_db = RedisQuote(self._instrument)        
         self._last_actioned = np.datetime64('now')
-        instr.canonical_symbol
+        self._long_oid = None
+        self._short_oid = None
+
+        # create a client
+        self._client = SaxoClient(token_file='/data/saxo_token')
+
 
     def __read_tick_history(self, window:np.timedelta64) -> pd.DataFrame:
         df = self._tick_db.tail(window)
         return df
 
-    def __call__(self, update:Dict[Any, Any] | None):
-        if update:
-            t0 = time.time()
+    def __call__(self,):
+        t0 = time.time()
 
-            last_tick_time = np.int64(update['t']).astype('datetime64[ms]')            
+        now = np.datetime64('now')
+        time_since_acted = now  - self._last_actioned
 
-            time_since_acted = last_tick_time - self._last_actioned
+        # print(f" {self._instrument.__str__()}. dt =  {time_since_acted}")
 
-            # print(f" tick time: {last_tick_time}")
-            # print(f" last acted: {self._last_actioned}")
-            print(f" {self._instrument.__str__()}. dt =  {time_since_acted}")
+        if time_since_acted > self._frequency:
+            print(f"\n---- {now.astype('datetime64[s]')} ACTING -----")
+            self._last_actioned = now
+            # get data for the window
+            ticks = self.__read_tick_history(self._frequency)
+            if len(ticks) > 5:
+                staleness = self.__age_of_last_tick(now, ticks)
+                longEntry, longExit, shortEntry, shortExit = self.__strat(ticks, self._alpha, self._beta, 6)
+                self.__review_orders()
+                self.__place_new_orders(longEntry, longExit, shortEntry, shortExit)
 
-            if time_since_acted > self._frequency:
-                print("---- ACTING -----")
-                self._last_actioned = last_tick_time
-                ticks = self.__read_tick_history(self._data_window)
-                if len(ticks) > 5:
-                    longEntry, longExit, shortEntry, shortExit = self.__strat(ticks, 1.5, 0.6, 7)
-                    self.__review_orders()
-                    self.__place_new_orders(longEntry, longExit, shortEntry, shortExit)
-
-                t1 = time.time()
-                print(f"update took {t1 - t0}s. looking at {len(ticks)} quotes. \n---\n{ticks.tail(5)}")
-
+            t1 = time.time()
+            print(f"update took {t1 - t0}s. looking at {len(ticks)} quotes")
         else:
-            print("ignorring NULL update")
+            print('.', end='')
 
+    def __age_of_last_tick(self,
+                           now:np.datetime64,
+                           df:pd.DataFrame) -> np.timedelta64:
+        return df['t'].values[-1] - now
+        pass
 
     def __strat(self,
                 df:pd.DataFrame,
@@ -130,10 +113,41 @@ class StrategyImpl(StrategyConfig):
         return (longEntry, longExit, shortEntry, shortExit)
 
     def __place_new_orders(self, longEntry, longExit, shortEntry, shortExit):
-        from sxo.interface.client import SaxoClient
-        client = SaxoClient(token_file = "/data/saxo_token")
-        client.limit_order(self._instrument.__str__(), OrderDirection.Buy, longEntry, longExit, 1000000)
-        pass
+        instr = self._instrument.__str__()
+        try:
+            print(f"placing SHORT {{ {instr} }} at : {shortEntry} -> {shortExit}")
+            oid =  self._client.limit_order(instr, OrderDirection.Sell, shortEntry, shortExit, 100000)
+            print(oid)
+            self._short_oid = oid['OrderId']
+
+        except Exception as e:
+            print(f"ERROR placing SHORT order for  for  {{ {instr} }}. {e}")
+
+        time.sleep(0.5)
+
+        try:
+            print(f"placing LONG  {{ {instr} }} at : {longEntry} -> {longExit}")
+            oid =  self._client.limit_order(instr, OrderDirection.Buy, longEntry, longExit, 1000000)
+            print(oid)
+            self._long_oid = oid['OrderId']
+        except Exception as e:
+            print(f"ERROR placing LONG order for  {{ {instr} }}. {e}")
     
     def __review_orders(self,):
-        pass
+            try:
+                #oid = None
+                orders = self._client.list_orders()
+                all_order_ids = {o["OrderId"] for o in orders["Data"]}
+
+                oids = [self._long_oid, self._short_oid]
+                for oid in oids:
+                    print(f"DELETING  order : {oid} ")
+                    if oid in all_order_ids:
+                        #check if the order is still around...
+                        self._client.delete_orders(oid)
+                    else:
+                        print(f"=================")
+                        print(f"  CANNOT DELETE order {oid}. It must have been filled.")
+                        print(f"=================")
+            except Exception as e:
+                print(f"ERROR deleting orders. {oid}. {e}")
