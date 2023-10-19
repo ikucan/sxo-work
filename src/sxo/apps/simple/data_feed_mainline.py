@@ -4,7 +4,7 @@ from typing import Any
 from typing import Callable
 from typing import Dict
 
-from sxo.apps.simple.config import config
+from sxo.util.runtime.config import config
 from sxo.apps.simple.data_feed import DataFeed
 from sxo.interface.client import SaxoClient
 from sxo.interface.entities.instruments import InstrumentUtil

@@ -5,7 +5,7 @@ from abc import abstractmethod
 
 import redis
 from sxo.interface.entities.instruments import Instrument
-from sxo.util.runtime.redis import RedisConfig
+from sxo.util.runtime.redis_cfg import RedisConfig
 
 
 class CacheError(Exception):

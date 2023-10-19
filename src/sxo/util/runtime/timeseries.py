@@ -6,7 +6,7 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 import redis
-from sxo.util.runtime.redis import RedisConfig
+from sxo.util.runtime.redis_cfg import RedisConfig
 
 TMIN, TMAX = 0, np.iinfo(np.int64).max
 

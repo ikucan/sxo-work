@@ -19,7 +19,10 @@ from sxo.apps.simple.strategy_config import StrategyConfig
 
 
 def round_sig(x, sig=100):
-    return round(x, sig-int(floor(log10(abs(x))))-1)
+    if x == 0:
+        return 0
+    else:
+        return round(x, sig-int(floor(log10(abs(x))))-1)
 
 
 class StrategyImpl():
