@@ -23,16 +23,12 @@ class RedisSet:
         self._redis = redis.Redis(h, p, password=pwd)
  
     def __create_or_validate_redis_ts(self, delete_prev: bool):
-        if self._redis.exists(self._name):
+        if self._redis.exists(self._key):
             if delete_prev:
-                self._redis.delete(self._name)
-                self.__create_redis_set()
-        else:
-            self.__create_redis_set()
+                self._redis.delete(self._key)
 
     def __create_redis_ts(self):
         pass
-
 
     def add(self, value:Any):
         self._redis.sadd(self._key, value)
@@ -50,19 +46,19 @@ class RedisSet:
     def list(self,) -> List:
         return list(self.get())
 
-if __name__ == "__main__":
-    set = RedisSet("<strat1>:<orders>:ENTRY2")
+    def delete(self,):
+        self._redis.delete(self._key)
 
-    for x in range(20):
-        set.add(x)
-
-    for x in set.get():
-        if int(x) % 2 == 0:
-            set.rm(x)
-        if int(x)  > 50:
-            set.rm(x)
-
-    all = sorted(set.list())
-    print(all)
-    
-    i = 123
+# if __name__ == "__main__":
+#     set = RedisSet("<strat1>:<orders>:ENTRY2")
+#     for x in range(20):
+#         set.add(x)
+#     for x in set.get():
+#         if int(x) % 2 == 0:
+#             set.rm(x)
+#         if int(x)  > 50:
+#             set.rm(x)
+#     all = sorted(set.list())
+#     print(all)
+#     set.delete()
+#     i = 123
