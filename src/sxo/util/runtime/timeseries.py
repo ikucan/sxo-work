@@ -6,7 +6,7 @@ from typing import Tuple
 import numpy as np
 import pandas as pd
 import redis
-from sxo.util.runtime.redis_cfg import RedisConfig
+from sxo.util.runtime.config import RedisConfig
 
 TMIN, TMAX = 0, np.iinfo(np.int64).max
 
@@ -70,7 +70,7 @@ class RedisTs(PersistedTimeSeries):
         self._retention = retention_period_ms
         self._duplicates = duplicates_policy
 
-        (h, p, pwd) = RedisConfig.get()
+        (h, p, pwd) = RedisConfig().get_all()
         self._redis = redis.Redis(h, p, password=pwd)
         self._ts_module = self._redis.ts()
 

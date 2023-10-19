@@ -13,6 +13,8 @@ from typing import Tuple
 
 from sxo.apps.simple.persisted_quote import RedisQuote
 
+from sxo.util.runtime.redis_set import RedisSet
+
 from sxo.interface.client import SaxoClient
 from sxo.interface.definitions import OrderDirection
 from sxo.apps.simple.strategy_config import StrategyConfig
@@ -117,24 +119,26 @@ class StrategyImpl():
 
     def __place_new_orders(self, longEntry, longExit, shortEntry, shortExit):
         instr = self._instrument.__str__()
-        try:
-            print(f"placing SHORT {{ {instr} }} at : {shortEntry} -> {shortExit}")
-            oid =  self._client.limit_order(instr, OrderDirection.Sell, shortEntry, shortExit, 100000)
-            print(oid)
-            self._short_oid = oid['OrderId']
+        order_size = 100000
 
-        except Exception as e:
-            print(f"ERROR placing SHORT order for  for  {{ {instr} }}. {e}")
+        def place(side, entry_price, exit_price) -> int:
+            try:
+                print(f"placing SHORT {{ {instr} }} at : {shortEntry} -> {shortExit}")
+                oid =  self._client.limit_order(instr, side, entry_price, exit_price, order_size)
+                print(oid)
+                return oid
 
-        time.sleep(0.5)
+            except Exception as e:
+                print(f"ERROR placing SHORT order for  for  {{ {instr} }}. {e}")
 
-        try:
-            print(f"placing LONG  {{ {instr} }} at : {longEntry} -> {longExit}")
-            oid =  self._client.limit_order(instr, OrderDirection.Buy, longEntry, longExit, 1000000)
-            print(oid)
-            self._long_oid = oid['OrderId']
-        except Exception as e:
-            print(f"ERROR placing LONG order for  {{ {instr} }}. {e}")
+        oid_short = place(OrderDirection.Sell, shortEntry, shortExit)
+
+        oid_long = place(OrderDirection.Buy, longEntry, longExit)
+
+        short_entry_oid = oid_short['OrderId']
+        short_exit_oids = [x['OrderId'] for x in oid_short['Orders']]
+        long_entry_oid = oid_long['OrderId']
+        long_exit_oids = [x['OrderId'] for x in oid_long['Orders']]
     
     def __review_orders(self,):
             try:
