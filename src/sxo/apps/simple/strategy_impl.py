@@ -42,9 +42,13 @@ class StrategyImpl():
         # connect to db
         self._tick_db = RedisQuote(self._instrument)        
         self._last_actioned = np.datetime64('now')
-        self._long_oid = None
-        self._short_oid = None
 
+        self._short_entry_oids = RedisSet("<simple_strat>:<orders>:SHORT_ENTRY")
+        self._short_exit_oids = RedisSet("<simple_strat>:<orders>:SHORT_ENTRY")
+
+        self._long_entry_oids = RedisSet("<simple_strat>:<orders>:LONG_ENTRY")
+        self._long_exit_oids = RedisSet("<simple_strat>:<orders>:LONG_ENTRY")
+#
         # create a client
         self._client = SaxoClient(token_file='/data/saxo_token')
 
@@ -110,11 +114,22 @@ class StrategyImpl():
 
         print(f"LONG:  {price} / {range}. in: {longEntry} -> {longExit}. Delta: {rs(longEntry - price, 5)} -> {rs(longEntry - longExit, 5)}")
         print(f"SHORT: {price} / {range}. in: {shortEntry} -> {shortExit}. Delta: {rs(price - shortEntry, 5)} -> {rs(shortEntry- shortExit, 5)}")
-        
-        assert(longEntry <  longExit) 
-        assert(longEntry <  price) 
-        assert(shortEntry >  shortExit) 
-        assert(shortEntry >  price) 
+
+        # verify and test entry and exit prices        
+        if price and longEntry and longExit:
+            if longEntry == longExit:
+                longEntry, longExit = None, None
+            else:
+                assert(longEntry <  longExit) 
+                assert(longEntry <  price) 
+
+        if price and shortEntry and shortExit:
+            if shortEntry == shortExit:
+                shortEntry, shortExit = None, None
+            else:
+                assert(shortEntry >  shortExit) 
+                assert(shortEntry >  price) 
+
         return (longEntry, longExit, shortEntry, shortExit)
 
     def __place_new_orders(self, longEntry, longExit, shortEntry, shortExit):
@@ -123,38 +138,61 @@ class StrategyImpl():
 
         def place(side, entry_price, exit_price) -> int:
             try:
-                print(f"placing SHORT {{ {instr} }} at : {shortEntry} -> {shortExit}")
-                oid =  self._client.limit_order(instr, side, entry_price, exit_price, order_size)
-                print(oid)
-                return oid
+                if entry_price and exit_price:
+                    print(f"placing {side} {{ {instr} }} at : {shortEntry} -> {shortExit}")
+                    oid =  self._client.limit_order(instr, side, entry_price, exit_price, order_size)
+                    print(oid)
+                    return oid
+                else :
+                    print(f"FAILED placing {side}  {{ {instr} }} at : {shortEntry} -> {shortExit}")
+                    return None
+
 
             except Exception as e:
                 print(f"ERROR placing SHORT order for  for  {{ {instr} }}. {e}")
 
-        oid_short = place(OrderDirection.Sell, shortEntry, shortExit)
+        if shortEntry and shortExit:
+            oid_short = place(OrderDirection.Sell, shortEntry, shortExit)
+            if oid_short:
+                short_entry_oid = oid_short['OrderId']
+                short_exit_oids = [x['OrderId'] for x in oid_short['Orders']]
+                self._short_entry_oids.add(short_entry_oid)
+                self._short_exit_oids.madd(short_exit_oids)
 
-        oid_long = place(OrderDirection.Buy, longEntry, longExit)
-
-        short_entry_oid = oid_short['OrderId']
-        short_exit_oids = [x['OrderId'] for x in oid_short['Orders']]
-        long_entry_oid = oid_long['OrderId']
-        long_exit_oids = [x['OrderId'] for x in oid_long['Orders']]
+                time.sleep(0.5)
     
-    def __review_orders(self,):
-            try:
-                #oid = None
-                orders = self._client.list_orders()
-                all_order_ids = {o["OrderId"] for o in orders["Data"]}
+        if longEntry and longExit:
+            oid_long = place(OrderDirection.Buy, longEntry, longExit)
+            if oid_long:
+                long_entry_oid = oid_long['OrderId']
+                long_exit_oids = [x['OrderId'] for x in oid_long['Orders']]
+                self._long_entry_oids.add(long_entry_oid)
+                self._long_exit_oids.madd(long_exit_oids)
 
-                oids = [self._long_oid, self._short_oid]
-                for oid in oids:
-                    print(f"DELETING  order : {oid} ")
+    def __review_orders(self,):
+        
+        try:
+            #
+            # what is in the OMS
+            #
+            all_current_orders = self._client.list_orders()
+            all_order_ids = {o["OrderId"] for o in all_current_orders["Data"]}
+            #
+            # delete our short orders that hevent been filled
+            # 
+            def clear_out(label:str, order_set):
+                for oid in order_set.list():
                     if oid in all_order_ids:
-                        #check if the order is still around...
+                        print(f"DELETING active {label} order. {oid}.")
                         self._client.delete_orders(oid)
                     else:
-                        print(f"=================")
-                        print(f"  CANNOT DELETE order {oid}. It must have been filled.")
-                        print(f"=================")
-            except Exception as e:
-                print(f"ERROR deleting orders. {oid}. {e}")
+                        print(f"DELETING a MISSING {label} order. {oid}.")
+                    # either way, delete the entry order from our list
+                    order_set.rm(oid)
+                    time.sleep(0.5)
+
+            clear_out("SHORT", self._short_entry_oids)
+            clear_out("LONG", self._long_entry_oids)
+
+        except Exception as e:
+            print(f"ERROR deleting orders. {oid}. {e}")

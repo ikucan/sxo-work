@@ -33,12 +33,18 @@ class RedisSet:
     def add(self, value:Any):
         self._redis.sadd(self._key, value)
 
-    def get(self,) -> Set:
-        vals = self._redis.smembers(self._key)
-        strs = {str(x, 'utf-8') for x in vals}
-        return strs
+    def madd(self, values:List[Any]):
+        for v in values:
+            self.add(v)
+ 
+    def rm(self, value:Any):
+        self._redis.srem(self._key, value)
 
-    def rm(self, value:Any) -> Set:
+    def mrm(self, values:List[Any]):
+        for v in values:
+            self.rm(v)
+
+    def get(self,) -> Set:
         vals = self._redis.smembers(self._key)
         strs = {str(x, 'utf-8') for x in vals}
         return strs
