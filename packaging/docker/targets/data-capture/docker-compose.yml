@@ -1,0 +1,71 @@
+---
+# running with Docker Compose version 2.17.2, needs post 1.28
+version: '3.9'
+
+services:
+#   # generate a new 24hr loing token
+#     token_grabber:
+#         image: iztokkucan/sxo-token-grabber:0.0.1
+#         environment:
+#             SAXO_USER: 17805023
+#             SAXO_PASS: c45o55am
+#             TOKEN_PATH: /tokendir
+#             TOKEN_FILE: saxo_token
+#         volumes:
+#             - type: bind
+#               source: /tmp/
+#               target: /tokendir/
+
+
+  # when you have the token, start the data feeds
+    feed:
+        # depends_on:
+        #     token_grabber:
+        #         condition: service_completed_successfully
+        image: iztokkucan/sxo-data-capture:0.2.1
+        container_name: data-capture
+        environment:
+            INSTRUMENTS: FxSpot::GBPEUR,FxSpot::GBPUSD,FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+            DATA_DIR: /data/capture/
+            TOKEN_FILE: /tokendir/saxo_token
+            HB_TOLERANCE: 20
+        volumes:
+            - type: bind
+              source: /data/
+              target: /tokendir/
+            - type: bind
+              source: /data/capture
+              target: /data/capture
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 1s
+                max_attempts: 100
+                window: 60s
+
+
+    # ssh-server:
+    #     depends_on:
+    #         feed:
+    #             condition: service_started
+    #     image: iztokkucan/ssh:0.0.1
+    #     container_name: ssh-sidecar
+    #     hostname: ssh-sidecar
+
+    #     environment:
+    #         - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
+    #         - USER_NAME=admin
+    #         - SUDO_ACCESS=true
+
+    #     ports:
+    #         - 2222:2222
+
+    #     volumes:
+    #         - type: bind
+    #           source: /data
+    #           target: /data/
+    #           read_only: true
+
+    #     deploy:
+    #         restart_policy:
+    #             condition: any
