@@ -2,6 +2,8 @@
   "configurations": [
     {
       "console": "integratedTerminal",
+      // --------------
+      // // toke capture
       // "env": {
       //   "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
       //   "SETUPTOOLS_SCM_DEBUG": "True",
@@ -10,32 +12,42 @@
       //   "TOKEN_PATH": "/tmp" ,
       //   "TOKEN_FILE": "saxo_token" ,
       // },
+
+      // --------------
+      // // toke capture
+      "env": {
+        "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
+        "SETUPTOOLS_SCM_DEBUG": "True",
+        "INSTRUMENTS": "FxSpot::GBPEUR,FxSpot::GBPUSD,FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY",
+        "HB_TOLERANCE": "20",
+        "DATA_DIR": "/data/capture/" ,
+        "TOKEN_FILE": "/data/saxo_token" ,
+      },
+
+      // --------------
+      // // strategy data feed params
+      // "env": {   
+      //   "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
+      //   "SETUPTOOLS_SCM_DEBUG": "True",
+      //   "TOKEN_FILE": "/data/saxo_token" ,
+      //   "INSTRUMENTS": "FxSpot::GBPUSD,FxSpot::GBPEUR",
+      //   // "INSTRUMENTS": "FxSpot::GBPEUR,FxSpot::GBPUSD,FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY",
+      //   "REDIS_PASS": "boss",
+      //   "HB_TOLERANCE": "60",
+      // },
+      // // --------------
+      // stategy env vars
       // "env": {
       //   "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
       //   "SETUPTOOLS_SCM_DEBUG": "True",
       //   "TOKEN_FILE": "/data/saxo_token" ,
-      //   // "INSTRUMENTS": "FxSpot::GBPUSD,FxSpot::GBPEUR,FxSpot::GBPJPY,FxSpot::EURUSD,FxSpot::EURJPY,FxSpot::JPYUSD,",
-      //   "INSTRUMENTS": "FxSpot::GBPEUR,FxSpot::GBPUSD",
-      //   "DATA_DIR": "/data" ,
       //   "REDIS_PASS": "boss",
-      //   // general config
-      //   "HB_TOLERANCE": "60",
-      //   // strategy config
-      //   "STRATEGY_DATA_WINDOW_M": "1440",
-      //   "STRATEGY_FREQUENCY_S": "60",
-      //   "STRATEGYALPHA": "3.2",
-      //   "STRATEGY_BETA": "1.1",
+      //   "STRATEGY_INSTRUMENT": "FxSpot::GBPEUR",
+      //   "STRATEGY_TRADE_FREQUENCY": "90",
+      //   "STRATEGY_ALPHA": "0.5",
+      //   "STRATEGY_BETA": "2.0",
+      //   "STRATEGY_ORDER_SCALE": "4999999",
       // },
-      "env": {
-        "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/src",
-        "SETUPTOOLS_SCM_DEBUG": "True",
-        "TOKEN_FILE": "/data/saxo_token" ,
-        "REDIS_PASS": "boss",
-        "STRATEGY_INSTRUMENT": "FxSpot::GBPEUR",
-        "STRATEGY_TRADE_FREQUENCY": "90",
-        "STRATEGY_ALPHA": "0.3",
-        "STRATEGY_BETA": "1.4",
-      },
       "name": "Python: Current file",
       "program": "${file}",
       "request": "launch",

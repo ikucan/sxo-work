@@ -23,6 +23,23 @@ services:
               target: /var/lib/redis-stack
 
   # when you have the token, start the data feeds
+    redis-insight:
+        depends_on:
+            redis:
+                condition: service_started
+
+        # docker run --cap-add=IPC_LOCK -p 5000:5000 iztokkucan/redisinsight:2.34.0
+        image: iztokkucan/redisinsight:2.34.0
+        container_name: redis-insight
+        hostname: redis-insight
+
+        restart: always
+        ports:
+            - 5000:5000
+        cap_add:
+        - IPC_LOCK
+
+    # when you have the token, start the data feeds
     data-feed:
         depends_on:
             redis:
@@ -37,7 +54,7 @@ services:
             REDIS_PORT: 6379
             REDIS_PASS: boss
 
-        volumes:
+        volumes:()
             - type: bind
               source: /data/saxo_token
               target: /token

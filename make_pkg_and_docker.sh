@@ -12,7 +12,7 @@ conda run -n mamba-build2 conda mambabuild --python=3.11 --no-remove-work-dir pa
 # copy the binary and the repo information to target directory
 #
 export TARGET_DOCKER_DIR=packaging/docker/py/sxo-base
-export PACK_VER="v0.2.0-py311_0"
+export PACK_VER="v0.2.1-py311_0"
 #
 rm -f $TARGET_DOCKER_DIR/ik.sxo-${PACK_VER}.tar.bz2
 rm -f $TARGET_DOCKER_DIR/repodata-linux-64.json

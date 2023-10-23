@@ -19,5 +19,4 @@ COPY repodata-noarch.json /scratch/noarch/repodata.json
 RUN . /root/.bashrc && mamba install -yq -n sxo -c /scratch ik.sxo
 
 RUN rm -rf /scrath/*
-COPY run.py /scratch
 ENV PATH=$PATH:/opt/mambaforge/bin

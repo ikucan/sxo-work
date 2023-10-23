@@ -12,7 +12,3 @@ def mainline():
 
 if __name__ == "__main__":
     mainline()
-
-
-
-

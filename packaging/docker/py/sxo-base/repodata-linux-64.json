@@ -3,7 +3,7 @@
     "subdir": "linux-64"
   },
   "packages": {
-    "ik.sxo-v0.2.0-py311_0.tar.bz2": {
+    "ik.sxo-v0.2.1-py311_0.tar.bz2": {
       "build": "py311_0",
       "build_number": 0,
       "depends": [
@@ -17,13 +17,13 @@
         "redis-py >=5.0.1",
         "websockets >=11.0.3"
       ],
-      "md5": "a98de6e64f87f82cc461bce568d64f9a",
+      "md5": "7d4fefa4c27421516265dc501a603118",
       "name": "ik.sxo",
-      "sha256": "d6cb6cb323319ab55521c477f243c3ba1be1eb23944b71161da55004d1fcb0ab",
-      "size": 1366578,
+      "sha256": "5b3fe62c395ec2885916aac14c5a289283d3066137d9c3732cae84c348cdca7f",
+      "size": 728542,
       "subdir": "linux-64",
-      "timestamp": 1697568091718,
-      "version": "v0.2.0"
+      "timestamp": 1697820379793,
+      "version": "v0.2.1"
     }
   },
   "packages.conda": {},
