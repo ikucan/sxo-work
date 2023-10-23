@@ -3,17 +3,17 @@ from typing import List
 
 from concurrent.futures import ThreadPoolExecutor as exec
 
-# from sxo.apps.simple.data_feed import DataFeed
 from sxo.interface.client import SaxoClient
-# from sxo.interface.entities.instruments import Instrument
 from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.util.runtime.config import ConfigBase
 from sxo.util.runtime.config import SaxoClientConfig
 from sxo.util.runtime.heartbeat import HeartBeatMonitor
+from sxo.apps.data_capture.data_writer import DataWriter
 
 class DataCaptureConfig(ConfigBase):
     INSTRUMENTS = "INSTRUMENTS"
-    DATA_DIR = "DATA_DIR"
+    DATA_DIR = "DATA_DIR"# from sxo.apps.simple.data_feed import DataFeed
+
     SLEEP_PERIOD = "SLEEP_PERIOD"
     HB_TOLERANCE = "HB_TOLERANCE"
     NO_WORKERS = "NO_WORKERS"
@@ -44,6 +44,11 @@ class DataCaptureConfig(ConfigBase):
         return self._no_workers
 
 
+# ###
+# # TODO:>>  try one loop per thread
+# # https://docs.python.org/3/library/asyncio-eventloop.html
+# ###
+
 
 # ###
 # mainline
@@ -62,7 +67,7 @@ def mainline():
     for i in feed_config.instruments():
         instr = InstrumentUtil.parse(i)
         print(f"capture for instrument : {instr}")
-        # executor.submit(client.subscribe_price, instr, DataFeed(instr, hb_monitor))
+        executor.submit(client.subscribe_price, instr, DataWriter(feed_config.data_dir(), instr, hb_monitor))
 
     # wait until stop
     hb_monitor.start()
