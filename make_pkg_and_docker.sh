@@ -24,4 +24,4 @@ cp build/noarch/repodata.json $TARGET_DOCKER_DIR/repodata-noarch.json
 #
 # kick off the docker build
 #
-cd $TARGET_DOCKER_DIR && make
+cd $TARGET_DOCKER_DIR && make build-nocache

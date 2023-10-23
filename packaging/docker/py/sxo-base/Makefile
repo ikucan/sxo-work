@@ -4,6 +4,9 @@ PFX = iztokkucan/sxo-base
 build:
 	docker build -t $(PFX):$(TAG) .
 
+build-nocache:
+	docker build --no-cache -t $(PFX):$(TAG) .
+
 push: build
 	docker push $(PFX):$(TAG)
 

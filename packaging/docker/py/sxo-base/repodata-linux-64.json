@@ -17,12 +17,12 @@
         "redis-py >=5.0.1",
         "websockets >=11.0.3"
       ],
-      "md5": "7d4fefa4c27421516265dc501a603118",
+      "md5": "0a0c749785846ab420803efd4184322a",
       "name": "ik.sxo",
-      "sha256": "5b3fe62c395ec2885916aac14c5a289283d3066137d9c3732cae84c348cdca7f",
-      "size": 728542,
+      "sha256": "d42903248b7ca405e510115236b8edea542d6c481f7dd237c4e255199d197dda",
+      "size": 726305,
       "subdir": "linux-64",
-      "timestamp": 1697820379793,
+      "timestamp": 1698088269453,
       "version": "v0.2.1"
     }
   },
