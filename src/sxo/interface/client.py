@@ -13,6 +13,7 @@ from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import ListAllOrders
 from sxo.interface.prices import InfoPrice
 from sxo.interface.prices import InfoPriceSubscription
+from sxo.interface.positions import ListPositions
 from sxo.interface.reference import RefCountries
 from sxo.interface.reference import RefCultures
 from sxo.interface.reference import RefCurrencies
@@ -71,6 +72,8 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "order_details": GetOrderDetails,
         "list_orders": ListAllOrders,
         "delete_orders": DeleteOrders,
+        # positions
+        "all_positions": ListPositions,
     }
 
     def __init__(
