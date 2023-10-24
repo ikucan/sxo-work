@@ -14,6 +14,9 @@ from sxo.interface.entities.instruments import InstrumentUtil
 from sxo.interface.factories import SaxoAPIClientBoundMethodMethodFactory
 
 
+class OrderError(Exception):
+    pass
+
 class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
     """
     base class for order commands
@@ -38,6 +41,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         order_type: OrderType,
         duration: OrderDuration = OrderDuration.GoodTillCancel,
         relation: OrderReleation = OrderReleation.StandAlone,
+        extern_order_ref:str = None,
     ) -> Dict[str, Any]:
         order_json = {
             "Uic": instrument_id,
@@ -51,6 +55,12 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             "AccountKey": self.account_key,  # type: ignore
             "OrderRelation": relation.name,
         }
+        if extern_order_ref:
+            extern_order_ref_str = str(extern_order_ref)
+            if len(extern_order_ref_str) > 50:
+                raise OrderError(f"ERROR, 'ExternalReference' is too large. It is {len(extern_order_ref_str)} but can only be 50 chars.")
+            order_json['ExternalReference'] = extern_order_ref
+
 
         return order_json
 
@@ -72,6 +82,7 @@ class LimitOrder(OrderCommandBase):
         price: float,
         limit_price: float,
         amount: float,
+        reference_id: str = None,
     ):
         if isinstance(instrument, Instrument):
             instr = instrument
@@ -87,6 +98,7 @@ class LimitOrder(OrderCommandBase):
             amount=amount,
             price=price,
             order_type=OrderType.Limit,
+            extern_order_ref= reference_id,
         )
         exit_order = self._make_order_json(
             instrument_id=instr.uid(),
@@ -95,8 +107,8 @@ class LimitOrder(OrderCommandBase):
             amount=amount,
             price=limit_price,
             order_type=OrderType.Limit,
+            extern_order_ref= reference_id,
         )
-
         entry_order["Orders"] = [exit_order]
         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
 
