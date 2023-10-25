@@ -54,7 +54,7 @@ services:
             REDIS_PORT: 6379
             REDIS_PASS: boss
 
-        volumes:()
+        volumes:
             - type: bind
               source: /data/saxo_token
               target: /token
