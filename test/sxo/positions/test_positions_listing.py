@@ -70,10 +70,10 @@ class PositionBase(JsonUtils):
         self.must_have('Status')
         self.must_have('Uic')
         self.must_have('ValueDate')
-
         asset_type = _json['AssetType']
-        InstrumentUtil.find(_json['Uic'])
 
+        self._instrument = InstrumentUtil.find(_json['Uic'])
+        self._related_orders = _json['RelatedOpenOrders']
 
                   
 
