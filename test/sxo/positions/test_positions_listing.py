@@ -6,7 +6,7 @@ from typing import Dict
 from typing import Any
 from typing import List
 
-from sxo.util.json_utils import JsonUtils
+from sxo.util.json_utils import JsonWrapperBase
 from sxo.interface.entities.instruments.symbology import Instrument
 from sxo.interface.entities.instruments.symbology import InstrumentUtil
 
@@ -15,54 +15,30 @@ class PositionError(Exception):
 
 
 
-class PositionBase(JsonUtils):
+class PositionBase(JsonWrapperBase):
     '''
     position base part of the Net Position Json
-
-       'AccountId': '18286731',
-       'AccountKey': 'Rc9wX9gl1UcU6lsbTh1ZRA==',
-       'Amount': 99999.0,
-       'AssetType': 'FxSpot',
-       'CanBeClosed': False,
-       'ClientId': '18286731',
-       'CloseConversionRateSettled': True,
-       'CorrelationKey': '6d40839c-31ba-49d0-af48-28c8e8e631a5',
-       'CorrelationTypes': [],
-       'ExecutionTimeClose': '2023-10-20T11:44:52.008630Z',
-       'ExecutionTimeOpen': '2023-10-25T22:04:11.619853Z',
-       'IsForceOpen': False,
-       'IsMarketOpen': True,
-       'LockedByBackOffice': False,
-       'OpenPrice': 1.1459,
-       'OpenPriceIncludingCosts': 1.1459573005730057,
-       'RelatedOpenOrders': [],
-       'RelatedPositionId': '5017201599',
-       'SourceOrderId': '5015400879',
-       'SpotDate': '2023-10-30',
-       'Status': 'Closed',
-       'Uic': 3942,
-       'ValueDate': '2023-10-30T00:00:00.000000Z'},
 
     '''
     def __init__(self, _json: Dict[Any, Any]):
         super().__init__(_json)
 
-        self.must_have('AccountId')
-        self.must_have('AccountKey')
-        self.must_have('Amount')
-        self.must_have('AssetType')
-        self.must_have('CanBeClosed')
-        self.must_have('ClientId')
-        self.must_have('CloseConversionRateSettled')
-        self.must_have('CorrelationKey')
+        self.set_int('AccountId')
+        self.set_str('AccountKey')
+        self.set_float('Amount')
+        self.set_str('AssetType')
+        self.set_bool('CanBeClosed')
+        self.set_int('ClientId')
+        self.set_bool('CloseConversionRateSettled')
+        self.set_str('CorrelationKey')
         # self.must_have('CorrelationTypes')
         # self.must_have('ExecutionTimeClose')
-        self.must_have('ExecutionTimeOpen')
-        self.must_have('IsForceOpen')
-        self.must_have('IsMarketOpen')
-        self.must_have('LockedByBackOffice')
-        self.must_have('OpenPrice')
-        self.must_have('OpenPriceIncludingCosts')
+        self.set_timestamp('ExecutionTimeOpen')
+        self.set_bool('IsForceOpen')
+        self.set_bool('IsMarketOpen')
+        self.set_bool('LockedByBackOffice')
+        self.set_float('OpenPrice')
+        self.set_float('OpenPriceIncludingCosts')
         self.must_have('RelatedOpenOrders')
         # self.must_have('RelatedPositionId')
         self.must_have('SourceOrderId')
@@ -77,7 +53,7 @@ class PositionBase(JsonUtils):
 
                   
 
-class Position(JsonUtils):
+class Position(JsonWrapperBase):
     '''
     an individual position, with related orders
     '''
@@ -93,7 +69,7 @@ class Position(JsonUtils):
         return self._json['NetPositionId']
 
 
-class NetPosition(JsonUtils):
+class NetPosition(JsonWrapperBase):
     @staticmethod
     def parse(_json: Dict[Any, Any]):
         if "__count" not in _json:
