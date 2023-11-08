@@ -1,135 +1,21 @@
 # -*- coding: utf-8 -*-
+import json
 from pprint import pprint
 import time
-
-from typing import Dict
-from typing import Any
-from typing import List
-
-from sxo.util.json_utils import JsonWrapperBase
-from sxo.interface.entities.instruments.symbology import Instrument
-from sxo.interface.entities.instruments.symbology import InstrumentUtil
-
-class PositionError(Exception):
-    pass
-
-
-class PositionBase(JsonWrapperBase):
-    '''
-    position base part of the Net Position Json
-
-    '''
-    def __init__(self, _json: Dict[Any, Any]):
-        super().__init__(_json)
-
-        self.set_int('AccountId')
-        self.set_str('AccountKey')
-        self.set_float('Amount')
-        self.set_str('AssetType')
-        self.set_bool('CanBeClosed')
-        self.set_int('ClientId')
-        self.set_bool('CloseConversionRateSettled')
-        self.set_str('CorrelationKey')
-        # self.must_have('CorrelationTypes')
-        # self.must_have('ExecutionTimeClose')
-        self.set_timestamp('ExecutionTimeOpen')
-        self.set_bool('IsForceOpen')
-        self.set_bool('IsMarketOpen')
-        self.set_bool('LockedByBackOffice')
-        self.set_float('OpenPrice')
-        self.set_float('OpenPriceIncludingCosts')
-        self.must_have('RelatedOpenOrders')
-        # self.must_have('RelatedPositionId')
-        self.set_int('SourceOrderId')
-        self.set_date('SpotDate')
-        self.set_str('Status')
-        self.set_str('Uic')
-        self.set_timestamp('ValueDate')
-
-        self._instrument = InstrumentUtil.find(self.Uic)
-        self._related_orders = _json['RelatedOpenOrders']
-
-class PositionView(JsonWrapperBase):
-    '''
-    position view part of the Net Position Json
-
-    '''
-    def __init__(self, _json: Dict[Any, Any]):
-        super().__init__(_json)
-        self.set_float('Ask')
-        self.set_float('Bid')
-        self.set_str('CalculationReliability')
-        self.set_float('CurrentPrice')
-        self.set_float('CurrentPriceDelayMinutes')
-        self.set_str('CurrentPriceType')
-        self.set_str('ExposureCurrency')
-        self.set_float('InstrumentPriceDayPercentChange')
-        self.set_str('MarketState')
-        self.set_float('MarketValue')
-        self.set_float('ProfitLossOnTrade')
-        self.set_float('ProfitLossOnTradeInBaseCurrency')
-        self.set_float('TradeCostsTotal')
-        self.set_float('TradeCostsTotalInBaseCurrency')
-
-                  
-
-class Position(JsonWrapperBase):
-    '''
-    an individual position, with related orders
-    '''
-    def __init__(self, _json: Dict[Any, Any]):
-        super().__init__(_json)
-        self.set_str('NetPositionId')
-        self.set_int('PositionId')
-        self.must_have('PositionBase')
-        self.must_have('PositionView')
-        self._base = PositionBase(self._json['PositionBase'])
-        self._view = PositionView(self._json['PositionView'])
-
-    def net_position_id(self,) -> str:
-        return self._json['NetPositionId']
-
-
-class NetPosition(JsonWrapperBase):
-    @staticmethod
-    def parse(_json: Dict[Any, Any]) -> Dict[str,Any]:
-        if "__count" not in _json:
-            raise PositionError('ERROR, missing key in initial JSON: __count')
-        if "Data" not in _json:
-            raise PositionError('ERROR, missing key in initial JSON: Data')
-        all_positions = [Position(pj) for pj in _json['Data']]
-        by_net_pos_id  = {}
-        for pos in all_positions:
-            net_pos_id = pos.net_position_id()
-            net_pos_list = by_net_pos_id.get(net_pos_id, [])
-            net_pos_list.append(pos)
-            by_net_pos_id[net_pos_id] = net_pos_list
-
-        return {k:NetPosition(k, v) for k,v in by_net_pos_id.items()}
-
-    
-    '''
-    a netted position. 
-    '''
-    def __init__(self, net_pos_id:str, _json: Dict[Any, Any]):
-        # store the actual json
-        self._json = _json
-
-        pass
-
-
+from sxo.interface.entities.om.positions import *
 from sxo.interface.client import SaxoClient
 
-if __name__ == "__main__":
 
-    client = SaxoClient(token_file="/data/saxo_token")
-    positions = client.all_positions()
-    import json
-    f=open('tmp_pos.json', 'r')
+if __name__ == "__main__":
+    # client = SaxoClient(token_file="/data/saxo_token")
+    # positions = client.all_positions()
+    f=open('samples/positions/net_pos_example.json', 'r')
     positions_str = f.read()
     positions = json.loads(positions_str)
     f.close()
-    pprint(positions)
+    #pprint(positions)
     np = NetPosition.parse(positions)
-    i = 123
+    for k,v in np.items():
+        pprint(v.toJson())
+
 
