@@ -2,6 +2,7 @@ from typing import Dict
 from typing import Any
 
 import numpy as np
+import datetime as dt
 
 class JsonError(Exception):
     ...
@@ -20,25 +21,25 @@ class JsonWrapperBase:
         if key not in self._json:
             raise JsonError(f'MISSING key in Json: {key}')
 
-    def set_str(self, key):
+    def set_str(self, key: str):
         ''' creates a string atribute on the class with the name key and value from json doc'''
         self.must_have(key)
         json_val = self._json[key]
         setattr(self, key, json_val)
     
-    def set_int(self, key):
+    def set_int(self, key: str):
         ''' creates an int atribute'''
         self.must_have(key)
         json_val = self._json[key]
         setattr(self, key, int(json_val))
 
-    def set_float(self, key):
+    def set_float(self, key: str):
         ''' creates a float atribute'''
         self.must_have(key)
         json_val = self._json[key]
         setattr(self, key, float(json_val))
 
-    def set_bool(self, key):
+    def set_bool(self, key: str):
         ''' creates a boolean atribute'''
         self.must_have(key)
         json_val = self._json[key]
@@ -50,9 +51,18 @@ class JsonWrapperBase:
             # this is dangerous but assume user knows what they are doing
             setattr(self, key, bool(json_val))
 
-    def set_timestamp(self, key):
+    def set_timestamp(self, key: str):
         ''' creates a timestamp atribute'''
         self.must_have(key)
         json_val = self._json[key]
         setattr(self, key, np.datetime64(json_val))
 
+    def set_date(self,
+                 key: str,
+                 format: str = "%Y-%m-%d"):
+        ''' creates a timestamp atribute'''
+        self.must_have(key)
+        json_val = self._json[key]
+        aa = dt.datetime.strptime(json_val, format).date()
+
+        setattr(self, key, np.datetime64(json_val))
