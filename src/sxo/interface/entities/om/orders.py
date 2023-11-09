@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pprint import pprint
 import time
+from enum import Enum
 
 from typing import Dict
 from typing import Any
@@ -13,18 +14,32 @@ class OrderError(Exception):
     ...
 
 
-class Color(Enum):
-    RED = 1
-    GREEN = 2
-    BLUE = 3
-    
-class OrderDuration:
+class OrderDuration(Enum):
+    GOOD_TILL_CANCEL= "GoodTillCancel"
+    # ik:>> TODO:>> add others
 
+    @staticmethod
+    def parse( _json: Dict[Any, Any]):
+        jwb = JsonWrapperBase(_json)
+        jwb.must_have('DurationType')
+        return OrderDuration(_json['DurationType'])
 
-            # "Duration": {
-            #     "DurationType": "GoodTillCancel"
-            # },
+class Exchange(JsonWrapperBase):
+    def __init__(self, _json: Dict[Any, Any]):
+        super().__init__(_json)
+        self.set_str('Description')
+        self.set_str('ExchangeId')
+        self.set_bool('IsOpen')
+        self.set_int('TimeZoneId')
 
+class OrderDisplayAndFormat(JsonWrapperBase):
+    def __init__(self, _json: Dict[Any, Any]):
+        super().__init__(_json)
+        self.set_str('Currency')
+        self.set_int('Decimals')
+        self.set_str('Description')
+        self.set_str('Format')
+        self.set_str('Symbol')
 
 class Order(JsonWrapperBase):
 
@@ -75,23 +90,13 @@ class Order(JsonWrapperBase):
         self.set_str('TradingStatus')
         self.set_int('Uic')
 
-
-            # "DisplayAndFormat": {
-            #     "Currency": "EUR",
-            #     "Decimals": 4,
-            #     "Description": "British Pound/Euro",
-            #     "Format": "AllowDecimalPips",
-            #     "Symbol": "GBPEUR"
-            # },
-            # "Duration": {
-            #     "DurationType": "GoodTillCancel"
-            # },
-            # "Exchange": {
-            #     "Description": "Inter Bank",
-            #     "ExchangeId": "SBFX",
-            #     "IsOpen": true,
-            #     "TimeZoneId": "3"
-            # },
+        # nested types and subtypes
+        self.must_have('Exchange')
+        self.exchange = Exchange(self._json['Exchange'])
+        self.must_have('DisplayAndFormat')
+        self.display_and_format = OrderDisplayAndFormat(self._json['DisplayAndFormat'])
+        self.must_have('Duration')
+        self.duration = OrderDuration.parse(self._json['Duration'])
   
 
     def __str__(self,) -> str:
