@@ -1,1 +1,117 @@
-{"__count": 2, "Data": [{"AccountId": "18286731", "AccountKey": "Rc9wX9gl1UcU6lsbTh1ZRA==", "AdviceNote": "", "Amount": 99999.0, "Ask": 1.14795, "AssetType": "FxSpot", "Bid": 1.14758, "BuySell": "Buy", "CalculationReliability": "Ok", "ClientId": "18286731", "ClientKey": "Rc9wX9gl1UcU6lsbTh1ZRA==", "ClientName": "iztok kucan", "ClientNote": "", "CorrelationKey": "01c5bad4-6eef-4211-8bbd-5d28fa1e05fc", "CorrelationTypes": [], "CurrentPrice": 1.14795, "CurrentPriceDelayMinutes": 0, "CurrentPriceType": "Ask", "DisplayAndFormat": {"Currency": "EUR", "Decimals": 4, "Description": "British Pound/Euro", "Format": "AllowDecimalPips", "Symbol": "GBPEUR"}, "DistanceToMarket": 0.00628, "Duration": {"DurationType": "GoodTillCancel"}, "Exchange": {"Description": "Inter Bank", "ExchangeId": "SBFX", "IsOpen": true, "TimeZoneId": "3"}, "IpoSubscriptionFee": 0.0, "IsExtendedHoursEnabled": false, "IsForceOpen": false, "IsMarketOpen": true, "MarketPrice": 1.14795, "MarketState": "Open", "MarketValue": 0.0, "NonTradableReason": "None", "OpenOrderType": "Limit", "OrderAmountType": "Quantity", "OrderId": "5015409037", "OrderRelation": "StandAlone", "OrderTime": "2023-10-25T18:19:45.815256Z", "Price": 1.14167, "RelatedOpenOrders": [], "RelatedPositionId": "5017201169", "Status": "Working", "TradingStatus": "Tradable", "Uic": 3942}, {"AccountId": "18286731", "AccountKey": "Rc9wX9gl1UcU6lsbTh1ZRA==", "AdviceNote": "", "Amount": 99999.0, "Ask": 1.14795, "AssetType": "FxSpot", "Bid": 1.14758, "BuySell": "Buy", "CalculationReliability": "Ok", "ClientId": "18286731", "ClientKey": "Rc9wX9gl1UcU6lsbTh1ZRA==", "ClientName": "iztok kucan", "ClientNote": "", "CorrelationKey": "a7a04a6f-af15-4472-8b71-cf1559c6b116", "CorrelationTypes": [], "CurrentPrice": 1.14795, "CurrentPriceDelayMinutes": 0, "CurrentPriceType": "Ask", "DisplayAndFormat": {"Currency": "EUR", "Decimals": 4, "Description": "British Pound/Euro", "Format": "AllowDecimalPips", "Symbol": "GBPEUR"}, "DistanceToMarket": 0.00615, "Duration": {"DurationType": "GoodTillCancel"}, "Exchange": {"Description": "Inter Bank", "ExchangeId": "SBFX", "IsOpen": true, "TimeZoneId": "3"}, "IpoSubscriptionFee": 0.0, "IsExtendedHoursEnabled": false, "IsForceOpen": false, "IsMarketOpen": true, "MarketPrice": 1.14795, "MarketState": "Open", "MarketValue": 0.0, "NonTradableReason": "None", "OpenOrderType": "Limit", "OrderAmountType": "Quantity", "OrderId": "5015409036", "OrderRelation": "StandAlone", "OrderTime": "2023-10-25T18:18:48.018686Z", "Price": 1.1418, "RelatedOpenOrders": [], "RelatedPositionId": "5017201209", "Status": "Working", "TradingStatus": "Tradable", "Uic": 3942}]}
+{
+    "__count": 2,
+    "Data": [
+        {
+            "AccountId": "18286731",
+            "AccountKey": "Rc9wX9gl1UcU6lsbTh1ZRA==",
+            "AdviceNote": "",
+            "Amount": 99999.0,
+            "Ask": 1.14795,
+            "AssetType": "FxSpot",
+            "Bid": 1.14758,
+            "BuySell": "Buy",
+            "CalculationReliability": "Ok",
+            "ClientId": "18286731",
+            "ClientKey": "Rc9wX9gl1UcU6lsbTh1ZRA==",
+            "ClientName": "iztok kucan",
+            "ClientNote": "",
+            "CorrelationKey": "01c5bad4-6eef-4211-8bbd-5d28fa1e05fc",
+            "CorrelationTypes": [],
+            "CurrentPrice": 1.14795,
+            "CurrentPriceDelayMinutes": 0,
+            "CurrentPriceType": "Ask",
+            "DisplayAndFormat": {
+                "Currency": "EUR",
+                "Decimals": 4,
+                "Description": "British Pound/Euro",
+                "Format": "AllowDecimalPips",
+                "Symbol": "GBPEUR"
+            },
+            "DistanceToMarket": 0.00628,
+            "Duration": {
+                "DurationType": "GoodTillCancel"
+            },
+            "Exchange": {
+                "Description": "Inter Bank",
+                "ExchangeId": "SBFX",
+                "IsOpen": true,
+                "TimeZoneId": "3"
+            },
+            "IpoSubscriptionFee": 0.0,
+            "IsExtendedHoursEnabled": false,
+            "IsForceOpen": false,
+            "IsMarketOpen": true,
+            "MarketPrice": 1.14795,
+            "MarketState": "Open",
+            "MarketValue": 0.0,
+            "NonTradableReason": "None",
+            "OpenOrderType": "Limit",
+            "OrderAmountType": "Quantity",
+            "OrderId": "5015409037",
+            "OrderRelation": "StandAlone",
+            "OrderTime": "2023-10-25T18:19:45.815256Z",
+            "Price": 1.14167,
+            "RelatedOpenOrders": [],
+            "RelatedPositionId": "5017201169",
+            "Status": "Working",
+            "TradingStatus": "Tradable",
+            "Uic": 3942
+        },
+        {
+            "AccountId": "18286731",
+            "AccountKey": "Rc9wX9gl1UcU6lsbTh1ZRA==",
+            "AdviceNote": "",
+            "Amount": 99999.0,
+            "Ask": 1.14795,
+            "AssetType": "FxSpot",
+            "Bid": 1.14758,
+            "BuySell": "Buy",
+            "CalculationReliability": "Ok",
+            "ClientId": "18286731",
+            "ClientKey": "Rc9wX9gl1UcU6lsbTh1ZRA==",
+            "ClientName": "iztok kucan",
+            "ClientNote": "",
+            "CorrelationKey": "a7a04a6f-af15-4472-8b71-cf1559c6b116",
+            "CorrelationTypes": [],
+            "CurrentPrice": 1.14795,
+            "CurrentPriceDelayMinutes": 0,
+            "CurrentPriceType": "Ask",
+            "DisplayAndFormat": {
+                "Currency": "EUR",
+                "Decimals": 4,
+                "Description": "British Pound/Euro",
+                "Format": "AllowDecimalPips",
+                "Symbol": "GBPEUR"
+            },
+            "DistanceToMarket": 0.00615,
+            "Duration": {
+                "DurationType": "GoodTillCancel"
+            },
+            "Exchange": {
+                "Description": "Inter Bank",
+                "ExchangeId": "SBFX",
+                "IsOpen": true,
+                "TimeZoneId": "3"
+            },
+            "IpoSubscriptionFee": 0.0,
+            "IsExtendedHoursEnabled": false,
+            "IsForceOpen": false,
+            "IsMarketOpen": true,
+            "MarketPrice": 1.14795,
+            "MarketState": "Open",
+            "MarketValue": 0.0,
+            "NonTradableReason": "None",
+            "OpenOrderType": "Limit",
+            "OrderAmountType": "Quantity",
+            "OrderId": "5015409036",
+            "OrderRelation": "StandAlone",
+            "OrderTime": "2023-10-25T18:18:48.018686Z",
+            "Price": 1.1418,
+            "RelatedOpenOrders": [],
+            "RelatedPositionId": "5017201209",
+            "Status": "Working",
+            "TradingStatus": "Tradable",
+            "Uic": 3942
+        }
+    ]
+}
