@@ -1,6 +1,6 @@
 # -------------------------------------------------------
 # -------------------------------------------------------
-FROM iztokkucan/pybase:0.2.0
+FROM iztokkucan/pybase:0.2.1
 
 USER root
 
@@ -8,7 +8,7 @@ RUN mkdir -p /scratch
 RUN rm -f /scratch/*
 WORKDIR /scratch
 
-RUN . /root/.bashrc && mamba create     n sxo
+RUN . /root/.bashrc && mamba create -n sxo
 
 RUN mkdir -p /scratch/linux-64
 RUN mkdir -p /scratch/noarch

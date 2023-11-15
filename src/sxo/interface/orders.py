@@ -42,6 +42,7 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         duration: OrderDuration = OrderDuration.GoodTillCancel,
         relation: OrderReleation = OrderReleation.StandAlone,
         extern_order_ref:str = None,
+        expiry_time:str = None,
     ) -> Dict[str, Any]:
         order_json = {
             "Uic": instrument_id,
@@ -60,6 +61,12 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             if len(extern_order_ref_str) > 50:
                 raise OrderError(f"ERROR, 'ExternalReference' is too large. It is {len(extern_order_ref_str)} but can only be 50 chars.")
             order_json['ExternalReference'] = extern_order_ref
+        if expiry_time:
+            order_json['OrderDuration'] = {
+                    "DurationType": OrderDuration.GoodTillDate.name,
+                    "ExpirationDateContainsTime": True,
+                    #"ExpirationDateTime": "2023-11-15T07:33:00" }
+                    "ExpirationDateTime": str(expiry_time) }
 
 
         return order_json
@@ -83,6 +90,7 @@ class LimitOrder(OrderCommandBase):
         limit_price: float,
         amount: float,
         reference_id: str = None,
+        expiry_time:str = None,
     ):
         if isinstance(instrument, Instrument):
             instr = instrument
@@ -99,6 +107,7 @@ class LimitOrder(OrderCommandBase):
             price=price,
             order_type=OrderType.Limit,
             extern_order_ref= reference_id,
+            expiry_time=expiry_time,
         )
         exit_order = self._make_order_json(
             instrument_id=instr.uid(),
