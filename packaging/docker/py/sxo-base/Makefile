@@ -1,4 +1,4 @@
-TAG = 0.2.1
+TAG = 0.2.3
 PFX = iztokkucan/sxo-base
 
 build:

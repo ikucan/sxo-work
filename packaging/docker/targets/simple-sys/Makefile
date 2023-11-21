@@ -1,4 +1,4 @@
-TAG = 0.2.0
+TAG = 0.2.3
 DATA_FEED_PFX = iztokkucan/simple-strat-data-feed
 STRATEGY_PFX = iztokkucan/simple-strat-impl
 

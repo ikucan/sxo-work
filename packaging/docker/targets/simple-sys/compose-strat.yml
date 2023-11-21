@@ -1,0 +1,43 @@
+---
+version: '3.9'
+
+services:
+# -----
+# unrelated, just here for convenience
+            # SAXO_USER: 18286731
+            # SAXO_PASS: t62455gu
+# -----
+
+    # when you have the token, start the data feeds
+    simple-strat:
+
+        image: iztokkucan/simple-strat-impl:0.2.3
+        container_name: simple-strat-GBPUSD
+        networks:
+            - simple-strat-network
+
+        environment:
+            TOKEN_FILE: /token
+            REDIS_HOST: redis
+            REDIS_PASS: boss
+            
+            STRATEGY_INSTRUMENT: FxSpot::GBPUSD
+            STRATEGY_TRADE_FREQUENCY: 300
+            STRATEGY_ALPHA: 4.0
+            STRATEGY_BETA: 1.5
+            STRATEGY_ORDER_SCALE: 1000000
+
+        volumes:
+            - type: bind
+              source: /data/saxo_token
+              target: /data/saxo_token
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 10s
+                max_attempts: 10000
+                window: 5s
+
+networks:
+  simple-strat-network:
+    external: true
