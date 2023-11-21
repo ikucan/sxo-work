@@ -17,27 +17,27 @@ services:
             - type: bind
               source: /workstem/sxo-work/packaging/docker/targets/simple-sys/redis-stack.conf
               target: /opt/redis-stack/etc/redis-stack.conf
-              read_only: true18286731
+              read_only: true
             - type: bind
               source: /data/cache
               target: /var/lib/redis-stack
 
-#   # when you have the token, start the data feeds
-#     redis-insight:
-#         depends_on:
-#             redis:
-#                 condition: service_started
+    # redis insight
+    redis-insight:
+        depends_on:
+            redis:
+                condition: service_started
 
-#         # docker run --cap-add=IPC_LOCK -p 5000:5000 iztokkucan/redisinsight:2.34.0
-#         image: iztokkucan/redisinsight:2.34.0
-#         container_name: redis-insight
-#         hostname: redis-insight
+        # docker run --cap-add=IPC_LOCK -p 5000:5000 iztokkucan/redisinsight:2.34.0
+        image: iztokkucan/redisinsight:2.34.0
+        container_name: redis-insight
+        hostname: redis-insight
 
-#         restart: always
-#         ports:
-#             - 5000:5000
-#         cap_add:
-#         - IPC_LOCK
+        restart: always
+        ports:
+            - 5000:5000
+        cap_add:
+            - IPC_LOCK
 
 # -----
 # unrelated, just here for convenience
@@ -55,7 +55,7 @@ services:
         container_name: feed-server
         environment:
             TOKEN_FILE: /token
-            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+            INSTRUMENTS: FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::EURJPY,FxSpot::USDJPY,FxSpot::GBPJPY,FxSpot::AUDJPY,FxSpot::AUDEUR,FxSpot::AUDGBP,FxSpot::AUDUSD
             REDIS_HOST: redis
             REDIS_PORT: 6379
             REDIS_PASS: boss

@@ -56,7 +56,7 @@ class TimeUtils:
 
         # is string, see if it can be parsed and process as datetime64
         if isinstance(time, str):
-            return TimeUtils.round_time(np.datetime64(time), granularity)
+            return TimeUtils.round(np.datetime64(time), granularity)
 
         tu = TimeUnits(granularity)
 
@@ -107,17 +107,18 @@ class GranularTime:
     def units(self,) -> np.timedelta64:
         return self._tu
 
-    def round(self, boundary_fraction:float): # -> GranularTime:
+    def round(self, unit_treshold:float): # -> GranularTime:
         '''
         round the granular time up or down depending on its residual.
         if the residual is more than the fraction of the time unit
         round up, else do nothing
         '''
 
-        very_granular_time_units = self._tu.one_down().one_down().one_down()
-        very_granular_unit_increment = np.int64(1).astype(self._tu.np_td_type()).astype(very_granular_time_units.np_td_type())
+        much_more_granular_time_units = self._tu.one_down().one_down().one_down()
+        much_more_granular_unit_increment = np.int64(1).astype(self._tu.np_td_type()).astype(much_more_granular_time_units.np_td_type())
+        treshold = much_more_granular_unit_increment * unit_treshold
 
-        if self._residual > very_granular_unit_increment * boundary_fraction:
+        if self._residual >= treshold:
             return self.add(1)
         else:
             return self

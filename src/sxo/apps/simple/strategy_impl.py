@@ -13,6 +13,7 @@ from typing import Tuple
 
 from sxo.apps.simple.persisted_quote import RedisQuote
 
+from sxo.util.time import GranularTime
 from sxo.util.runtime.redis_set import RedisSet
 
 from sxo.interface.client import SaxoClient
@@ -37,18 +38,21 @@ class StrategyImpl():
         self._alpha= conf.alpha()
         self._beta = conf.beta()
         frequency = conf.frequency()        
+        self._order_size = conf._trade_size
         self._frequency = np.timedelta64(frequency, 's')
         self._tick_size = None
+
+        self._strategy_name = "simple_strat"
 
         # connect to db
         self._tick_db = RedisQuote(self._instrument)        
         self._last_actioned = np.datetime64('now')
 
-        self._short_entry_oids = RedisSet("<simple_strat>:<orders>:SHORT_ENTRY")
-        self._short_exit_oids = RedisSet("<simple_strat>:<orders>:SHORT_EXIT")
+        self._short_entry_oids = RedisSet(f"<{self._strategy_name}>:<orders>:SHORT_ENTRY")
+        self._short_exit_oids = RedisSet(f"<{self._strategy_name}>:<orders>:SHORT_EXIT")
 
-        self._long_entry_oids = RedisSet("<simple_strat>:<orders>:LONG_ENTRY")
-        self._long_exit_oids = RedisSet("<simple_strat>:<orders>:LONG_EXIT")
+        self._long_entry_oids = RedisSet(f"<{self._strategy_name}>:<orders>:LONG_ENTRY")
+        self._long_exit_oids = RedisSet(f"<{self._strategy_name}>:<orders>:LONG_EXIT")
 
         # create a client
         self._client = SaxoClient(token_file='/data/saxo_token')
@@ -76,7 +80,7 @@ class StrategyImpl():
             if len(ticks) > 5:
                 staleness = self.__age_of_last_tick(now, ticks)
                 long_entry, long_exit, short_entry, short_exit = self.__strat(ticks, self._alpha, self._beta, 6)
-                long_size, short_size = 99999, 99999
+                long_size, short_size = self._order_size, self._order_size
                 self.__review_orders()
                 self.__place_new_orders(long_entry, long_exit, long_size, short_entry, short_exit, short_size)
                 # test - strat in tick space
@@ -221,11 +225,13 @@ class StrategyImpl():
     def __place_new_orders(self, longEntry, longExit, long_size, short_entry, short_exit, short_size):
         instr = self._instrument.__str__()
 
+        texp = GranularTime(units ='m').add(self._frequency).round(0.1)
+
         def place(side, entry_price, exit_price, size) -> int:
             try:
                 if entry_price and exit_price:
                     print(f"placing {side} {{{instr}}} at : {entry_price} -> {exit_price} (size:{size})")
-                    oid =  self._client.limit_order(instr, side, entry_price, exit_price, size)
+                    oid =  self._client.limit_order(instr, side, entry_price, exit_price, size, expiry_time = str(texp))
                     print(f"SUCCESSFULLY Placed {side} : detail {oid}")
                     return oid
                 else :

@@ -65,7 +65,6 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             order_json['OrderDuration'] = {
                     "DurationType": OrderDuration.GoodTillDate.name,
                     "ExpirationDateContainsTime": True,
-                    #"ExpirationDateTime": "2023-11-15T07:33:00" }
                     "ExpirationDateTime": str(expiry_time) }
 
 
@@ -99,6 +98,9 @@ class LimitOrder(OrderCommandBase):
         else:
             raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
+        entry_ref = f"{reference_id}:<en>" if reference_id else ":<en>"
+        exit_ref = f"{reference_id}:<ex>" if reference_id else ":<ex>"
+
         entry_order = self._make_order_json(
             instrument_id=instr.uid(),
             direction=direction,
@@ -106,7 +108,7 @@ class LimitOrder(OrderCommandBase):
             amount=amount,
             price=price,
             order_type=OrderType.Limit,
-            extern_order_ref= reference_id,
+            extern_order_ref= entry_ref,
             expiry_time=expiry_time,
         )
         exit_order = self._make_order_json(
@@ -116,7 +118,7 @@ class LimitOrder(OrderCommandBase):
             amount=amount,
             price=limit_price,
             order_type=OrderType.Limit,
-            extern_order_ref= reference_id,
+            extern_order_ref= exit_ref,
         )
         entry_order["Orders"] = [exit_order]
         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore

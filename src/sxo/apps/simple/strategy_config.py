@@ -7,7 +7,8 @@ class StrategyConfig(ConfigBase):
     INSTRUMENT = "STRATEGY_INSTRUMENT"
     TRADE_FREQUENCY = "STRATEGY_TRADE_FREQUENCY"
     ALPHA = "STRATEGY_ALPHA"
-    BETA = "STRATEGY_BETA"
+    BETA = "STRATEGY_BETA"#
+    STRATEGY_ORDER_SCALE = "STRATEGY_ORDER_SCALE"
 
     def __init__(self,):
         instr_str = self.get_str(StrategyConfig.INSTRUMENT)
@@ -15,6 +16,7 @@ class StrategyConfig(ConfigBase):
         self._freq = self.get_int(StrategyConfig.TRADE_FREQUENCY)
         self._alph = self.get_float(StrategyConfig.ALPHA)
         self._beta = self.get_float(StrategyConfig.BETA)
+        self._trade_size = self.get_float(StrategyConfig.STRATEGY_ORDER_SCALE)
 
     def instrument(self,) -> Instrument:
         return self._inst
