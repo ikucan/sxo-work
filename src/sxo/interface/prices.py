@@ -87,6 +87,8 @@ class InfoPriceSubscription(metaclass=SaxoAPISubscriptionClientMethodFactory):
             print(f"error trying to initiate a subscription for :{instrument}. {e}")
             raise e
 
+
+    # ik:>> TODO:>> see if this is a general steraming function
     async def streamer(
         self,
         context_id: str,
