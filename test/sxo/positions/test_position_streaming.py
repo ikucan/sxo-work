@@ -9,7 +9,6 @@ from sxo.interface.client import SaxoClient
 if __name__ == "__main__":
     client = SaxoClient(token_file="/data/saxo_token")
 
-
     def foo(x):
         print('-----------')
         pprint(x)
