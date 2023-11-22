@@ -12,7 +12,7 @@ services:
     simple-strat:
 
         image: iztokkucan/simple-strat-impl:0.2.3
-        container_name: simple-strat-GBPUSD
+        container_name: simple-strat-GBPUSpo
         networks:
             - simple-strat-network
 
