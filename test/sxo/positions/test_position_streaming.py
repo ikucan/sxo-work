@@ -14,7 +14,7 @@ if __name__ == "__main__":
         pprint(x)
 
 
-    client.subscribe_positions(callback = foo)
+    client.subscribe_messages(callback = foo)
 
     # # positions = client.all_positions()
     # f=open('samples/positions/net_pos_example.json', 'r')

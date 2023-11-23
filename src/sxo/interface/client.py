@@ -12,9 +12,9 @@ from sxo.interface.orders import GetOrderDetails
 from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import ListAllOrders
 from sxo.interface.prices import InfoPrice
-from sxo.interface.prices import InfoPriceSubscription
+from sxo.interface.streaming import InfoPriceSubscription
+from sxo.interface.streaming import InfoMessageSubscription
 from sxo.interface.positions import ListPositions
-from sxo.interface.positions import InfoPositionSubscription
 from sxo.interface.reference import RefCountries
 from sxo.interface.reference import RefCultures
 from sxo.interface.reference import RefCurrencies
@@ -68,7 +68,7 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "info_price": InfoPrice,
         # subscriptions
         "subscribe_price": InfoPriceSubscription,
-        "subscribe_positions": InfoPositionSubscription,
+        "subscribe_messages": InfoMessageSubscription,
         # orders
         "limit_order": LimitOrder,
         "order_details": GetOrderDetails,

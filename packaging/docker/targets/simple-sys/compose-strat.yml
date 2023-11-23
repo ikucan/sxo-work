@@ -8,11 +8,10 @@ services:
             # SAXO_PASS: t62455gu
 # -----
 
-    # when you have the token, start the data feeds
-    simple-strat:
+    simple-strat-1:
 
         image: iztokkucan/simple-strat-impl:0.2.3
-        container_name: simple-strat-GBPUSpo
+        container_name: simple-strat-GBPUSD
         networks:
             - simple-strat-network
 
@@ -22,10 +21,39 @@ services:
             REDIS_PASS: boss
             
             STRATEGY_INSTRUMENT: FxSpot::GBPUSD
-            STRATEGY_TRADE_FREQUENCY: 30
+            STRATEGY_TRADE_FREQUENCY: 60
             STRATEGY_ALPHA: 1.0
             STRATEGY_BETA: 1.0
-            STRATEGY_ORDER_SCALE: 10000
+            STRATEGY_ORDER_SCALE: 99000
+
+        volumes:
+            - type: bind
+              source: /data/saxo_token
+              target: /data/saxo_token
+        deploy:
+            restart_policy:
+                condition: on-failure
+                delay: 10s
+                max_attempts: 10000
+                window: 5s
+
+    simple-strat-2:
+
+        image: iztokkucan/simple-strat-impl:0.2.3
+        container_name: simple-strat-USDJPY
+        networks:
+            - simple-strat-network
+
+        environment:
+            TOKEN_FILE: /token
+            REDIS_HOST: redis
+            REDIS_PASS: boss
+            
+            STRATEGY_INSTRUMENT: FxSpot::USDJPY
+            STRATEGY_TRADE_FREQUENCY: 60
+            STRATEGY_ALPHA: 1.0
+            STRATEGY_BETA: 1.0
+            STRATEGY_ORDER_SCALE: 99000
 
         volumes:
             - type: bind
