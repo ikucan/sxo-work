@@ -8,7 +8,7 @@ services:
             # SAXO_PASS: t62455gu
 # -----
 
-    simple-strat-1:
+    simple-strat-GBPUSD:
 
         image: iztokkucan/simple-strat-impl:0.2.3
         container_name: simple-strat-GBPUSD
@@ -37,7 +37,7 @@ services:
                 max_attempts: 10000
                 window: 5s
 
-    simple-strat-2:
+    simple-strat-USDJPY:
 
         image: iztokkucan/simple-strat-impl:0.2.3
         container_name: simple-strat-USDJPY
