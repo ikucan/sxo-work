@@ -112,14 +112,26 @@ class Order(JsonWrapperBase):
 
         pass
 
-import json
 
-if __name__ == "__main__":
-    # client = SaxoClient(token_file="/data/saxo_token")
-    # positions = client.all_positions()
-    f=open('samples/orders/order_example.json', 'r')
-    orders_str = f.read()
-    f.close()
-    order_json = json.loads(orders_str)
-    pprint(order_json)
-    Order.parse(order_json)
+class RelatedOrder(JsonWrapperBase):
+    ''' order related to an open position '''
+    def __init__(self, _json: Dict[Any, Any]):
+        super().__init__(_json)
+        self.set_float('Amount')
+        self.set_str('OpenOrderType')
+        self.set_int('OrderId')
+        self.set_float('OrderPrice')
+        self.set_str('Status')
+        self.must_have('Duration')
+        self.Duration = OrderDuration.parse(self._json['Duration'])
+
+# import json
+# if __name__ == "__main__":
+#     # client = SaxoClient(token_file="/data/saxo_token")
+#     # positions = client.all_positions()
+#     f=open('samples/orders/order_example.json', 'r')
+#     orders_str = f.read()
+#     f.close()
+#     order_json = json.loads(orders_str)
+#     pprint(order_json)
+#     Order.parse(order_json)

@@ -8,6 +8,7 @@ from typing import List
 
 from sxo.util.json_utils import JsonWrapperBase
 from sxo.interface.entities.instruments.symbology import InstrumentUtil
+from sxo.interface.entities.om.orders import RelatedOrder
 
 class PositionError(Exception):
     ...
@@ -46,7 +47,7 @@ class PositionBase(JsonWrapperBase):
         self.set_timestamp('ValueDate')
 
         self._instrument = InstrumentUtil.find(self.Uic)
-        self._related_orders = _json['RelatedOpenOrders']
+        self.RelatedOpenOrders = [RelatedOrder(oj) for oj in _json['RelatedOpenOrders']]
 
 class PositionView(JsonWrapperBase):
     '''
@@ -70,7 +71,6 @@ class PositionView(JsonWrapperBase):
         self.set_float('TradeCostsTotal')
         self.set_float('TradeCostsTotalInBaseCurrency')
 
-                  
 
 class Position(JsonWrapperBase):
     '''
@@ -87,6 +87,12 @@ class Position(JsonWrapperBase):
 
     def net_position_id(self,) -> str:
         return self._json['NetPositionId']
+
+    def status(self,) -> str:
+        return self._base.Status
+
+    def related_open_orders(self,) -> str:
+        return self._base.RelatedOpenOrders
 
     def __str__(self,) -> str:
         return pprint(self._json)
