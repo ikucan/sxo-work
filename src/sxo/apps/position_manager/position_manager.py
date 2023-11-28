@@ -19,11 +19,11 @@ class Monitor:
         - group by instrument - assuming we will apply same adjustment per instrument
         - adjust
         '''
+        orders_by_instr = {}
         for net_pos_name, pos in net_pos.items():
             positions = pos.get_positions()
             open_positions = [p for p in positions if p.status() == 'Open']
 
-            orders_by_instr = {}
 
             for open_pos in open_positions:
                 pos_instr = open_pos.instrument()
@@ -32,11 +32,10 @@ class Monitor:
                 for roo in roos:
                     if instr_name not in orders_by_instr:
                         orders_by_instr[instr_name] = []
-                    existing = orders_by_instr[instr_name]
-                    orders_by_instr[instr_name] = existing.append(roo)
+                    orders_by_instr[instr_name].append(roo)
 
-                self.adjust(roos, pos_instr)
-                i = 123
+        self.adjust(roos, pos_instr)
+        i = 123
 
     def get_prices(self, instr):
         instr_name = instr.canonical_symbol()
