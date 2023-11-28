@@ -10,7 +10,6 @@ from typing import Any
 from typing import Dict
 from typing import Tuple
 
-
 from sxo.apps.simple.persisted_quote import RedisQuote
 
 from sxo.util.time import GranularTime

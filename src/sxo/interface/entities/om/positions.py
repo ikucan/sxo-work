@@ -88,6 +88,9 @@ class Position(JsonWrapperBase):
     def net_position_id(self,) -> str:
         return self._json['NetPositionId']
 
+    def instrument(self,) -> str:
+        return self._base._instrument
+
     def status(self,) -> str:
         return self._base.Status
 
