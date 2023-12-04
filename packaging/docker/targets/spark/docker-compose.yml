@@ -1,0 +1,12 @@
+---
+version: '3.9'
+
+services:
+    data-feed:
+        image: quay.io/jupyter/all-spark-notebook:latest
+        container_name: spark-jupyter
+        hostname: spark
+
+        restart: always
+        ports:
+            - 8888:8888

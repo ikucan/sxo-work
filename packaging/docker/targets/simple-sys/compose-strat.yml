@@ -33,9 +33,7 @@ services:
         deploy:
             restart_policy:
                 condition: on-failure
-                delay: 10s
                 max_attempts: 10000
-                window: 5s
 
     simple-strat-USDJPY:
 
@@ -62,9 +60,9 @@ services:
         deploy:
             restart_policy:
                 condition: on-failure
-                delay: 10s
+                #delay: 10s
                 max_attempts: 10000
-                window: 5s
+                #window: 5s
 
 networks:
   simple-strat-network:

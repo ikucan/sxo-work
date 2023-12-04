@@ -88,6 +88,7 @@ class LimitOrder(OrderCommandBase):
         price: float,
         limit_price: float,
         amount: float,
+        stop_price: float = None,
         reference_id: str = None,
         expiry_time:str = None,
     ):
@@ -121,6 +122,17 @@ class LimitOrder(OrderCommandBase):
             extern_order_ref= exit_ref,
         )
         entry_order["Orders"] = [exit_order]
+        if stop_price:
+            stop_order = self._make_order_json(
+                instrument_id=instr.uid(),
+                direction=direction.flip(),
+                asset_class=instr.asset_type(),
+                amount=amount,
+                price=stop_price,
+                order_type=OrderType.StopLimit,
+                extern_order_ref= exit_ref,
+            )
+                
         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
 
         return res

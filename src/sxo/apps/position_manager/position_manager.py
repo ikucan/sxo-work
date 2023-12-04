@@ -5,12 +5,14 @@ import time
 from sxo.interface.entities.om.positions import *
 from sxo.interface.client import SaxoClient
 from sxo.apps.simple.persisted_quote import RedisQuote
+from sxo.interface.entities.instruments.symbology import InstrumentUtil
 import numpy as np
 
 class Monitor:
 
     def __init__(self,):
         self._tick_dbs = {}
+        self._PRICE_HISTORY_WINDOW = np.timedelta64(30 * 60, "s")
 
     def scan(self, net_pos):
         '''
@@ -27,14 +29,14 @@ class Monitor:
 
             for open_pos in open_positions:
                 pos_instr = open_pos.instrument()
-                instr_name = pos_instr.canonical_symbol()
+                uid = pos_instr.uid()
                 roos = open_pos.related_open_orders()
                 for roo in roos:
-                    if instr_name not in orders_by_instr:
-                        orders_by_instr[instr_name] = []
-                    orders_by_instr[instr_name].append(roo)
+                    if uid not in orders_by_instr:
+                        orders_by_instr[uid] = []
+                    orders_by_instr[uid].append(roo)
 
-        self.adjust(roos, pos_instr)
+        self.adjust(orders_by_instr)
         i = 123
 
     def get_prices(self, instr):
@@ -45,9 +47,13 @@ class Monitor:
         return self._tick_dbs[instr_name]
 
 
-    def adjust(self, order, instrument):
-        price = self.get_prices(instrument)
-        i = 123
+    def adjust(self, orders_by_instr):
+        for uid, orders in orders_by_instr.items():
+            instrument = InstrumentUtil.find(uid)
+            print(f"adjusting orders for {str(instrument)}")
+            price = self.get_prices(instrument)
+            
+            i = 123
 
 
 if __name__ == "__main__":
