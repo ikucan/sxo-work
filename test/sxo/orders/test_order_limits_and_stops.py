@@ -9,9 +9,10 @@ if __name__ == "__main__":
 
     oid = client.limit_order("FxSpot::GBPEUR",
                              OrderDirection.Sell,
-                             1.18076,
+                             1.18069,
                              1.15465,
                              10000,
+                             stop_price =1.18070,
                              reference_id= "123",
     )
     

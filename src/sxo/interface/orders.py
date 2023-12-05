@@ -99,8 +99,8 @@ class LimitOrder(OrderCommandBase):
         else:
             raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
-        entry_ref = f"{reference_id}:<en>" if reference_id else ":<en>"
-        exit_ref = f"{reference_id}:<ex>" if reference_id else ":<ex>"
+        entry_ref = f"{reference_id}:<en>" if reference_id else ":<entry>"
+        exit_ref = f"{reference_id}:<ex>" if reference_id else ":<exix>"
 
         entry_order = self._make_order_json(
             instrument_id=instr.uid(),
@@ -123,15 +123,18 @@ class LimitOrder(OrderCommandBase):
         )
         entry_order["Orders"] = [exit_order]
         if stop_price:
+            stop_ref = f"{reference_id}:<stop>" if reference_id else ":<stop>"
+
             stop_order = self._make_order_json(
                 instrument_id=instr.uid(),
                 direction=direction.flip(),
                 asset_class=instr.asset_type(),
                 amount=amount,
                 price=stop_price,
-                order_type=OrderType.StopLimit,
+                order_type=OrderType.Stop,
                 extern_order_ref= exit_ref,
             )
+            entry_order["Orders"].append(stop_order)
                 
         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
 
