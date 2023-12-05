@@ -132,7 +132,7 @@ class LimitOrder(OrderCommandBase):
                 amount=amount,
                 price=stop_price,
                 order_type=OrderType.Stop,
-                extern_order_ref= exit_ref,
+                extern_order_ref= stop_ref,
             )
             entry_order["Orders"].append(stop_order)
                 

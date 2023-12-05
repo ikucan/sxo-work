@@ -17,4 +17,7 @@ if __name__ == "__main__":
     )
     
     print(oid)
-    pprint(client.order_details(oid["OrderId"]))
+    order_json = client.order_details(oid["OrderId"])
+    pprint(order_json)
+    related_stop = [o for o in order_json['Data'] if o['OpenOrderType'] == 'Stop'][0]
+
