@@ -193,9 +193,37 @@ class DeleteOrders(OrderCommandBase):
 
     def __call__(
         self,
-        order_id: str | List[str] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
+        order_id: str | List[str],  # noqa:B006
     ):
         endpoint = f"orders/{self.string_or_list(order_id)}/?AccountKey={self.account_key}"  # type: ignore
 
         res = self.rest_conn._DELETE_json(api_set="trade", endpoint=endpoint, api_ver=2)  # type: ignore
         return res
+
+
+
+
+class ModifyOrder(OrderCommandBase):
+    """
+    https://www.developer.saxo/openapi/referencedocs/trade/v2/orders
+
+    prototype URL : PATCH https://gateway.saxobank.com/sim/openapi/trade/v2/orders
+    """
+
+    def __call__(
+        self,
+        order_id: str,
+        price : float = None,
+    ):
+        order_mods = {
+            "OrderPrice": price,
+            "AccountKey": self.account_key,
+            "OrderId":  order_id,
+            "OrderType": "Stop",
+            "AssetType": "FxSpot",
+            "Amount" : 10000.0
+        }
+        res = self.rest_conn._PATCH_json(api_set="trade", endpoint="orders", api_ver=2, json=order_mods)  # type: ignore
+        return res
+
+

@@ -93,6 +93,19 @@ class SaxoRestBase:
                     return await response.json()
                 raise Exception(f"a HTTP error occurred: {response.status}")
 
+    async def _patch_json_async(self, *, url: str, headers: Dict[str, str] | None, json: Dict[str, str] | None):
+        """
+        return
+        """
+        # url = "https://gateway.saxobank.com/sim/openapi/trade/v1/prices/subscriptions"
+
+        async with aiohttp.ClientSession() as session:
+            async with session.patch(url, headers=headers, json=json) as response:
+                # print("Status:", response.status)
+                if response.ok:
+                    return await response.json()
+                raise Exception(f"a HTTP error occurred: {response.status}")
+
     def _post_json_wrapper(self, *, url: str, headers: Dict[str, str], json: Dict[str, str]):
         """
         an await wrapper for the async get
@@ -106,6 +119,13 @@ class SaxoRestBase:
         url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
         headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
         return asyncio.new_event_loop().run_until_complete(self._post_json_async(url=url, headers=headers, json=json))
+
+    def _PATCH_json(
+        self, *, api_set: str, endpoint: str, api_ver: str, extra_headers: Dict[str, str] | None = None, json: Dict[str, str] | None = None
+    ):
+        url = f"{self.url_base}/{api_set}/v{api_ver}/{endpoint}"
+        headers = self._make_default_headers() | ({} if extra_headers is None else extra_headers)
+        return asyncio.new_event_loop().run_until_complete(self._patch_json_async(url=url, headers=headers, json=json))
 
     async def _delete_json_async(self, *, url: str, headers: Dict[str, str]):
         """

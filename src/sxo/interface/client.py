@@ -11,6 +11,7 @@ from sxo.interface.orders import DeleteOrders
 from sxo.interface.orders import GetOrderDetails
 from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import ListAllOrders
+from sxo.interface.orders import ModifyOrder
 from sxo.interface.prices import InfoPrice
 from sxo.interface.streaming import InfoPriceSubscription
 from sxo.interface.streaming import InfoMessageSubscription
@@ -74,6 +75,7 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "order_details": GetOrderDetails,
         "list_orders": ListAllOrders,
         "delete_orders": DeleteOrders,
+        "modify_order": ModifyOrder,
         # positions
         "all_positions": ListPositions,
     }
