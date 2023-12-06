@@ -70,6 +70,28 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
 
         return order_json
 
+    def order_mods_from_order(self, order:Dict[Any, Any]) :
+        order_mods = {
+            "AccountKey": order['AccountKey'],
+            "Uic": order['Uic'],
+            "AssetType":  order['AssetType'],
+            "Amount": order['Amount'],
+            "BuySell": order['BuySell'],
+            "OrderPrice":  order['Price'],
+            "OrderType": order['OpenOrderType'],
+            "OrderId": order['OrderId'],
+        }
+
+        if  "OrderDuration" in order:
+            order_mods["OrderDuration"] = order['OrderDuration']
+        elif 'RelatedOpenOrders' in order:
+            for related_order in order['RelatedOpenOrders']:
+                if  "Duration" in related_order:
+                    order_mods["OrderDuration"] = related_order['Duration']
+                    break                    
+
+        return order_mods
+
 
 class LimitOrder(OrderCommandBase):
     """
@@ -212,17 +234,16 @@ class ModifyOrder(OrderCommandBase):
 
     def __call__(
         self,
-        order_id: str,
+        order: Dict[Any, Any],
         price : float = None,
     ):
-        order_mods = {
-            "OrderPrice": price,
-            "AccountKey": self.account_key,
-            "OrderId":  order_id,
-            "OrderType": "Stop",
-            "AssetType": "FxSpot",
-            "Amount" : 10000.0
-        }
+        order_mods = self.order_mods_from_order(order)
+        if price:
+            order_mods['OrderPrice'] = price
+        # else:
+        #     raise OrderError(f"The order you are trying to modify needs to have an order Duration: {order}")
+
+
         res = self.rest_conn._PATCH_json(api_set="trade", endpoint="orders", api_ver=2, json=order_mods)  # type: ignore
         return res
 
