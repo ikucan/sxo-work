@@ -94,8 +94,28 @@ class Position(JsonWrapperBase):
     def status(self,) -> str:
         return self._base.Status
 
+    def current_price(self,) -> str:
+        return self._view.CurrentPrice
+    def current_price_type(self,) -> str:
+        return self._view.CurrentPriceType
+    def current_bid(self,) -> str:
+        return self._view.Bid
+    def current_ask(self,) -> str:
+        return self._view.Ask
+    def pnl(self,) -> str:
+        return self._view.ProfitLossOnTrade
+
     def related_open_orders(self,) -> str:
         return self._base.RelatedOpenOrders
+
+    def has_stop(self,) -> bool:
+        roos = self.related_open_orders()
+        if len(roos) > 0:
+            for roo in roos:
+                if roo.Status == "Working" and roo.OpenOrderType == "Stop":
+                    return True
+
+        return False
 
     def __str__(self,) -> str:
         return pprint(self._json)

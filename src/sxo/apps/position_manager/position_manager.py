@@ -14,46 +14,57 @@ class Monitor:
         self._tick_dbs = {}
         self._PRICE_HISTORY_WINDOW = np.timedelta64(30 * 60, "s")
 
-    def scan(self, net_pos):
+    def scan(self, net_positions):
         '''
         - scan all positions and find all Open positions
-        - for each open position find all (usually 1) related open orders
-        - group by instrument - assuming we will apply same adjustment per instrument
-        - adjust
+        - filter those with open orders
         '''
-        orders_by_instr = {}
-        for net_pos_name, pos in net_pos.items():
-            positions = pos.get_positions()
-            open_positions = [p for p in positions if p.status() == 'Open']
-            pos_with_open_orders = [p for p in open_positions if len(p.related_open_orders()) > 0]
+        pos_with_open_stops  = []
+        for _, net_pos in net_positions.items():
+            positions = net_pos.get_positions()
+            pos_with_open_stops += [p for p in positions if p.has_stop() ]
 
-            for open_pos in pos_with_open_orders:
-                pos_instr = open_pos.instrument()
-                uid = pos_instr.uid()
-                roos = open_pos.related_open_orders()
-                for roo in roos:
-                    if uid not in orders_by_instr:
-                        orders_by_instr[uid] = []
-                    orders_by_instr[uid].append(roo)
+        for pos_wos in pos_with_open_stops:
+            self.adjust_open_stop(pos_wos)
 
-        self.adjust(orders_by_instr)
+    def adjust_open_stop(self, position:Position):
+        # if a position is making money
+        if position.pnl() > 0:
+            price = position.current_price()
+
         i = 123
 
-    def get_prices(self, instr):
-        instr_name = instr.canonical_symbol()
-        if instr_name not in self._tick_dbs:
-            self._tick_dbs[instr_name] = RedisQuote(instr)
+        #     for open_pos in pos_with_open_orders:
+        #         pos_instr = open_pos.instrument()
+        #         uid = pos_instr.uid()
+        #         roos = open_pos.related_open_orders()
+        #         for roo in roos:
+        #             if uid not in orders_by_instr:
+        #                 orders_by_instr[uid] = []
+        #             orders_by_instr[uid].append(roo)
 
-        return self._tick_dbs[instr_name]
+        # self.adjust(orders_by_instr)
 
 
-    def adjust(self, orders_by_instr):
-        for uid, orders in orders_by_instr.items():
-            instrument = InstrumentUtil.find(uid)
-            print(f"adjusting orders for {str(instrument)}")
-            price = self.get_prices(instrument)
+    # def get_prices(self, instr):
+    #     instr_name = instr.canonical_symbol()
+    #     if instr_name not in self._tick_dbs:
+    #         self._tick_dbs[instr_name] = RedisQuote(instr)
+
+    #     return self._tick_dbs[instr_name]
+    #     for uid, orders in orders_by_instr.items():
+    #         instrument = InstrumentUtil.find(uid)
+    #         print(f"adjusting orders for {str(instrument)}")
+    #         price = self.get_prices(instrument)
+
+
+    # def adjust(self, orders_by_instr):
+    #     for uid, orders in orders_by_instr.items():
+    #         instrument = InstrumentUtil.find(uid)
+    #         print(f"adjusting orders for {str(instrument)}")
+    #         price = self.get_prices(instrument)
             
-            i = 123
+    #         i = 123
 
 
 if __name__ == "__main__":
