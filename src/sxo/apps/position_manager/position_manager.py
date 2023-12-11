@@ -61,10 +61,11 @@ if __name__ == "__main__":
 
     # client = SaxoClient(token_file="/data/saxo_token")
     # positions = client.all_positions()
-    f=open('samples/positions/net_pos_example.json', 'r')
-    positions_str = f.read()
+    # with open('samples/positions/net_pos_example.json', 'w') as f:
+    #     f.write(json.dumps(positions))
+    with open('samples/positions/net_pos_example.json', 'r') as f:
+        positions_str = f.read()    
     positions = json.loads(positions_str)
-    f.close()
     #pprint(positions)
     net_pos = NetPosition.parse(positions)
     mon.scan(net_pos)

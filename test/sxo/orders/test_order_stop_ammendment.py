@@ -13,6 +13,6 @@ if __name__ == "__main__":
         if o['OpenOrderType'] == 'Stop' and o['Status'] == 'Working':
             res = client.modify_order(
                 order = o,
-                price = o['Price'] + 0.1,
+                price = o['Price'] + 0.1    ,
             )
             print(f"modified: {res}")
