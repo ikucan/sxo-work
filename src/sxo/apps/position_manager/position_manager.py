@@ -25,9 +25,9 @@ class Monitor:
         for net_pos_name, pos in net_pos.items():
             positions = pos.get_positions()
             open_positions = [p for p in positions if p.status() == 'Open']
+            pos_with_open_orders = [p for p in open_positions if len(p.related_open_orders()) > 0]
 
-
-            for open_pos in open_positions:
+            for open_pos in pos_with_open_orders:
                 pos_instr = open_pos.instrument()
                 uid = pos_instr.uid()
                 roos = open_pos.related_open_orders()
