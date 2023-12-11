@@ -31,6 +31,7 @@ class Monitor:
         # if a position is making money
         if position.pnl() > 0:
             price = position.current_price()
+            stop_order = position.related_open_stop()
 
         i = 123
 

@@ -114,8 +114,17 @@ class Position(JsonWrapperBase):
             for roo in roos:
                 if roo.Status == "Working" and roo.OpenOrderType == "Stop":
                     return True
-
         return False
+    
+    def related_open_stop(self,) -> RelatedOrder:
+        roos = self.related_open_orders()
+        if len(roos) > 0:
+            for roo in roos:
+                if roo.Status == "Working" and roo.OpenOrderType == "Stop":
+                    return roo
+
+        return None
+
 
     def __str__(self,) -> str:
         return pprint(self._json)
