@@ -22,6 +22,7 @@ from sxo.interface.reference import RefCurrencies
 from sxo.interface.reference import RefCurrencyPairs
 from sxo.interface.reference import RefExchanges
 from sxo.interface.reference import RefInstruments
+from sxo.interface.reference import RefInstrumentDetails
 from sxo.interface.rest_base import SaxoRestBase
 
 # from functools import cache
@@ -65,6 +66,8 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "currency_pairs": RefCurrencyPairs,
         "exchanges": RefExchanges,
         "instruments": RefInstruments,
+        "instrument_details": RefInstrumentDetails,
+        
         # pricing
         "info_price": InfoPrice,
         # subscriptions

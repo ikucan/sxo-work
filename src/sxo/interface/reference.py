@@ -48,3 +48,17 @@ class RefInstruments(metaclass=SaxoAPIClientBoundMethodMethodFactory):
         account_key = self.account_key  # type: ignore
         endpoint = f"/instruments/?$top=1000&$skip=0&AssetTypes={asset_type}&AccountKey={account_key}"
         return self.rest_conn._GET_drain_json(api_set="ref", endpoint=endpoint, api_ver=1)  # type: ignore
+
+
+class RefInstrumentDetailss(metaclass=SaxoAPIClientBoundMethodMethodFactory):
+    '''
+    TBD!:
+    https://www.developer.saxo/openapi/referencedocsoas/refoas/v1/instruments/get__ref__details_uic_assettype
+    '''
+    def __call__(
+        self,
+        uic: int,
+    ):
+        account_key = self.account_key  # type: ignore
+        endpoint = f"/instruments/?$top=1000&$skip=0&AssetTypes={asset_type}&AccountKey={account_key}"
+        return self.rest_conn._GET_drain_json(api_set="ref", endpoint=endpoint, api_ver=1)  # type: ignore

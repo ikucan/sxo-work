@@ -18,8 +18,11 @@ class Manager:
         else:
             print(f"warning, creating default client")
             self._client = SaxoClient(token_file = "/data/saxo_token")
-        
+    
     def list_orders(self, cached:bool = False) -> List[Order]:
+        '''
+        list all orders
+        '''
         if cached:
             return self._orders
         else:
@@ -27,17 +30,26 @@ class Manager:
             return Order.parse(orders_json)
 
     def orders_by_id(self, cached:bool = False) -> Dict[int, Order]:
+        '''
+        orders mapped by id
+        '''
         if cached:
             return self._orders_by_id
         else:
             return {o.id():o for o in self.list_orders()}
 
     def refresh_orders(self,) -> Dict[int, Order]:
+        '''
+        refresh orders in the local cache
+        '''
         self._orders = self.list_orders()
         self._orders_by_id = {o.id():o for o in self._orders}
         return self._orders_by_id
 
     def net_positions(self,):
+        '''
+        list net positions
+        '''
         positions_json = self._client.all_positions()
         return NetPosition.parse(positions_json)
 
@@ -45,6 +57,9 @@ class Manager:
                            order_id:int,
                            target_price:float = None,
                            refresh_first:bool = False):
+        '''
+        modify an order by id. if refresh, pull the latest view of orders
+        '''
         if refresh_first:
             self.refresh_orders()
 
