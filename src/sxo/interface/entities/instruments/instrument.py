@@ -28,7 +28,7 @@ class Format(JsonWrapperBase):
         self.set_str('Format')
         self.set_str('OrderDecimals')
 
-class InstrumentDefinition(JsonWrapperBase):
+class InstrumentDef(JsonWrapperBase):
     def __init__(self, _json: Dict[Any, Any]):
         super().__init__(_json)
         self.set_int('AmountDecimals')
@@ -38,79 +38,142 @@ class InstrumentDefinition(JsonWrapperBase):
         self.set_float('DefaultSlippage')
         self.set_str('DefaultSlippageType')
         self.set_str('Description')
+
         self.must_have('Exchange')
-        self.must_have('Format')
         self._exchange = Exchange(_json['Exchange'])
-        self._format = Exchange(_json['Format'])
+        self.must_have('Format')
+        self._format = Format(_json['Format'])
 
+        self.set_timestamp('FxForwardMaxForwardDate')
+        self.set_timestamp('FxForwardMinForwardDate')
+        self.set_timestamp('FxSpotDate')
 
+        self.set_int('GroupId')
+        self.set_float('IncrementSize')
+
+        self.set_bool('IsBarrierEqualsStrike')
+        self.set_bool('IsComplex')
+        self.set_bool('IsPEAEligible')
+        self.set_bool('IsPEASMEEligible')
+        self.set_bool('IsRedemptionByAmounts')
+        self.set_bool('IsSwitchBySameCurrency')
+        self.set_bool('IsTradable')
+        self.set_str('LotSizeType')
+        self.set_float('MinimumTradeSize')
+        self.set_str('NonTradableReason')
+
+        self.must_have('OrderDistances')
+        self.must_have('StandardAmounts')
+        self.must_have('SupportedOrderTriggerPriceTypes')
+        self.must_have('SupportedOrderTypes')
+
+        self.set_str('Symbol')
+        self.set_float('TickSize')
+        self.set_float('TickSizeLimitOrder')
+        self.set_float('TickSizeStopOrder')
+    
+        self.must_have('TradableAs')
+        self.must_have('TradableOn')
+
+        self.set_str('TradingSignals')
+        self.set_str('TradingStatus')
+        self.set_int('Uic')
+
+    
 if __name__ == "__main__" :
+    import json
     with open("instrument_def.json", "r") as f:
         json_str = f.read()
     print(json_str) 
 
-# class OrderDisplayAndFormat(JsonWrapperBase):
-#     def __init__(self, _json: Dict[Any, Any]):
-#         super().__init__(_json)
-#         self.set_str('Currency')
-#         self.set_int('Decimals')
-#         self.set_str('Description')
-#         self.set_str('Format')
-#         self.set_str('Symbol')
+    id = InstrumentDef(json.loads(json_str))
 
-# class Order(JsonWrapperBase):
 
-#     '''
-#     an individual position, with related orders
-#     '''
-#     def __init__(self, _json: Dict[Any, Any]):
-#         super().__init__(_json)
-#         self.set_int('AccountId')
-#         self.set_str('AccountKey')
-#         self.set_str('AdviceNote')
-#         self.set_float('Amount')
-#         self.set_float('Ask')
-#         self.set_float('Bid')
-#         self.set_str('AssetType')
-#         self.set_str('BuySell')
-#         self.set_str('CalculationReliability')
-#         self.set_int('ClientId')
-#         self.set_str('ClientKey')
-#         self.set_str('ClientName')
-#         self.set_str('ClientNote')
-#         self.set_str('CorrelationKey')
-#         self.must_have('CorrelationTypes')
-#         self.set_float('CurrentPrice')
-#         self.set_float('CurrentPriceDelayMinutes')
-#         self.set_str('CurrentPriceType')
-#         self.set_float('DistanceToMarket')
-#         #
-#         # parse nested
-#         # 
-#         self.set_float('IpoSubscriptionFee')
-#         self.set_bool('IsExtendedHoursEnabled')
-#         self.set_bool('IsForceOpen')
-#         self.set_bool('IsMarketOpen')
-#         self.set_float('MarketPrice')
-#         self.set_str('MarketState')
-#         self.set_float('MarketValue')
-#         self.set_str('NonTradableReason')
-#         self.set_str('OpenOrderType')
-#         self.set_str('OrderAmountType')
-#         self.set_int('OrderId')
-#         self.set_str('OrderRelation')
-#         self.set_timestamp('OrderTime')
-#         self.set_float('Price')
-#         self.set_str('RelatedOpenOrders')
-#         self.set_int('RelatedPositionId')
-#         self.set_str('Status')
-#         self.set_str('TradingStatus')
-#         self.set_int('Uic')
-
-#         # nested types and subtypes
-#         self.must_have('Exchange')
-#         self.exchange = Exchange(self._json['Exchange'])
-#         self.must_have('DisplayAndFormat')
-#         self.display_and_format = OrderDisplayAndFormat(self._json['DisplayAndFormat'])
-#         self.must_have('Duration')
-#         self.duration = OrderDuration.parse(self._json['Duration'])
+# example JSON
+#
+# {
+#     "AffiliateInfoRequired": false,
+#     "AmountDecimals": 6,
+#     "AssetType": "FxSpot",
+#     "CurrencyCode": "USD",
+#     "DefaultAmount": 10000.0,
+#     "DefaultSlippage": 0.01,
+#     "DefaultSlippageType": "Percentage",
+#     "Description": "British Pound/US Dollar",
+#     "Exchange": {
+#         "CountryCode": "DK",
+#         "ExchangeId": "SBFX",
+#         "Name": "Inter Bank",
+#         "TimeZoneId": "3"
+#     },
+#     "Format": {
+#         "Decimals": 4,
+#         "Format": "AllowDecimalPips",
+#         "OrderDecimals": 4
+#     },
+#     "FxForwardMaxForwardDate": "2024-12-19T00:00:00.000000Z",
+#     "FxForwardMinForwardDate": "2023-12-15T00:00:00.000000Z",
+#     "FxSpotDate": "2023-12-15T00:00:00.000000Z",
+#     "GroupId": 0,
+#     "IncrementSize": 5000.0,
+#     "IsBarrierEqualsStrike": false,
+#     "IsComplex": true,
+#     "IsPEAEligible": false,
+#     "IsPEASMEEligible": false,
+#     "IsRedemptionByAmounts": false,
+#     "IsSwitchBySameCurrency": false,
+#     "IsTradable": true,
+#     "LotSizeType": "NotUsed",
+#     "MinimumTradeSize": 1000.0,
+#     "NonTradableReason": "None",
+#     "OrderDistances": {
+#         "EntryDefaultDistance": 0.5,
+#         "EntryDefaultDistanceType": "Percentage",
+#         "LimitDefaultDistance": 0.0,
+#         "LimitDefaultDistanceType": "Percentage",
+#         "StopLimitDefaultDistance": 5.0,
+#         "StopLimitDefaultDistanceType": "Pips",
+#         "StopLossDefaultDistance": 50.0,
+#         "StopLossDefaultDistanceType": "Pips",
+#         "StopLossDefaultEnabled": false,
+#         "StopLossDefaultOrderType": "Stop",
+#         "TakeProfitDefaultDistance": 50.0,
+#         "TakeProfitDefaultDistanceType": "Pips",
+#         "TakeProfitDefaultEnabled": false
+#     },
+#     "StandardAmounts": [
+#         10000.0,
+#         50000.0,
+#         100000.0,
+#         250000.0,
+#         500000.0,
+#         1000000.0,
+#         2000000.0,
+#         5000000.0,
+#         10000000.0,
+#         20000000.0
+#     ],
+#     "SupportedOrderTriggerPriceTypes": [],
+#     "SupportedOrderTypes": [
+#         "Stop",
+#         "TrailingStop",
+#         "StopLimit",
+#         "Limit",
+#         "Market"
+#     ],
+#     "Symbol": "GBPUSD",
+#     "TickSize": 1e-05,
+#     "TickSizeLimitOrder": 1e-05,
+#     "TickSizeStopOrder": 1e-05,
+#     "TradableAs": [
+#         "FxSpot",
+#         "FxForwards",
+#         "FxSwap"
+#     ],
+#     "TradableOn": [
+#         "18286731"
+#     ],
+#     "TradingSignals": "Allowed",
+#     "TradingStatus": "Tradable",
+#     "Uic": 31
+# }
