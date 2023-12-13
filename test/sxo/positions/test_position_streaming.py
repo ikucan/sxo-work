@@ -2,7 +2,7 @@
 import json
 from pprint import pprint
 import time
-from sxo.interface.entities.om.positions import *
+from sxo.om.positions import *
 from sxo.interface.client import SaxoClient
 
 

@@ -82,7 +82,9 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             "OrderId": order['OrderId'],
         }
 
-        if  "OrderDuration" in order:
+        if  "Duration" in order:
+            order_mods["OrderDuration"] = order['Duration']
+        elif  "OrderDuration" in order:
             order_mods["OrderDuration"] = order['OrderDuration']
         elif 'RelatedOpenOrders' in order:
             for related_order in order['RelatedOpenOrders']:

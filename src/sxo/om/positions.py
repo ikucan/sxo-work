@@ -8,7 +8,7 @@ from typing import List
 
 from sxo.util.json_utils import JsonWrapperBase
 from sxo.interface.entities.instruments.symbology import InstrumentUtil
-from sxo.interface.entities.om.orders import RelatedOrder
+from sxo.om.orders import RelatedOrder
 
 class PositionError(Exception):
     ...
@@ -62,10 +62,13 @@ class PositionView(JsonWrapperBase):
         self.set_float('CurrentPrice')
         self.set_float('CurrentPriceDelayMinutes')
         self.set_str('CurrentPriceType')
+        self.set_float('Exposure')
         self.set_str('ExposureCurrency')
+        self.set_float('ExposureInBaseCurrency')
         self.set_float('InstrumentPriceDayPercentChange')
         self.set_str('MarketState')
         self.set_float('MarketValue')
+        self.set_float('MarketValueInBaseCurrency')
         self.set_float('ProfitLossOnTrade')
         self.set_float('ProfitLossOnTradeInBaseCurrency')
         self.set_float('TradeCostsTotal')
@@ -85,6 +88,16 @@ class Position(JsonWrapperBase):
         self._base = PositionBase(self._json['PositionBase'])
         self._view = PositionView(self._json['PositionView'])
 
+
+    def account_id(self,) -> str:
+        return self._base.AccountId
+
+    def account_key(self,) -> str:
+        return self._base.AccountKey
+
+    def uic(self,) -> str:
+        return self._base.Uic
+
     def net_position_id(self,) -> str:
         return self._json['NetPositionId']
 
@@ -94,18 +107,35 @@ class Position(JsonWrapperBase):
     def status(self,) -> str:
         return self._base.Status
 
-    def current_price(self,) -> str:
+    def open_price(self,) -> str:
+        return self._base.OpenPrice
+
+    def is_short(self,) -> str:
+        return self._base.Amount < 0
+
+    def size(self,) -> float:
+        return self._base.Amount
+    
+    def current_price(self,) -> float:
         return self._view.CurrentPrice
     def current_price_type(self,) -> str:
         return self._view.CurrentPriceType
-    def current_bid(self,) -> str:
+    def current_bid(self,) -> float:
         return self._view.Bid
-    def current_ask(self,) -> str:
+    def current_ask(self,) -> float:
         return self._view.Ask
-    def pnl(self,) -> str:
+    def pnl(self,) -> float:
         return self._view.ProfitLossOnTrade
+    def exposure(self,) -> float:
+        return self._view.Exposure    
+    def exposure_ccy(self,) -> str:
+        return self._view.ExposureCurrency
+    def pct_pnl(self,) -> float:
+        # percent pnl
+        return self._view.ProfitLossOnTrade / self._view.Exposure
 
-    def related_open_orders(self,) -> str:
+
+    def related_open_orders(self,):
         return self._base.RelatedOpenOrders
 
     def has_stop(self,) -> bool:

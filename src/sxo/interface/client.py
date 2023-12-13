@@ -84,7 +84,7 @@ class SaxoClient(metaclass=ClientMethodFactory):
         self,
         *,
         url_base: str = "https://gateway.saxobank.com/sim/openapi",
-        token_file: str = "/tmp/saxo_token",
+        token_file: str = "/data/saxo_token",
     ):
         self.rest_helper = SaxoRestBase(url_base=url_base, token_file=token_file)
         self.user_info = UserDetails(self.user_details())  # type: ignore
