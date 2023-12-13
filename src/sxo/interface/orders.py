@@ -127,7 +127,7 @@ class LimitOrder(OrderCommandBase):
         exit_ref = f"{reference_id}:<ex>" if reference_id else ":<exix>"
 
         entry_order = self._make_order_json(
-            instrument_id=instr.uid(),
+            instrument_id=instr.uic(),
             direction=direction,
             asset_class=instr.asset_type(),
             amount=amount,
@@ -137,7 +137,7 @@ class LimitOrder(OrderCommandBase):
             expiry_time=expiry_time,
         )
         exit_order = self._make_order_json(
-            instrument_id=instr.uid(),
+            instrument_id=instr.uic(),
             direction=direction.flip(),
             asset_class=instr.asset_type(),
             amount=amount,
@@ -150,7 +150,7 @@ class LimitOrder(OrderCommandBase):
             stop_ref = f"{reference_id}:<stop>" if reference_id else ":<stop>"
 
             stop_order = self._make_order_json(
-                instrument_id=instr.uid(),
+                instrument_id=instr.uic(),
                 direction=direction.flip(),
                 asset_class=instr.asset_type(),
                 amount=amount,

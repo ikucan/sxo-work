@@ -40,7 +40,7 @@ class Instrument(ABC):
     def __set_detail(self):
         self._symbol = self._json["Symbol"]
         self._canonical_asset_class = self._json["AssetType"]
-        self._uid = self._json["Identifier"]
+        self._uic = self._json["Identifier"]
         self._gid = self._json["GroupId"]
         self._descr = self._json["Description"]
 
@@ -50,15 +50,19 @@ class Instrument(ABC):
     # @abstractmethod
     # def uid(self) -> str:
     #     ...
-    def uid(self) -> int:
-        return self._uid
+    def uic(self) -> int:
+        return self._uic
+    
+    # # deprecated
+    # def uid(self) -> int:
+    #     return self._uic
 
     def gid(self) -> int:
         return self._gid
 
     # an unique id combiing the group id aith the instrument id
     def canonical_id(self) ->str:
-        return f"{self._gid}_{self._uid}"
+        return f"{self._gid}_{self._uic}"
 
 
     def symbol(self) -> str:
@@ -93,7 +97,7 @@ class Instrument(ABC):
         return f"{self.asset_class()}::{self.symbol()}"
 
     def __eq__(self, other):
-        return isinstance(other, Instrument) and self.uid() == other.uid()
+        return isinstance(other, Instrument) and self.uic() == other.uic()
 
     def __ne__(self, other):
         return not self == other
@@ -127,7 +131,7 @@ class Equity(Instrument):
     def __str__(self) -> str:
         return (
             f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # "
-            f"{self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
+            f"{self.uic()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
         )
 
 
@@ -246,28 +250,28 @@ class InstrumentUtil:
         # if assetClass is None:
 
 
-if __name__ == "__main__":
-    for sym in [
-        "FxSpot::GBPEUR",
-        "FxSpot::GBPJPY",
-        "FxSpot::GBPUSD",
-        "FxSpot::USDJPY",
-        "FxSpot::EURAUD",
-        "FxSpot::EURGBP",
-    ]:
-        print("----------")
-        s1 = InstrumentUtil.parse(sym)
-        print(s1)
-        s2 = InstrumentUtil.find(s1.uid())
-        print(s2)
-        print(s2.path(root="/data", ext="ccsv"))
-        print(s1 != s2)
+    # if __name__ == "__main__":
+    #     for sym in [
+    #         "FxSpot::GBPEUR",
+    #         "FxSpot::GBPJPY",
+    #         "FxSpot::GBPUSD",
+    #         "FxSpot::USDJPY",
+    #         "FxSpot::EURAUD",
+    #         "FxSpot::EURGBP",
+    #     ]:
+    #         print("----------")
+    #         s1 = InstrumentUtil.parse(sym)
+    #         print(s1)
+    #         s2 = InstrumentUtil.find(s1.uic())
+    #         print(s2)
+    #         print(s2.path(root="/data", ext="ccsv"))
+    #         print(s1 != s2)
 
     # # for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
     # #     print("----------")
     # #     s1 = InstrumentUtil.parse(sym)
     # #     print(s1)
-    # #     s2 = InstrumentUtil.find(s1.uid())
+    # #     s2 = InstrumentUtil.find(s1.uic())
     # #     print(s2)
     # #     print(s2.path(root="/data", ext="ccsv", dated=True))
     # #     assert(s1 == s2)

@@ -1,0 +1,86 @@
+{
+    "AffiliateInfoRequired": false,
+    "AmountDecimals": 6,
+    "AssetType": "FxSpot",
+    "CurrencyCode": "USD",
+    "DefaultAmount": 10000.0,
+    "DefaultSlippage": 0.01,
+    "DefaultSlippageType": "Percentage",
+    "Description": "British Pound/US Dollar",
+    "Exchange": {
+        "CountryCode": "DK",
+        "ExchangeId": "SBFX",
+        "Name": "Inter Bank",
+        "TimeZoneId": "3"
+    },
+    "Format": {
+        "Decimals": 4,
+        "Format": "AllowDecimalPips",
+        "OrderDecimals": 4
+    },
+    "FxForwardMaxForwardDate": "2024-12-19T00:00:00.000000Z",
+    "FxForwardMinForwardDate": "2023-12-15T00:00:00.000000Z",
+    "FxSpotDate": "2023-12-15T00:00:00.000000Z",
+    "GroupId": 0,
+    "IncrementSize": 5000.0,
+    "IsBarrierEqualsStrike": false,
+    "IsComplex": true,
+    "IsPEAEligible": false,
+    "IsPEASMEEligible": false,
+    "IsRedemptionByAmounts": false,
+    "IsSwitchBySameCurrency": false,
+    "IsTradable": true,
+    "LotSizeType": "NotUsed",
+    "MinimumTradeSize": 1000.0,
+    "NonTradableReason": "None",
+    "OrderDistances": {
+        "EntryDefaultDistance": 0.5,
+        "EntryDefaultDistanceType": "Percentage",
+        "LimitDefaultDistance": 0.0,
+        "LimitDefaultDistanceType": "Percentage",
+        "StopLimitDefaultDistance": 5.0,
+        "StopLimitDefaultDistanceType": "Pips",
+        "StopLossDefaultDistance": 50.0,
+        "StopLossDefaultDistanceType": "Pips",
+        "StopLossDefaultEnabled": false,
+        "StopLossDefaultOrderType": "Stop",
+        "TakeProfitDefaultDistance": 50.0,
+        "TakeProfitDefaultDistanceType": "Pips",
+        "TakeProfitDefaultEnabled": false
+    },
+    "StandardAmounts": [
+        10000.0,
+        50000.0,
+        100000.0,
+        250000.0,
+        500000.0,
+        1000000.0,
+        2000000.0,
+        5000000.0,
+        10000000.0,
+        20000000.0
+    ],
+    "SupportedOrderTriggerPriceTypes": [],
+    "SupportedOrderTypes": [
+        "Stop",
+        "TrailingStop",
+        "StopLimit",
+        "Limit",
+        "Market"
+    ],
+    "Symbol": "GBPUSD",
+    "TickSize": 1e-05,
+    "TickSizeLimitOrder": 1e-05,
+    "TickSizeStopOrder": 1e-05,
+    "TradableAs": [
+        "FxSpot",
+        "FxForwards",
+        "FxSwap"
+    ],
+    "TradableOn": [
+        "18286731"
+    ],
+    "TradingSignals": "Allowed",
+    "TradingStatus": "Tradable",
+    "Uic": 31
+}

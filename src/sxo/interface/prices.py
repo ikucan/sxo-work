@@ -31,14 +31,14 @@ class InfoPrice(metaclass=SaxoAPIClientBoundMethodMethodFactory):
             prices = []
             for ac in instruments.asset_classes():
                 all_ac_instr = instruments.get_by_asset_class(ac)
-                listOfIds = [i.uid() for i in all_ac_instr]
+                listOfIds = [i.uic() for i in all_ac_instr]
                 uicsParam = f"list?Uics={','.join([str(id) for id in listOfIds])}"
                 endpoint = f"/infoprices/{uicsParam}&AssetType={ac}" "&FieldGroups=Quote,Commissions"
                 price = self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)  # type: ignore
                 prices += price["Data"]
             return {"Data": prices}
         elif isinstance(instruments, Instrument):
-            instr_id = f"?Uic={instruments.uid()}"
+            instr_id = f"?Uic={instruments.uic()}"
             endpoint = f"/infoprices/{instr_id}&AssetType={instruments.asset_class()}" "&FieldGroups=Quote,Commissions"
             return {"Data": self.rest_conn._GET_json(api_set="trade", endpoint=endpoint, api_ver=1)}  # type:ignore
         else:

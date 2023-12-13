@@ -108,7 +108,7 @@ class InfoPriceSubscription(WebSocketSubscriptionBase, metaclass=SaxoAPISubscrip
 
             json = {
                 "Arguments": {
-                    "Uic": instr.uid(),
+                    "Uic": instr.uic(),
                     "AssetType": instr.asset_class(),
                 },
                 "ContextId": context_id,
