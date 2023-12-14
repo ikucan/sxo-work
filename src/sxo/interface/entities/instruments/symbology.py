@@ -5,7 +5,10 @@ from abc import ABC
 from abc import abstractmethod
 from io import StringIO
 from pathlib import Path
+from functools import lru_cache
+
 from pprint import pformat
+
 from typing import Any
 from typing import Dict
 from typing import List
@@ -212,6 +215,7 @@ class InstrumentUtil:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
 
     @staticmethod
+    @lru_cache
     def parse(sym: str | List[str]):  # -> Instrument
         if isinstance(sym, str):
             return InstrumentUtil.__parse_one(sym)
@@ -220,19 +224,22 @@ class InstrumentUtil:
         else:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
-    @staticmethod
-    def parse_grp(sym: str | List[str]):  # -> Instrument
-        if isinstance(sym, str):
-            return InstrumentGroup([sym])
-        elif isinstance(sym, list):
-            return InstrumentGroup(sym)
-        else:
-            raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
+    # does not seem used. delete after Mar 2024
+    # @staticmethod
+    # @lru_cache
+    # def parse_grp(sym: str | List[str]):  # -> Instrument
+    #     if isinstance(sym, str):
+    #         return InstrumentGroup([sym])
+    #     elif isinstance(sym, list):
+    #         return InstrumentGroup(sym)
+    #     else:
+    #         raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
+    @lru_cache
     def find(uid: int):  # -> Instrument
         """
-        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each databas
+        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each database
         we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold
         but have not seen it stated
         """

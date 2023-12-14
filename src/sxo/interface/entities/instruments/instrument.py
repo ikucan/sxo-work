@@ -79,7 +79,7 @@ class InstrumentDef(JsonWrapperBase):
         self.set_str('TradingStatus')
         self.set_int('Uic')
 
-    
+
 if __name__ == "__main__" :
     import json
     with open("instrument_def.json", "r") as f:
