@@ -71,6 +71,7 @@ class Manager:
         else:
             raise OrderManagerError(f"ERROR. Order with id {order_id} does not exist. Refresh if it should?")
 
+    # def get_instrument_ref(self,
 
 if __name__ == "__main__":
     om = Manager()
