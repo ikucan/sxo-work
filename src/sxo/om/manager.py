@@ -3,8 +3,11 @@ from typing import List
 from typing import Dict
 
 from sxo.interface.client import SaxoClient
+from sxo.interface.entities.instruments.symbology import InstrumentUtil
+from sxo.interface.entities.instruments.instrument import InstrumentDef
 from sxo.om.orders import Order
 from sxo.om.positions import NetPosition
+from functools import lru_cache
 
 class OrderManagerError(Exception):
     ...
@@ -18,7 +21,19 @@ class Manager:
         else:
             print(f"warning, creating default client")
             self._client = SaxoClient(token_file = "/data/saxo_token")
-    
+
+    @lru_cache
+    def __verify_instr(self, asset_id:int|str) -> int:
+        '''
+        find the instrument def for either a uic or and asset name of typ FxSpot::GBPUSD etc...
+        '''
+        if isinstance(asset_id, str):
+            return InstrumentUtil.parse(asset_id)
+        elif isinstance(asset_id, int):
+            return InstrumentUtil.find(asset_id)
+        else:
+            raise OrderManagerError(f"Error verifying Uic for asset_id: ${asset_id}. It is of the wrong type: ${type(asset_id)}")
+
     def list_orders(self, cached:bool = False) -> List[Order]:
         '''
         list all orders
@@ -71,12 +86,25 @@ class Manager:
         else:
             raise OrderManagerError(f"ERROR. Order with id {order_id} does not exist. Refresh if it should?")
 
-    # def get_instrument_ref(self,
+    def get_instrument_ref(self, asset_id:int|str):
+        '''
+        verify id ad find the instrument spec from the symbology database
+        (instrument spec is a cut down instrument )
+        '''
+        instrument_spec = self.__verify_instr(asset_id)
+        uic, asset_type = instrument_spec.uic(), instrument_spec.asset_type()
+        details_json = self._client.instrument_details(
+                                    instrument_spec.uic(),
+                                    instrument_spec.asset_type().name)
+        parsed_ref = InstrumentDef(details_json)
+
+        i = 123
 
 if __name__ == "__main__":
     om = Manager()
-    a = om.list_orders()
-    b = om.orders_by_id()
-    c = om.net_positions()
+    # a = om.list_orders()
+    # b = om.orders_by_id()
+    # c = om.net_positions()
+    d = om.get_instrument_ref("FxSpot::GBPUSD")
 
     z = 123    

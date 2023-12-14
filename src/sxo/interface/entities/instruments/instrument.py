@@ -79,14 +79,28 @@ class InstrumentDef(JsonWrapperBase):
         self.set_str('TradingStatus')
         self.set_int('Uic')
 
+    def uic(self,) -> int:
+        return self.Uic
 
-if __name__ == "__main__" :
-    import json
-    with open("instrument_def.json", "r") as f:
-        json_str = f.read()
-    print(json_str) 
+    def asset_type(self,) -> str:
+        return self.AssetType
 
-    id = InstrumentDef(json.loads(json_str))
+    def tick_size(self,) -> float:
+        return self.TickSize
+
+    def limit_order_tick_size(self,) -> float:
+        return self.TickSizeLimitOrder
+
+    def stop_order_tick_size(self,) -> float:
+        return self.TickSizeStopOrder
+
+# if __name__ == "__main__" :
+#     import json
+#     with open("instrument_def.json", "r") as f:
+#         json_str = f.read()
+#     print(json_str) 
+
+#     id = InstrumentDef(json.loads(json_str))
 
 
 # example JSON
