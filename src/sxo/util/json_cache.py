@@ -6,17 +6,39 @@ from functools import lru_cache
 from typing import Any
 from typing import Dict
 
+from abc import ABC
+from abc import abstractmethod
+
 
 class JsonCacheError(Exception):
     ...
 
-class JsonCache:
+class JsonCache(ABC):
 
     @staticmethod
     @lru_cache
-    def instance(base:str|Path = None, make:bool = True):
+    def redis():
+        raise Exception("Method not implemented")
+    
+    @staticmethod
+    @lru_cache
+    def file(base:str|Path = None, make:bool = True):
         '''a cahced constructor wrapper'''
-        return JsonCache(base, make)
+        return JsonFileCache(base, make)
+
+    @abstractmethod
+    def get(self,
+            name:str | Path,
+            max_age_s:int = -1,
+            throw_if_missing:bool = False) -> Dict[Any, Any] | None:
+        ...
+
+    @abstractmethod
+    def put(self, name:str | Path, jsn: Dict[Any, Any]):
+        ...
+
+class JsonFileCache(JsonCache):
+
 
     def __init__(self, base: str|Path, make:bool):
         if not base:

@@ -5,6 +5,15 @@ from sxo.om.positions import Position
 from sxo.om.manager import Manager
 from sxo.om.orders import Order
 
+from math import floor
+from math import log10
+
+def round_sig(x, sig=100):
+    if x == 0:
+        return 0
+    else:
+        return round(x, sig-int(floor(log10(abs(x))))-1)
+    
 class Monitor:
 
     def __init__(self, om:Manager = None):
@@ -32,32 +41,54 @@ class Monitor:
     def adjust_open_stop(self, position:Position):
         # if a position is making money
         if position.pnl() > 0:
+            instrument_def = self._om.get_instrument_def(position.uic())
             live_price = position.current_price()
             open_price = position.open_price()
 
             stop_order = position.related_open_stop()
-            stop_price = stop_order.price()
+            current_stop_price = stop_order.price()
 
             price_return = abs(open_price - live_price)
-            min_abs_stop_offset = price_return * 0.6666
 
             if position.is_short():
+                ik_pnl = abs(live_price - open_price) / open_price * 100
+                min_abs_stop_offset = price_return * 0.6666
                 target_stop_price = open_price - min_abs_stop_offset
-                if target_stop_price < stop_price:
+                rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
+                rounded_stop_price = round_sig(rounded_stop_price, 7)
+                if target_stop_price < current_stop_price:
+                    print(f"moving spot for SHORT {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
                     self._om.modify_order_by_id(
                         stop_order.id(),
-                        target_stop_price
+                        rounded_stop_price
                     )
-                    i = 123
+
             else:
-                target_stop_price = open_price - min_abs_stop_offset 
-            
+                ik_pnl = abs(live_price - open_price) / open_price * 100
+                min_abs_stop_offset = price_return * 0.6666
+                target_stop_price = open_price + min_abs_stop_offset 
+                rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
+                rounded_stop_price = round_sig(rounded_stop_price, 7)
+                if target_stop_price > current_stop_price:
+                    print(f"moving spot for LONG {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
+                    self._om.modify_order_by_id(
+                        stop_order.id(),
+                        rounded_stop_price
+                    )
+
 
         i = 123
 
 
 if __name__ == "__main__":
-    mon = Monitor()
+    import time
 
-    mon.scan()
+    mon = Monitor()
+    while 1 < 2:
+        try:
+            mon.scan()
+        except Exception as e:
+            print(e)
+
+        time.sleep(10)
 

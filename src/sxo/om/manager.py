@@ -87,7 +87,7 @@ class Manager:
         else:
             raise OrderManagerError(f"ERROR. Order with id {order_id} does not exist. Refresh if it should?")
 
-    def get_instrument_ref(self,
+    def get_instrument_def(self,
                            asset_id:int|str,
                            max_cached_age:int = -1) -> InstrumentDef:
         '''
@@ -100,11 +100,11 @@ class Manager:
         sybol, asset_type, uic  = instrument_spec.symbol(), instrument_spec.asset_type().name,  instrument_spec.uic()
         
         cached_ref_path = f"instrument_ref/{asset_type}::{sybol}"
-        ref_json = JsonCache.instance().get(cached_ref_path, max_cached_age)
+        ref_json = JsonCache.file().get(cached_ref_path, max_cached_age)
 
         if not ref_json:
             ref_json = self._client.instrument_details(uic, asset_type)
-            JsonCache.instance().put(cached_ref_path, ref_json)
+            JsonCache.file().put(cached_ref_path, ref_json)
 
         return InstrumentDef(ref_json)
 
@@ -114,12 +114,12 @@ if __name__ == "__main__":
     # a = om.list_orders()
     # b = om.orders_by_id()
     # c = om.net_positions()
-    d = om.get_instrument_ref("FxSpot::GBPUSD")
-    d = om.get_instrument_ref("FxSpot::GBPUSD")
-    d = om.get_instrument_ref("FxSpot::GBPUSD")
-    d = om.get_instrument_ref("FxSpot::USDJPY")
-    d = om.get_instrument_ref("FxSpot::USDJPY")
-    d = om.get_instrument_ref("FxSpot::USDCHF")
-    d = om.get_instrument_ref("FxSpot::USDCHF")
+    d = om.get_instrument_def("FxSpot::GBPUSD")
+    d = om.get_instrument_def("FxSpot::GBPUSD")
+    d = om.get_instrument_def("FxSpot::GBPUSD")
+    d = om.get_instrument_def("FxSpot::USDJPY")
+    d = om.get_instrument_def("FxSpot::USDJPY")
+    d = om.get_instrument_def("FxSpot::USDCHF")
+    d = om.get_instrument_def("FxSpot::USDCHF")
 
-    z = 123    
+#     z = 123    
