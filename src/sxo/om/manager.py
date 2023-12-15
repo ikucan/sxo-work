@@ -1,3 +1,4 @@
+from functools import lru_cache
 
 from typing import List
 from typing import Dict
@@ -7,7 +8,7 @@ from sxo.interface.entities.instruments.symbology import InstrumentUtil
 from sxo.interface.entities.instruments.instrument import InstrumentDef
 from sxo.om.orders import Order
 from sxo.om.positions import NetPosition
-from functools import lru_cache
+from sxo.util.json_cache import JsonCache
 
 class OrderManagerError(Exception):
     ...
@@ -86,19 +87,27 @@ class Manager:
         else:
             raise OrderManagerError(f"ERROR. Order with id {order_id} does not exist. Refresh if it should?")
 
-    def get_instrument_ref(self, asset_id:int|str):
+    def get_instrument_ref(self,
+                           asset_id:int|str,
+                           max_cached_age:int = -1) -> InstrumentDef:
         '''
-        verify id ad find the instrument spec from the symbology database
-        (instrument spec is a cut down instrument )
+        1. verify id ad find the instrument spec from the symbology database
+           (instrument spec is a cut down instrument def )
+        2. look up the full instrument definition, use cahed if exists
         '''
-        instrument_spec = self.__verify_instr(asset_id)
-        uic, asset_type = instrument_spec.uic(), instrument_spec.asset_type()
-        details_json = self._client.instrument_details(
-                                    instrument_spec.uic(),
-                                    instrument_spec.asset_type().name)
-        parsed_ref = InstrumentDef(details_json)
 
-        i = 123
+        instrument_spec = self.__verify_instr(asset_id)
+        sybol, asset_type, uic  = instrument_spec.symbol(), instrument_spec.asset_type().name,  instrument_spec.uic()
+        
+        cached_ref_path = f"instrument_ref/{asset_type}::{sybol}"
+        ref_json = JsonCache.instance().get(cached_ref_path, max_cached_age)
+
+        if not ref_json:
+            ref_json = self._client.instrument_details(uic, asset_type)
+            JsonCache.instance().put(cached_ref_path, ref_json)
+
+        return InstrumentDef(ref_json)
+
 
 if __name__ == "__main__":
     om = Manager()
@@ -106,5 +115,11 @@ if __name__ == "__main__":
     # b = om.orders_by_id()
     # c = om.net_positions()
     d = om.get_instrument_ref("FxSpot::GBPUSD")
+    d = om.get_instrument_ref("FxSpot::GBPUSD")
+    d = om.get_instrument_ref("FxSpot::GBPUSD")
+    d = om.get_instrument_ref("FxSpot::USDJPY")
+    d = om.get_instrument_ref("FxSpot::USDJPY")
+    d = om.get_instrument_ref("FxSpot::USDCHF")
+    d = om.get_instrument_ref("FxSpot::USDCHF")
 
     z = 123    

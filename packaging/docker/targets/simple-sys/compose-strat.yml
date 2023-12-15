@@ -14,7 +14,7 @@ services:
         container_name: simple-strat-GBPUSD
         networks:
             - simple-strat-network
-t62455gu
+
         environment:
             TOKEN_FILE: /token
             REDIS_HOST: redis
