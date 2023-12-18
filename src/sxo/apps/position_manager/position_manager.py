@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import itertools
 from pprint import pprint
 from typing import Dict
 from sxo.om.positions import Position
@@ -30,15 +31,23 @@ class Monitor:
         '''
         self._om.refresh_orders()
         net_positions = self._om.net_positions()
-        pos_with_open_stops  = []
-        for _, net_pos in net_positions.items():
-            positions = net_pos.get_positions()
-            pos_with_open_stops += [p for p in positions if p.has_stop() ]
 
-        for pos_wos in pos_with_open_stops:
-            self.adjust_open_stop(pos_wos)
+        all_positions = list (itertools.chain.from_iterable([x.get_positions() for x in [np[1] for np in net_positions.items()]]))
+
+        # pos_with_open_stops = [p for p in all_positions if p.has_stop()]
+        # pos_wo_open_stops = [p for p in all_positions if p.has_stop()]
+
+        for pos in all_positions:
+            self.adjust_open_stop(pos)
 
     def adjust_open_stop(self, position:Position):
+        instrument_def = self._om.get_instrument_def(position.uic())
+        live_price = position.current_price()
+        open_price = position.open_price()
+        pos_size = position.size()
+
+        pnl = (live_price - open_price) * pos_size
+
         # if a position is making money
         if position.pnl() > 0:
             instrument_def = self._om.get_instrument_def(position.uic())
