@@ -59,7 +59,7 @@ class PositionView(JsonWrapperBase):
         self.set_float('Ask')
         self.set_float('Bid')
         self.set_str('CalculationReliability')
-        self.set_float('ConversionRateCurrent')
+        #self.set_float('ConversionRateCurrent')
         self.set_float('ConversionRateOpen')
         self.set_float('CurrentPrice')
         self.set_float('CurrentPriceDelayMinutes')
@@ -112,7 +112,13 @@ class Position(JsonWrapperBase):
     def open_price(self,) -> str:
         return self._base.OpenPrice
 
-    def is_short(self,) -> str:
+    def is_open(self,) -> bool:
+        return self.status() == "Open"
+
+    def is_closed(self,) -> bool:
+        return self.status() == "Closed"
+
+    def is_short(self,) -> bool:
         return self._base.Amount < 0
 
     def size(self,) -> float:

@@ -41,6 +41,9 @@ class Monitor:
             self.adjust_open_stop(pos)
 
     def adjust_open_stop(self, position:Position):
+        if not position.is_open():
+            return
+
         instrument_def = self._om.get_instrument_def(position.uic())
         live_price = position.current_price()
         open_price = position.open_price()
@@ -55,47 +58,47 @@ class Monitor:
         pos_sign =  1 if position.size() >= 0 else -1
         pnl_tick = (live_price_tick - open_price_tick) * pos_sign
  
-        # if a position is making money
-        if pnl_tick > 100:
+        # lossy position
+        if pnl_tick < 0:
+            return
+ 
+        # if a position is making [a lot of] money       
+        # push the stop very close to the price, would be ok to close it
+        elif pnl_tick > 100:
             target_stop_distance = pnl_tick * 0.8
             target_stop_price_tick = int(open_price_tick + target_stop_distance)
-            target_stop_price = target_stop_price_tick * tick_size
-        
+            target_stop_price = target_stop_price_tick * tick_size        
 
-            instrument_def = self._om.get_instrument_def(position.uic())
-            live_price = position.current_price()
-            open_price = position.open_price()
-
-            stop_order = position.related_open_stop()
-            current_stop_price = stop_order.price()
-
-            price_return = abs(open_price - live_price)
-
-            if position.is_short():
-                ik_pnl = abs(live_price - open_price) / open_price * 100
-                min_abs_stop_offset = price_return * 0.6666
-                target_stop_price = open_price - min_abs_stop_offset
-                rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
-                rounded_stop_price = round_sig(rounded_stop_price, 7)
-                if target_stop_price < current_stop_price:
-                    print(f"moving spot for SHORT {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
-                    self._om.modify_order_by_id(
-                        stop_order.id(),
-                        rounded_stop_price
-                    )
-
-            else:
-                ik_pnl = abs(live_price - open_price) / open_price * 100
-                min_abs_stop_offset = price_return * 0.6666
-                target_stop_price = open_price + min_abs_stop_offset 
-                rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
-                rounded_stop_price = round_sig(rounded_stop_price, 7)
-                if target_stop_price > current_stop_price:
-                    print(f"moving spot for LONG {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
-                    self._om.modify_order_by_id(
-                        stop_order.id(),
-                        rounded_stop_price
-                    )
+            # instrument_def = self._om.get_instrument_def(position.uic())
+            # live_price = position.current_price()
+            # open_price = position.open_price()
+            # stop_order = position.related_open_stop()
+            # current_stop_price = stop_order.price()
+            # price_return = abs(open_price - live_price)
+            # if position.is_short():
+            #     ik_pnl = abs(live_price - open_price) / open_price * 100
+            #     min_abs_stop_offset = price_return * 0.6666
+            #     target_stop_price = open_price - min_abs_stop_offset
+            #     rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
+            #     rounded_stop_price = round_sig(rounded_stop_price, 7)
+            #     if target_stop_price < current_stop_price:
+            #         print(f"moving spot for SHORT {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
+            #         self._om.modify_order_by_id(
+            #             stop_order.id(),
+            #             rounded_stop_price
+            #         )
+            # else:
+            #     ik_pnl = abs(live_price - open_price) / open_price * 100
+            #     min_abs_stop_offset = price_return * 0.6666
+            #     target_stop_price = open_price + min_abs_stop_offset 
+            #     rounded_stop_price =int(target_stop_price/instrument_def.tick_size()) * instrument_def.tick_size()
+            #     rounded_stop_price = round_sig(rounded_stop_price, 7)
+            #     if target_stop_price > current_stop_price:
+            #         print(f"moving spot for LONG {instrument_def.symbol()} position from {current_stop_price} to {target_stop_price}")
+            #         self._om.modify_order_by_id(
+            #             stop_order.id(),
+            #             rounded_stop_price
+            #         )
 
 
         i = 123
