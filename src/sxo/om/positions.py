@@ -59,6 +59,8 @@ class PositionView(JsonWrapperBase):
         self.set_float('Ask')
         self.set_float('Bid')
         self.set_str('CalculationReliability')
+        self.set_float('ConversionRateCurrent')
+        self.set_float('ConversionRateOpen')
         self.set_float('CurrentPrice')
         self.set_float('CurrentPriceDelayMinutes')
         self.set_str('CurrentPriceType')
@@ -129,7 +131,12 @@ class Position(JsonWrapperBase):
     def exposure(self,) -> float:
         return self._view.Exposure    
     def exposure_ccy(self,) -> str:
-        return self._view.ExposureCurrency
+        return self._view.ExposureCurrency    
+    def conversion_rate(self,) -> float:
+        return self._view.ConversionRateCurrent
+    def fx(self,) -> float:
+        return self.conversion_rate()
+    
     def pct_pnl(self,) -> float:
         # percent pnl
         return self._view.ProfitLossOnTrade / self._view.Exposure

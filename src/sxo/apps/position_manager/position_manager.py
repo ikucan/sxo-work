@@ -47,9 +47,21 @@ class Monitor:
         pos_size = position.size()
 
         pnl = (live_price - open_price) * pos_size
+        exp = open_price * position.size()
 
+        tick_size = instrument_def.tick_size()
+        live_price_tick = position.current_price() / tick_size
+        open_price_tick = position.open_price() / tick_size
+        pos_sign =  1 if position.size() >= 0 else -1
+        pnl_tick = (live_price_tick - open_price_tick) * pos_sign
+ 
         # if a position is making money
-        if position.pnl() > 0:
+        if pnl_tick > 100:
+            target_stop_distance = pnl_tick * 0.8
+            target_stop_price_tick = int(open_price_tick + target_stop_distance)
+            target_stop_price = target_stop_price_tick * tick_size
+        
+
             instrument_def = self._om.get_instrument_def(position.uic())
             live_price = position.current_price()
             open_price = position.open_price()
