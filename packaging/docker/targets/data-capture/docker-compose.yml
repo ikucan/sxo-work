@@ -25,10 +25,10 @@ services:
         image: iztokkucan/sxo-data-capture:0.2.1
         container_name: data-capture
         environment:
-            INSTRUMENTS: FxSpot::GBPEUR,FxSpot::GBPUSD,FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPEUR,FxSpot::GBPJPY
+            INSTRUMENTS: FxSpot::GBPEUR,FxSpot::GBPUSD,FxSpot::GBPCAD,FxSpot::GBPJPY,FxSpot::USDJPY,FxSpot::AUDJPY,FxSpot::AUDUSD,FxSpot::EURUSD
             DATA_DIR: /data/capture/
             TOKEN_FILE: /tokendir/saxo_token
-            HB_TOLERANCE: 20
+            HB_TOLERANCE: 30
         volumes:
             - type: bind
               source: /data/
@@ -39,33 +39,8 @@ services:
         deploy:
             restart_policy:
                 condition: on-failure
-                delay: 1s
-                max_attempts: 100
+                delay: 120s
+                max_attempts: 10000
                 window: 60s
 
 
-    # ssh-server:
-    #     depends_on:
-    #         feed:
-    #             condition: service_started
-    #     image: iztokkucan/ssh:0.0.1
-    #     container_name: ssh-sidecar
-    #     hostname: ssh-sidecar
-
-    #     environment:
-    #         - PUBLIC_KEY_FILE=/.ssh/id_rsa.pub
-    #         - USER_NAME=admin
-    #         - SUDO_ACCESS=true
-
-    #     ports:
-    #         - 2222:2222
-
-    #     volumes:
-    #         - type: bind
-    #           source: /data
-    #           target: /data/
-    #           read_only: true
-
-    #     deploy:
-    #         restart_policy:
-    #             condition: any
