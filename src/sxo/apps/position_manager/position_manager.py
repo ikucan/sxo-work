@@ -45,12 +45,6 @@ class Monitor:
             return
 
         instrument_def = self._om.get_instrument_def(position.uic())
-        live_price = position.current_price()
-        open_price = position.open_price()
-        pos_size = position.size()
-
-        pnl = (live_price - open_price) * pos_size
-        exp = open_price * position.size()
 
         tick_size = instrument_def.tick_size()
         live_price_tick = position.current_price() / tick_size

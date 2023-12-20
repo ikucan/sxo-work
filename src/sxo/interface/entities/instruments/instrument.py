@@ -85,6 +85,9 @@ class InstrumentDef(JsonWrapperBase):
     def asset_type(self,) -> str:
         return self.AssetType
 
+    def symbol(self,) -> str:
+        return self.Symbol
+
     def tick_size(self,) -> float:
         return self.TickSize
 
@@ -93,6 +96,12 @@ class InstrumentDef(JsonWrapperBase):
 
     def stop_order_tick_size(self,) -> float:
         return self.TickSizeStopOrder
+
+    def __expr__(self,) -> str:
+        return f"{self.asset_type}::{self.Symbol}"
+    def __str__(self,) -> str:
+        return self.__expr__()
+
 
 # if __name__ == "__main__" :
 #     import json

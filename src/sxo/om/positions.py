@@ -96,6 +96,12 @@ class Position(JsonWrapperBase):
 
     def account_key(self,) -> str:
         return self._base.AccountKey
+    
+    def asset_type(self,) -> str:
+        return self._base.AssetType
+
+    def symbol(self,) -> str:
+        return self.instrument().symbol()
 
     def uic(self,) -> str:
         return self._base.Uic
@@ -170,6 +176,7 @@ class Position(JsonWrapperBase):
 
 
     def __str__(self,) -> str:
+        return f"{str(self.instrument())} :: {self.size()}"  
         return pprint(self._json)
 
 class NetPosition(JsonWrapperBase):
