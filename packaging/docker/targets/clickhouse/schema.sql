@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS Saxo;
 
 DROP TABLE IF EXISTS Saxo.FxQuotes;
-CREATE TABLE Saxo.FxQuotes (d date, t DateTime64(6), pair char(6), bid float, bsz int, ask float, asz int)
+CREATE TABLE Saxo.FxQuotes (d date, t DateTime64(6), pair char(6), bid Float64, bsz Float64, ask Float64, asz Float64)
     ENGINE = MergeTree()
     ORDER BY (d, t, pair);
 
