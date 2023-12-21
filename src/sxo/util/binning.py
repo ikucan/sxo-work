@@ -63,7 +63,7 @@ def numba_binner(t:np.array, val:np.array, bin_start:np.array, bin_end:np.array,
     # do the binning. j is leading index, i is traling index, bi is the bin index
     i, j, bi = 0, 0, 0
     while j < n_ticks:
-        while (j < n_ticks) & (bin_start[i] == bin_start[j]):
+        while (j < n_ticks) and (bin_start[i] == bin_start[j]):
             j += 1
 
         # j has overshot the bin, so the bin index is on the prev bin
@@ -106,7 +106,8 @@ def numba_binner(t:np.array, val:np.array, bin_start:np.array, bin_end:np.array,
 def bin_values(ticks:pd.DataFrame,
                bin_size_sec:int,
                value_col:str,
-               time_col:str = "t",) -> pd.DataFrame:
+               time_col:str = "t",
+               check_ordering:bool=False) -> pd.DataFrame:
     '''
     Prepare data frame data for binning with numba. Generates O,H,L,C and Twap of the
     value for each bin
@@ -115,6 +116,11 @@ def bin_values(ticks:pd.DataFrame,
      - cast all timestamps to integers
      - invoke the numba binner method and then repackage the results into a df
     '''
+    if check_ordering:
+        dt = np.diff(ticks[time_col].values)
+        if np.sum(dt < np.timedelta64(0)) > 0:
+            raise Exception(f"ERROR. For this binning algo to work, data must be sorted by time column.")
+        
     bin_start = ticks[time_col].values.astype(f'datetime64[{bin_size_sec}s]').astype('datetime64[ns]')
     bin_end = (bin_start + np.timedelta64(bin_size_sec, 's')).astype(np.int64)
     bin_start  = bin_start.astype(np.int64)

@@ -47,6 +47,8 @@
         "STRATEGY_ALPHA": "0.1",
         "STRATEGY_BETA": "5",
         "STRATEGY_ORDER_SCALE": "100000",
+        // "CLICKHOUSE_HOST": "0.0.0.0",
+        // "CLICKHOUSE_PORT": "9000"
       },
       "name": "Python: Current file",
       "program": "${file}",
