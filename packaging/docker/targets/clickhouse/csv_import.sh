@@ -5,7 +5,8 @@ export DB_NAME="Saxo"
 export ASSET_CLASS="FxSpot"
 export FQ_TAB="${DB_NAME}.${ASSET_CLASS}"
 
-export CH_HOST=192.168.0.201
+#export CH_HOST=192.168.0.201
+export CH_HOST=0.0.0.0
 
 export CH_PORT=9000
 
@@ -16,9 +17,12 @@ docker run --rm -it --net=host bitnami/clickhouse:23 clickhouse-client --host=${
 for p in `ls ${DATA_DIR}/${ASSET_CLASS}`; do
     echo === ${p} ===
     PAIR_DIR="${DATA_DIR}/${ASSET_CLASS}/${p}"
-    echo "    pair dir: ${PAIR_DIR}"
+    TMP_FILE="/tmp/$p.csv"
+
+    echo "    pair dir: ${PAIR_DIR}, tmp file: ${TMP_FILE}"
+    
     pushd $PAIR_DIR
-    cat $p-2*.csv | gawk -F\, -v PAIR=$p -v q=\" '{print q substr($1,0,10) q "," q $1 q "," q PAIR q "," $2 "," $3 "," $4 "," $5}' | sed "s/Z\"\,/\"\,/" > /tmp/$p.csv
+    cat $p-2*.csv | gawk -F\, -v PAIR=$p -v q=\" '{print q substr($1,0,10) q "," q $1 q "," q PAIR q "," $2 "," $3 "," $4 "," $5}' | sed "s/Z\"\,/\"\,/" > ${TMP_FILE}
     docker run --rm -it -v /tmp/$p.csv/:/data/$p.csv --net=host bitnami/clickhouse:23 clickhouse-client --host=${CH_HOST} --port=${CH_PORT} -q "insert into ${FQ_TAB} FROM INFILE '/data/$p.csv' FORMAT CSV"
 done
 
