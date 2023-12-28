@@ -120,12 +120,12 @@ def bin_values(ticks:pd.DataFrame,
         dt = np.diff(ticks[time_col].values)
         if np.sum(dt < np.timedelta64(0)) > 0:
             raise Exception(f"ERROR. For this binning algo to work, data must be sorted by time column.")
-        
+
     bin_start = ticks[time_col].values.astype(f'datetime64[{bin_size_sec}s]').astype('datetime64[ns]')
     bin_end = (bin_start + np.timedelta64(bin_size_sec, 's')).astype(np.int64)
     bin_start  = bin_start.astype(np.int64)
 
-    tt = ticks.t.values.astype(np.int64)
+    tt = ticks[time_col].values.astype(np.int64)
     values = ticks[value_col].values
 
     bin_start_index, bin_end_index, t0, t1, n_samples, o, h, l, c, twap =  \

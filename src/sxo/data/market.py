@@ -1,7 +1,11 @@
 import os
 import numpy as np
 import pandas as pd
+from typing import List
+
 import clickhouse_connect as cc 
+
+from sxo.util.binning import bin_values
 
 
 class ClickhouseConfig:
@@ -33,23 +37,88 @@ class ClickhouseConfig:
 
 class SaxoFxSpot(ClickhouseConfig):
 
-    def init(self,):
-        self.ch_client = cc.get_client(self.host(), self.port())
+    def __init__(self,
+             saxo_db:str = "Saxo",
+             fx_table:str =  "FxSpot",
+             cols:List[str] = ["d", "t", "pair", "bid", "bsz", "ask", "asz"],
+             time_col:str = "t",
+             instr_col:str = "pair"
+             ):
+        super().__init__()
 
-    def get_ticks(pair:str = None,
+        self._ch_client = cc.get_client(host=self.host(), port=self.port())
+        self._saxo_db = saxo_db
+        self._fx_table = fx_table
+        self._fq_tname = f"{saxo_db}.{fx_table}"
+        self._cols = cols
+        self._instr_col = instr_col
+        self._time_col = time_col
+
+    def ls(self,) -> pd.DataFrame:
+        sql = (f"SELECT {self._instr_col}, "
+               "count(1) as n, "
+               f"min({self._time_col}) as `first`, "
+               f"max({self._time_col}) as `last` "
+               f"FROM {self._fq_tname} "
+               f"GROUP BY {self._instr_col}")
+        return self.__query_to_df(sql, ['pair', 'n_ticks', 'from', 'to'])
+
+    def get_quotes(self,
+                  pair:str = None,
                   start:np.datetime64 = None,
                   end:np.datetime64 = None,
-                  sort:bool = False,
+                  sort_col:str = "t",
         ) -> pd.DataFrame:
         
-        qry = "select d, t, pair, bid, bsz, ask, asz from Saxo.FxSpot"
+        qry = f"SELECT {','.join(self._cols)} FROM {self._fq_tname} "
+        where_cls = ""
         if pair:
-            ...
-        "where pair='GBPUSD' order by t asc"
+            where_cls += f"WHERE {self._instr_col}='{pair}' "
+        if start:
+            where_cls += "WHERE " if len(where_cls) == 0 else "AND "
+            where_cls += f"{self._time_col} >= '{str(start)}' "
+        if end:
+            where_cls += "WHERE " if len(where_cls) == 0 else "AND "
+            where_cls += f"{self._time_col} <= '{str(end)}' "
+        qry += where_cls
 
-        pass
+        if sort_col:
+            qry += f"ORDER BY '{sort_col}' ASC "
+
+        res = self._ch_client.query(qry)
+        return pd.DataFrame(res.result_rows, columns=self._cols)
+        # res = self._ch_client.query(qry)
+        # df = pd.DataFrame(res.result_rows, columns=self._cols)
+        # i = 123
+
+    def get_bins(self,
+                 pair:str,
+                 bin_size_s:int = 60,
+                 start:np.datetime64 = None,
+                 end:np.datetime64 = None,
+                 sort_col:str = "t",
+        ) -> pd.DataFrame:
+        quotes = self.get_quotes(pair, start, end, sort_col)
+        quotes['mid'] = (quotes['bid'].values + quotes['ask'].values) / 2
+        bins = bin_values(quotes, bin_size_s, 'mid', check_ordering=True)
+        return bins
+
+
+
+    def __query_to_df(self, sql_query:str, cols:List[str]) -> pd.DataFrame :
+        res = self._ch_client.query(sql_query)
+        return pd.DataFrame(res.result_rows, columns=cols)
 
 
 if __name__ == "__main__":
-    ch = ClickhouseConfig()
+    fx_db = SaxoFxSpot()
+    df1 = fx_db.ls()
+    # df2 = fx_db.get_quotes(pair='GBPUSD')
+    # df3 = fx_db.get_quotes(pair='GBPUSD', start = np.datetime64('2023-12-15'))
+    # df4 = fx_db.get_quotes(pair='GBPUSD', end = np.datetime64('2023-12-15'))
+    # df5 = fx_db.get_quotes(pair='GBPUSD', start = np.datetime64('2023-12-14'), end = np.datetime64('2023-12-16'))
+    df12 = fx_db.get_bins(pair='GBPUSD')
+    df13 = fx_db.get_bins(pair='GBPUSD', start = np.datetime64('2023-12-15'))
+    df14 = fx_db.get_bins(pair='GBPUSD', end = np.datetime64('2023-12-15'))
+    df15 = fx_db.get_bins(pair='GBPUSD', start = np.datetime64('2023-12-14'), end = np.datetime64('2023-12-16'))
     i = 123
