@@ -67,7 +67,6 @@ class SaxoFxSpot(ClickhouseConfig):
                   pair:str = None,
                   start:np.datetime64 = None,
                   end:np.datetime64 = None,
-                  sort_col:str = "t",
         ) -> pd.DataFrame:
         
         qry = f"SELECT {','.join(self._cols)} FROM {self._fq_tname} "
@@ -82,23 +81,17 @@ class SaxoFxSpot(ClickhouseConfig):
             where_cls += f"{self._time_col} <= '{str(end)}' "
         qry += where_cls
 
-        if sort_col:
-            qry += f"ORDER BY '{sort_col}' ASC "
-
-        res = self._ch_client.query(qry)
-        return pd.DataFrame(res.result_rows, columns=self._cols)
-        # res = self._ch_client.query(qry)
-        # df = pd.DataFrame(res.result_rows, columns=self._cols)
-        # i = 123
-
+        quotes = self.__query_to_df(qry, self._cols)
+        sorted = quotes.sort_values(by = self._time_col)
+        return sorted
+    
     def get_bins(self,
                  pair:str,
                  bin_size_s:int = 60,
                  start:np.datetime64 = None,
                  end:np.datetime64 = None,
-                 sort_col:str = "t",
         ) -> pd.DataFrame:
-        quotes = self.get_quotes(pair, start, end, sort_col)
+        quotes = self.get_quotes(pair, start, end)
         quotes['mid'] = (quotes['bid'].values + quotes['ask'].values) / 2
         bins = bin_values(quotes, bin_size_s, 'mid', check_ordering=True)
         return bins
