@@ -5,7 +5,10 @@ from abc import ABC
 from abc import abstractmethod
 from io import StringIO
 from pathlib import Path
+from functools import lru_cache
+
 from pprint import pformat
+
 from typing import Any
 from typing import Dict
 from typing import List
@@ -40,7 +43,7 @@ class Instrument(ABC):
     def __set_detail(self):
         self._symbol = self._json["Symbol"]
         self._canonical_asset_class = self._json["AssetType"]
-        self._uid = self._json["Identifier"]
+        self._uic = self._json["Identifier"]
         self._gid = self._json["GroupId"]
         self._descr = self._json["Description"]
 
@@ -50,15 +53,19 @@ class Instrument(ABC):
     # @abstractmethod
     # def uid(self) -> str:
     #     ...
-    def uid(self) -> int:
-        return self._uid
+    def uic(self) -> int:
+        return self._uic
+    
+    # # deprecated
+    # def uid(self) -> int:
+    #     return self._uic
 
     def gid(self) -> int:
         return self._gid
 
     # an unique id combiing the group id aith the instrument id
     def canonical_id(self) ->str:
-        return f"{self._gid}_{self._uid}"
+        return f"{self._gid}_{self._uic}"
 
 
     def symbol(self) -> str:
@@ -93,7 +100,7 @@ class Instrument(ABC):
         return f"{self.asset_class()}::{self.symbol()}"
 
     def __eq__(self, other):
-        return isinstance(other, Instrument) and self.uid() == other.uid()
+        return isinstance(other, Instrument) and self.uic() == other.uic()
 
     def __ne__(self, other):
         return not self == other
@@ -127,7 +134,7 @@ class Equity(Instrument):
     def __str__(self) -> str:
         return (
             f"{self.asset_class()} # {self.symbol()} # {self.exchange()} # "
-            f"{self.uid()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
+            f"{self.uic()}/{self.primary_listing_id()} # {self.gid()} # {self.descr()}."
         )
 
 
@@ -208,6 +215,7 @@ class InstrumentUtil:
             raise Exception("Error parsing instrument. Expecting string in form of <asset class>::<symbol>")
 
     @staticmethod
+    @lru_cache
     def parse(sym: str | List[str]):  # -> Instrument
         if isinstance(sym, str):
             return InstrumentUtil.__parse_one(sym)
@@ -216,19 +224,22 @@ class InstrumentUtil:
         else:
             raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
-    @staticmethod
-    def parse_grp(sym: str | List[str]):  # -> Instrument
-        if isinstance(sym, str):
-            return InstrumentGroup([sym])
-        elif isinstance(sym, list):
-            return InstrumentGroup(sym)
-        else:
-            raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
+    # does not seem used. delete after Mar 2024
+    # @staticmethod
+    # @lru_cache
+    # def parse_grp(sym: str | List[str]):  # -> Instrument
+    #     if isinstance(sym, str):
+    #         return InstrumentGroup([sym])
+    #     elif isinstance(sym, list):
+    #         return InstrumentGroup(sym)
+    #     else:
+    #         raise ValueError(f"sym parameter must be a string or a list. you passed: {type(sym)}")
 
     @staticmethod
+    @lru_cache
     def find(uid: int):  # -> Instrument
         """
-        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each databas
+        find an instrument if you have an id already... this is fairly stupid, just looks up the id in each database
         we assume here that an instrument id ("Identifier") is globally unique. wlhen checked, this seems to hold
         but have not seen it stated
         """
@@ -246,28 +257,28 @@ class InstrumentUtil:
         # if assetClass is None:
 
 
-if __name__ == "__main__":
-    for sym in [
-        "FxSpot::GBPEUR",
-        "FxSpot::GBPJPY",
-        "FxSpot::GBPUSD",
-        "FxSpot::USDJPY",
-        "FxSpot::EURAUD",
-        "FxSpot::EURGBP",
-    ]:
-        print("----------")
-        s1 = InstrumentUtil.parse(sym)
-        print(s1)
-        s2 = InstrumentUtil.find(s1.uid())
-        print(s2)
-        print(s2.path(root="/data", ext="ccsv"))
-        print(s1 != s2)
+    # if __name__ == "__main__":
+    #     for sym in [
+    #         "FxSpot::GBPEUR",
+    #         "FxSpot::GBPJPY",
+    #         "FxSpot::GBPUSD",
+    #         "FxSpot::USDJPY",
+    #         "FxSpot::EURAUD",
+    #         "FxSpot::EURGBP",
+    #     ]:
+    #         print("----------")
+    #         s1 = InstrumentUtil.parse(sym)
+    #         print(s1)
+    #         s2 = InstrumentUtil.find(s1.uic())
+    #         print(s2)
+    #         print(s2.path(root="/data", ext="ccsv"))
+    #         print(s1 != s2)
 
     # # for sym in ["Equity::TSLA:xmil", "Stock::TL0:xetr", ]:
     # #     print("----------")
     # #     s1 = InstrumentUtil.parse(sym)
     # #     print(s1)
-    # #     s2 = InstrumentUtil.find(s1.uid())
+    # #     s2 = InstrumentUtil.find(s1.uic())
     # #     print(s2)
     # #     print(s2.path(root="/data", ext="ccsv", dated=True))
     # #     assert(s1 == s2)

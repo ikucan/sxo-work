@@ -42,14 +42,15 @@ class OrderDirection(Enum):
 class OrderType(Enum):
     Market = 0
     Limit = 1
-    StopIfBid = 2
-    StopIfOffered = 3
-    StopIfTraded = 4
-    StopLimit = 5
-    TrailingStop = 6
-    TrailingStopIfBid = 7
-    TrailingStopIfOffered = 8
-    TrailingStopIfTraded = 9
+    Stop = 2
+    StopIfBid = 3
+    StopIfOffered = 4
+    StopIfTraded = 5
+    StopLimit = 6
+    TrailingStop = 7
+    TrailingStopIfBid = 8
+    TrailingStopIfOffered = 9
+    TrailingStopIfTraded = 10
 
 
 class OrderDuration(Enum):

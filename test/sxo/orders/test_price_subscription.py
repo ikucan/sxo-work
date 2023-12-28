@@ -18,7 +18,7 @@ def foreva():
 exectr = exec(max_workers=10)
 
 # ###
-# # TODO:>>  try one loop per thread
+# # ik TODO:>>  try one loop per thread
 # # https://docs.python.org/3/library/asyncio-eventloop.html
 # ###
 

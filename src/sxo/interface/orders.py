@@ -70,6 +70,30 @@ class OrderCommandBase(metaclass=SaxoAPIClientBoundMethodMethodFactory):
 
         return order_json
 
+    def order_mods_from_order(self, order:Dict[Any, Any]) :
+        order_mods = {
+            "AccountKey": order['AccountKey'],
+            "Uic": order['Uic'],
+            "AssetType":  order['AssetType'],
+            "Amount": order['Amount'],
+            "BuySell": order['BuySell'],
+            "OrderPrice":  order['Price'],
+            "OrderType": order['OpenOrderType'],
+            "OrderId": order['OrderId'],
+        }
+
+        if  "Duration" in order:
+            order_mods["OrderDuration"] = order['Duration']
+        elif  "OrderDuration" in order:
+            order_mods["OrderDuration"] = order['OrderDuration']
+        elif 'RelatedOpenOrders' in order:
+            for related_order in order['RelatedOpenOrders']:
+                if  "Duration" in related_order:
+                    order_mods["OrderDuration"] = related_order['Duration']
+                    break                    
+
+        return order_mods
+
 
 class LimitOrder(OrderCommandBase):
     """
@@ -88,6 +112,7 @@ class LimitOrder(OrderCommandBase):
         price: float,
         limit_price: float,
         amount: float,
+        stop_price: float = None,
         reference_id: str = None,
         expiry_time:str = None,
     ):
@@ -98,11 +123,11 @@ class LimitOrder(OrderCommandBase):
         else:
             raise ValueError(f"the instrument spec {instrument} needs to be either a str or Instrument type: {type(instrument)}")
 
-        entry_ref = f"{reference_id}:<en>" if reference_id else ":<en>"
-        exit_ref = f"{reference_id}:<ex>" if reference_id else ":<ex>"
+        entry_ref = f"{reference_id}:<en>" if reference_id else ":<entry>"
+        exit_ref = f"{reference_id}:<ex>" if reference_id else ":<exix>"
 
         entry_order = self._make_order_json(
-            instrument_id=instr.uid(),
+            instrument_id=instr.uic(),
             direction=direction,
             asset_class=instr.asset_type(),
             amount=amount,
@@ -112,7 +137,7 @@ class LimitOrder(OrderCommandBase):
             expiry_time=expiry_time,
         )
         exit_order = self._make_order_json(
-            instrument_id=instr.uid(),
+            instrument_id=instr.uic(),
             direction=direction.flip(),
             asset_class=instr.asset_type(),
             amount=amount,
@@ -121,6 +146,20 @@ class LimitOrder(OrderCommandBase):
             extern_order_ref= exit_ref,
         )
         entry_order["Orders"] = [exit_order]
+        if stop_price:
+            stop_ref = f"{reference_id}:<stop>" if reference_id else ":<stop>"
+
+            stop_order = self._make_order_json(
+                instrument_id=instr.uic(),
+                direction=direction.flip(),
+                asset_class=instr.asset_type(),
+                amount=amount,
+                price=stop_price,
+                order_type=OrderType.Stop,
+                extern_order_ref= stop_ref,
+            )
+            entry_order["Orders"].append(stop_order)
+                
         res = self.rest_conn._POST_json(api_set="trade", endpoint="orders", api_ver=2, json=entry_order)  # type: ignore
 
         return res
@@ -178,9 +217,36 @@ class DeleteOrders(OrderCommandBase):
 
     def __call__(
         self,
-        order_id: str | List[str] = ["DisplayAndFormat", "ExchangeInfo"],  # noqa:B006
+        order_id: str | List[str],  # noqa:B006
     ):
         endpoint = f"orders/{self.string_or_list(order_id)}/?AccountKey={self.account_key}"  # type: ignore
 
         res = self.rest_conn._DELETE_json(api_set="trade", endpoint=endpoint, api_ver=2)  # type: ignore
         return res
+
+
+
+
+class ModifyOrder(OrderCommandBase):
+    """
+    https://www.developer.saxo/openapi/referencedocs/trade/v2/orders
+
+    prototype URL : PATCH https://gateway.saxobank.com/sim/openapi/trade/v2/orders
+    """
+
+    def __call__(
+        self,
+        order: Dict[Any, Any],
+        price : float = None,
+    ):
+        order_mods = self.order_mods_from_order(order)
+        if price:
+            order_mods['OrderPrice'] = price
+        # else:
+        #     raise OrderError(f"The order you are trying to modify needs to have an order Duration: {order}")
+
+
+        res = self.rest_conn._PATCH_json(api_set="trade", endpoint="orders", api_ver=2, json=order_mods)  # type: ignore
+        return res
+
+

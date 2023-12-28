@@ -10,7 +10,6 @@ from typing import Any
 from typing import Dict
 from typing import Tuple
 
-
 from sxo.apps.simple.persisted_quote import RedisQuote
 
 from sxo.util.time import GranularTime
@@ -55,6 +54,7 @@ class StrategyImpl():
         self._long_exit_oids = RedisSet(f"<{self._strategy_name}>:<orders>:LONG_EXIT")
 
         # create a client
+        # ik:>> tOdo:>> , change this to be an env variable
         self._client = SaxoClient(token_file='/data/saxo_token')
         # clean any old orders
         self.__review_orders()

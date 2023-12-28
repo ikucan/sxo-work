@@ -98,6 +98,8 @@ class Order(JsonWrapperBase):
         self.must_have('Duration')
         self.duration = OrderDuration.parse(self._json['Duration'])
   
+    def id(self,) -> int:
+        return self.OrderId
 
     def __str__(self,) -> str:
         return pprint(self._json)
@@ -108,18 +110,45 @@ class Order(JsonWrapperBase):
             raise OrderError('ERROR, missing key in initial JSON: __count')
         if "Data" not in _json:
             raise OrderError('ERROR, missing key in initial JSON: Data')
-        all_orders = [Order(oj) for oj in _json['Data']]
+        orders = [Order(oj) for oj in _json['Data']]
+        return orders
 
-        pass
 
-import json
+class RelatedOrder(JsonWrapperBase):
+    ''' order related to an open position '''
+    def __init__(self, _json: Dict[Any, Any]):
+        super().__init__(_json)
+        self.set_float('Amount')
+        self.set_str('OpenOrderType')
+        self.set_int('OrderId')
+        self.set_float('OrderPrice')
+        self.set_str('Status')
+        self.must_have('Duration')
+        self.Duration = OrderDuration.parse(self._json['Duration'])
 
-if __name__ == "__main__":
-    # client = SaxoClient(token_file="/data/saxo_token")
-    # positions = client.all_positions()
-    f=open('samples/orders/order_example.json', 'r')
-    orders_str = f.read()
-    f.close()
-    order_json = json.loads(orders_str)
-    pprint(order_json)
-    Order.parse(order_json)
+    def id(self,) -> int:
+        return self.OrderId
+
+    def type(self,) -> str:
+        return self.OpenOrderType
+
+    def price(self,) -> float:
+        return self.OrderPrice
+
+    def size(self,) -> float:
+        return self.Amount
+
+    def status(self,) -> str:
+        return self.Status
+
+
+# import json
+# if __name__ == "__main__":
+#     # client = SaxoClient(token_file="/data/saxo_token")
+#     # positions = client.all_positions()
+#     f=open('samples/orders/order_example.json', 'r')
+#     orders_str = f.read()
+#     f.close()
+#     order_json = json.loads(orders_str)
+#     pprint(order_json)
+#     Order.parse(order_json)

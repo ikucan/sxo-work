@@ -1,5 +1,4 @@
----
-version: '3.9'
+version: '3.8'
 
 services:
     redis:
@@ -74,9 +73,9 @@ services:
         deploy:
             restart_policy:
                 condition: on-failure
-                delay: 1s
                 max_attempts: 10000
-                window: 1s
+                #delay: 1s
+                #window: 1s
 
 networks:
   simple-strat-network:

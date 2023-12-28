@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# a bit silly... 
+# get rid of this one....
 def save(fnm: str, text: str):
     file = open(fnm, "w")
     file.write(text)

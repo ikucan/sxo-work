@@ -36,8 +36,12 @@ class JsonWrapperBase:
     def set_float(self, key: str):
         ''' creates a float atribute'''
         self.must_have(key)
-        json_val = self._json[key]
-        setattr(self, key, float(json_val))
+        setattr(self, key, float(self._json[key]))
+
+    def set_float_if(self, key: str):
+        ''' creates a float atribute if present'''
+        if self.has_key(key):
+            setattr(self, key, float(self._json[key]))
 
     def set_bool(self, key: str):
         ''' creates a boolean atribute'''

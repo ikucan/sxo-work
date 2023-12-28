@@ -11,8 +11,10 @@ from sxo.interface.orders import DeleteOrders
 from sxo.interface.orders import GetOrderDetails
 from sxo.interface.orders import LimitOrder
 from sxo.interface.orders import ListAllOrders
+from sxo.interface.orders import ModifyOrder
 from sxo.interface.prices import InfoPrice
-from sxo.interface.prices import InfoPriceSubscription
+from sxo.interface.streaming import InfoPriceSubscription
+from sxo.interface.streaming import InfoMessageSubscription
 from sxo.interface.positions import ListPositions
 from sxo.interface.reference import RefCountries
 from sxo.interface.reference import RefCultures
@@ -20,6 +22,7 @@ from sxo.interface.reference import RefCurrencies
 from sxo.interface.reference import RefCurrencyPairs
 from sxo.interface.reference import RefExchanges
 from sxo.interface.reference import RefInstruments
+from sxo.interface.reference import RefInstrumentDetails
 from sxo.interface.rest_base import SaxoRestBase
 
 # from functools import cache
@@ -63,15 +66,19 @@ class SaxoClient(metaclass=ClientMethodFactory):
         "currency_pairs": RefCurrencyPairs,
         "exchanges": RefExchanges,
         "instruments": RefInstruments,
+        "instrument_details": RefInstrumentDetails,
+        
         # pricing
         "info_price": InfoPrice,
         # subscriptions
         "subscribe_price": InfoPriceSubscription,
+        "subscribe_messages": InfoMessageSubscription,
         # orders
         "limit_order": LimitOrder,
         "order_details": GetOrderDetails,
         "list_orders": ListAllOrders,
         "delete_orders": DeleteOrders,
+        "modify_order": ModifyOrder,
         # positions
         "all_positions": ListPositions,
     }
@@ -80,7 +87,7 @@ class SaxoClient(metaclass=ClientMethodFactory):
         self,
         *,
         url_base: str = "https://gateway.saxobank.com/sim/openapi",
-        token_file: str = "/tmp/saxo_token",
+        token_file: str = "/data/saxo_token",
     ):
         self.rest_helper = SaxoRestBase(url_base=url_base, token_file=token_file)
         self.user_info = UserDetails(self.user_details())  # type: ignore
