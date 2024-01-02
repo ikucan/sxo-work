@@ -67,6 +67,7 @@ class SaxoFxSpot(ClickhouseConfig):
                   pair:str = None,
                   start:np.datetime64 = None,
                   end:np.datetime64 = None,
+                  filter_no_volume:bool = True,
         ) -> pd.DataFrame:
         
         qry = f"SELECT {','.join(self._cols)} FROM {self._fq_tname} "
@@ -82,6 +83,9 @@ class SaxoFxSpot(ClickhouseConfig):
         qry += where_cls
 
         quotes = self.__query_to_df(qry, self._cols)
+        if filter_no_volume:
+            non_zero_volume = (quotes['bsz'].values > 0) & (quotes['asz'].values > 0)
+            quotes = quotes[non_zero_volume].copy()
         sorted = quotes.sort_values(by = self._time_col)
         return sorted
     
@@ -110,8 +114,8 @@ if __name__ == "__main__":
     # df3 = fx_db.get_quotes(pair='GBPUSD', start = np.datetime64('2023-12-15'))
     # df4 = fx_db.get_quotes(pair='GBPUSD', end = np.datetime64('2023-12-15'))
     # df5 = fx_db.get_quotes(pair='GBPUSD', start = np.datetime64('2023-12-14'), end = np.datetime64('2023-12-16'))
-    df12 = fx_db.get_bins(pair='GBPUSD')
-    df13 = fx_db.get_bins(pair='GBPUSD', start = np.datetime64('2023-12-15'))
-    df14 = fx_db.get_bins(pair='GBPUSD', end = np.datetime64('2023-12-15'))
+    # df12 = fx_db.get_bins(pair='GBPUSD')
+    # df13 = fx_db.get_bins(pair='GBPUSD', start = np.datetime64('2023-12-15'))
+    # df14 = fx_db.get_bins(pair='GBPUSD', end = np.datetime64('2023-12-15'))
     df15 = fx_db.get_bins(pair='GBPUSD', start = np.datetime64('2023-12-14'), end = np.datetime64('2023-12-16'))
     i = 123
